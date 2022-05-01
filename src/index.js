@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import Search from "./Components/Search";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./Components/NavBar";
-
+import AddItem from "./Components/AddItem";
  import Home from "./Components/Home";
 // import ItemInfo from "./Components/ItemInfo";
 // import ItemAdd from "./Components/ItemAdd";
@@ -22,6 +22,7 @@ root.render(
   <NavBar/>
    <Routes>
   <Route path="/Home" element={<Home />} />
+  <Route path="AddItem" element={<AddItem />} />
    </Routes>
     <App />
     
