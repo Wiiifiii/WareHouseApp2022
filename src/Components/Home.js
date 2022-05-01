@@ -10,6 +10,7 @@ import { FcStatistics } from "react-icons/fc";
 
 function Home() {
   return (
+    
     <div class="container px-4">
       <div class="row gx-5">
         <div class="col">

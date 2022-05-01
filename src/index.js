@@ -22,6 +22,7 @@ root.render(
   <BrowserRouter>
   <NavBar/>
    <Routes>
+     
   <Route path="/Home" element={<Home />} />
   <Route path="AddItem" element={<AddItem />} />
   <Route path="Inventory" element={<Inventory />} />
