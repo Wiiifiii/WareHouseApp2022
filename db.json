@@ -23,38 +23,6 @@
       "id": 2
     },
     {
-      "id": 3,
-      "img": "https://media.partioaitta.fi/detail/2400000960843_a_soelden_meindl_110.jpg",
-      "name": "Meindl SÖLDEN",
-      "categorie": " Talvi-kengät",
-      "productnumber": "1008062",
-      "shelfid": "C-03",
-      "action": "Out",
-      "actiondate": "10.7.2021",
-      "quantity": -1
-    },
-    {
-      "itemid": 4,
-      "name": "Patagonia BIVY VEST ",
-      "categorie": " Toppaliivit",
-      "productnumber": "2006806",
-      "shelfid": "D-07",
-      "action": "Out",
-      "img": "https://media.partioaitta.fi/detail/192964645325_d_m_s_reversible_bivy_down_vest_patagonia_110.jpg",
-      "id": 4
-    },
-    {
-      "id": 5,
-      "img": "https://media.partioaitta.fi/detail/303502007_a_expedition_down_lite_vest_m_fjaellraeven_1.jpg",
-      "name": "Fjällräven LITE VEST",
-      "categorie": " Toppaliivit",
-      "productnumber": "F84606",
-      "shelfid": "D-07",
-      "action": "In",
-      "actiondate": "3.2.2022",
-      "quantity": 4
-    },
-    {
       "id": 6,
       "img": "https://media.partioaitta.fi/detail/5637655018_duodiqk_huettenschuh_plakolm_24.jpg",
       "name": "Plakolm HÜTTENSCHUH Unisex",
@@ -207,6 +175,17 @@
       "actiondate": "2022-04-19",
       "quantity": "25",
       "id": 19
+    },
+    {
+      "img": "https://media.partioaitta.fi/detail/2400000614326_a_mila_jacket_junior_hagloefs_110.jpg",
+      "name": "Haglöfs MILA JACKET ",
+      "categorie": "Pants",
+      "productnumber": "1005229",
+      "shelfid": "V-01",
+      "action": "In",
+      "actionDate": "2022-05-01",
+      "quantity": "15",
+      "id": 20
     }
   ]
 }

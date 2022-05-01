@@ -9,7 +9,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./Components/NavBar";
 import AddItem from "./Components/AddItem";
  import Home from "./Components/Home";
-// import ItemInfo from "./Components/ItemInfo";
+ import Inventory from "./Components/Inventory";
+ import InfoItem from "./Components/InfoItem";
 // import ItemAdd from "./Components/ItemAdd";
 // import ItemEdit from "./Components/ItemEdit";
 // import AddModal from "./Components/AddModal";
@@ -23,6 +24,8 @@ root.render(
    <Routes>
   <Route path="/Home" element={<Home />} />
   <Route path="AddItem" element={<AddItem />} />
+  <Route path="Inventory" element={<Inventory />} />
+  <Route path="/InfoItem/:productnumber" element={<InfoItem />} />
    </Routes>
     <App />
     
