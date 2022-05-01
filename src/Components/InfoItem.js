@@ -45,7 +45,7 @@ function ItemInfo() {
         </Link>
       </td>
       <td>
-        <Link to={`/ItemEdit/${item.id}`}>
+        <Link to={`/EditItem/${item.id}`}>
           <VscEdit />
         </Link>
       </td>

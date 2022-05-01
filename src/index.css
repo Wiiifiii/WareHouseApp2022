@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-image: url(/src/img/bg.jpg);
+  background-image: url(/src/img/pexels-anni.jpg);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -27,8 +27,9 @@ img{
 .table td,
 th {
   text-align: center;
-  margin: auto; 
-  padding: 16px 32px;
+  padding: 15px;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
   background-color: #cccccc;
  
 }
@@ -51,10 +52,10 @@ div{
   padding:3px 3px;
 }
 Form{
-background-color: #cccccc;
- margin-top:5px;
- margin-left: 40px;
- margin-right: 40px;
+background-color: #011627;
+padding: 15px;
+margin: 0 auto; /* Added */
+float: none; /* Added */
 }
 .card {
   margin: 0 auto; /* Added */

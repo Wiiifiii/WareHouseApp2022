@@ -93,7 +93,7 @@ function GetAllData() {
         </Link>
       </td>
       <td>
-        <Link to={`/ItemEdit/${item.id}`}  onClick={() => {
+        <Link to={`/EditItem/${item.id}`}  onClick={() => {
             // seletItem(item.id);
           }}>
           <VscEdit />
