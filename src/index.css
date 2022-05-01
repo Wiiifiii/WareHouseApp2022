@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-image: url(/src/img/hieroglyphs.jpg);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +11,52 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html,
+body {
+  padding-top: auto;
+  margin: auto;
+  text-align: center;
+ 
+}
+img{
+  width: 30px;
+  height: 30px;
+}
+.table td,
+th {
+  text-align: center;
+  margin: auto; 
+  padding: 16px 32px;
+  background-color: #cccccc;
+ 
+}
+
+nav {
+  background-color: #011627;
+  padding: 15px;
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+}
+
+nav a {
+  margin-right:20px;
+}
+nav a.active {
+  text-decoration: none;
+  font-weight: bold ;
+}
+div{
+  padding:3px 3px;
+}
+Form{
+background-color: #cccccc;
+ margin-top:5px;
+ margin-left: 40px;
+ margin-right: 40px;
+}
+.card {
+  margin: 0 auto; /* Added */
+  margin-bottom: 10px; /* Added */
 }
