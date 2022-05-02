@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-image: url(/src/img/bg2.jpg);
+  background-image: url("./img/pg8.jpg");
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -27,15 +27,14 @@ img{
 .table td,
 th {
   text-align: center;
-  padding: 15px;
-  margin: 0 auto; /* Added */
-  float: none; /* Added */
-  background-color: #cccccc;
+
+ 
+
  
 }
 
 nav {
-  background-color: #011627;
+  background-color: #1b1b1b;
   padding: 15px;
   margin: 0 auto; /* Added */
   float: none; /* Added */
@@ -52,7 +51,7 @@ div{
   padding:3px 3px;
 }
 Form{
-background-color: #011627;
+background-color: #1b1b1b;
 padding: 15px;
 margin: 0 auto; /* Added */
 float: none; /* Added */
@@ -60,4 +59,15 @@ float: none; /* Added */
 .card {
   margin: 0 auto; /* Added */
   margin-bottom: 10px; /* Added */
+}
+
+.footer {
+  color: white;
+  background-color: #1b1b1b;
+  position: relative;
+  padding-top: 1em;
+  bottom: 0;
+  width: 100%;
+  font-size: x-small;
+ 
 }

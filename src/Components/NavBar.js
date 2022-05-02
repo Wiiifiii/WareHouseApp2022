@@ -12,17 +12,17 @@ export const NavBar = () => {
     <nav> 
   <Navbar variant="dark">
       <Navbar.Brand href="/Home">
-    <VscSquirrel style={{ color: "#45bbfb" , paddingRight: 7}} size={45}/>
+    <VscSquirrel style={{ color: "#ff650b" , paddingRight: 7}} size={45}/>
       WareHouse App 
       </Navbar.Brand>
-      <NavLink style={{ color: "#45bbfb" }} to={"/Home"}>
+      <NavLink style={{ color: "#ff650b" }} to={"/Home"}>
         <VscHome size={30} />
       </NavLink>
-      <NavLink style={{ color: "#45bbfb" }} to={"/Search"}>
+      <NavLink style={{ color: "#ff650b" }} to={"/Search"}>
         <VscSearch size={25} />
       </NavLink>
-      <NavLink to={"/stock"}>
-        <VscGraph style={{ color: "#45bbfb" }} size={25} />
+      <NavLink to={"/Inventory"}>
+        <VscGraph style={{ color: "#ff650b" }} size={25} />
       </NavLink>
   </Navbar>
   </nav>

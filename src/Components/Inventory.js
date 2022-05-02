@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-
+import { Navbar, Container, Card, Button, Badge } from "react-bootstrap";
 const url = "http://localhost:8000/stock/";
 
-function GetAllData() {
+function Inventory() {
 
   const [products, setproducts] = useState([]);
   const [name, setname] = useState("");
@@ -111,6 +111,7 @@ function GetAllData() {
   ));
 
   return (
+    
     <div>
         <div>
           <table className="table table-striped table-dark">
@@ -132,10 +133,21 @@ function GetAllData() {
               {outPutData}
             </tbody>
           </table>
+
+{/* <Card style={{ width: '18rem' }}>
+  <Card.Img variant="top" src={outPutData.item.img} />
+  <Card.Body>
+    <Card.Title>{products.name}</Card.Title>
+    <Card.Text>
+      {products.quantity}
+    </Card.Text>
+    <Button variant="primary">Go somewhere</Button>
+  </Card.Body>
+</Card> */}
         </div>
       
     </div>
   );
 }
 
-export default GetAllData;
+export default Inventory;

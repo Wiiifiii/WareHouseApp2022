@@ -76,7 +76,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="text"
-                  placeholder="name"
+                  placeholder="Product name"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
                 />
@@ -88,7 +88,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="text"
-                  placeholder="categorie"
+                  placeholder="Product Category"
                   value={categorie}
                   onChange={(e) => setcategorie(e.target.value)}
                 />
@@ -99,7 +99,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="text"
-                  placeholder="productnumber"
+                  placeholder="Product code"
                   value={productnumber}
                   onChange={(e) => setProductNumber(e.target.value)}
                 />
@@ -111,7 +111,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="text"
-                  placeholder="shelfid"
+                  placeholder="Shelf code"
                   value={shelfid}
                   onChange={(e) => setShelfId(e.target.value)}
                 />
@@ -136,7 +136,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="number"
-                  placeholder="quantity"
+                  placeholder="Product Quantity"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
@@ -147,7 +147,7 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="text"
-                  placeholder="img url"
+                  placeholder="Product Image URL"
                   value={img}
                   onChange={(e) => setImg(e.target.value)}
                 />
@@ -187,11 +187,11 @@ function AddModal() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => { setMessage(false); handleClose()} }>
+          <Button  variant="outline-secondary" onClick={() => { setMessage(false); handleClose()} }>
             Close
           </Button>
           <div>
-              <Button variant="primary" type="submit" onClick={() => {save(); setMessage(true); handleClearClick()} }>
+              <Button  variant="outline-secondary" type="submit" onClick={() => {save(); setMessage(true); handleClearClick()} }>
                 {" "}
                 Send{" "}
               </Button>

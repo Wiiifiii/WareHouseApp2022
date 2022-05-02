@@ -16,7 +16,7 @@ import AddItem from "./Components/AddItem";
 // import AddModal from "./Components/AddModal";
 // import GetAllData from "./Components/GetAllData";
 import Search from "./Components/Search";
-
+import Footer from "./Components/Footer";
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
@@ -31,6 +31,7 @@ root.render(
   <Route path="Search/"  element={<Search />} />
    </Routes>
     <App />
+    <Footer/>
     
   </BrowserRouter>
 );

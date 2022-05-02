@@ -91,8 +91,8 @@ function ItemInfo() {
         <tbody>{outPutData}</tbody>
       </table>
       <div>
-        <VscGraphLine size={50} style={{ color: "#45bbfb" }}/>
-        <h1 ><b> In stock: <span style={{ color: "#45bbfb" }}>{stockTotal} </span> Pcs</b> </h1>
+        <VscGraphLine size={50} style={{ color: "#ff650b" }}/>
+        <h1 ><b> In stock: <span style={{ color: "#ff650b" }}>{stockTotal} </span> Pcs</b> </h1>
       </div>
     </div>
   );

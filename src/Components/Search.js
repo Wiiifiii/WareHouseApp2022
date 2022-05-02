@@ -3,7 +3,6 @@ import { VscTrash, VscEdit, VscInfo, VscSearch } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Button } from "react-bootstrap";
 
-
 const url = "http://localhost:8000/stock/";
 
 function Search() {
@@ -174,7 +173,7 @@ function Search() {
             {" "}
             <Form.Control
               action="text"
-              placeholder="name"
+              placeholder="Product name"
               value={name}
               onChange={(e) => setname(e.target.value)}
             />
@@ -183,7 +182,7 @@ function Search() {
             {" "}
             <Form.Control
               action="text"
-              placeholder="categorie"
+              placeholder="Product Category"
               value={categorie}
               onChange={(e) => setcategorie(e.target.value)}
             />
@@ -192,7 +191,7 @@ function Search() {
             {" "}
             <Form.Control
               action="text"
-              placeholder="productnumber"
+              placeholder="Product code"
               value={productnumber}
               onChange={(e) => setProductNumber(e.target.value)}
             />
@@ -203,7 +202,7 @@ function Search() {
             {" "}
             <Form.Control
               action="text"
-              placeholder="shelfid"
+              placeholder="Shelf code"
               value={shelfid}
               onChange={(e) => setShelfId(e.target.value)}
             />
@@ -223,7 +222,7 @@ function Search() {
             {" "}
             <Form.Control
               type="number"
-              placeholder="quantity"
+              placeholder="Product Quantity"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
@@ -231,7 +230,7 @@ function Search() {
         </Row>
         <div>
           <Button
-            variant="outline-primary"
+            variant="outline-secondary"
             onClick={() => {
               handleInputClick();
               handleClearClick();

@@ -110,7 +110,7 @@ function seletItem(id){
       <td>{item.quantity}</td>
 
       <td>
-        <Link to={`/ItemInfo/${item.productnumber}`}>
+        <Link to={`/InfoItem/${item.productnumber}`}>
           <VscInfo style={{ color: "#45bbfb" }} />
         </Link>
       </td>

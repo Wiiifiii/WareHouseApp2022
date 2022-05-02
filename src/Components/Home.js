@@ -1,81 +1,92 @@
 import { Link } from "react-router-dom";
 import { Navbar, Container, Card, Button, Badge } from "react-bootstrap";
-import { VscHome, VscSearch, VscGraph,VscSquirrel } from "react-icons/vsc";
+import { VscHome, VscSearch, VscGraph, VscSquirrel } from "react-icons/vsc";
 
 import {
   MdAddCircleOutline,
   MdOutlineScreenSearchDesktop,
 } from "react-icons/md";
 
-
 function Home() {
   return (
-    
-    <div class="container px-4">
-      <div class="row gx-5">
-        <div class="col">
-          <Card border="info" style={{ width: "20rem", background: "#011627" }}>
-            <Link to={`/AddItem/`}>
-              <Card.Body>
+    <div className="container px-4">
+       <h1 style={{ color: "#011627"}}>
+          Maximize your <b> WareHouse</b> efficiency
+        </h1>
+        <div>
+        <p style={{ color: "#011627"}}>
+          Inventory tracking can help you avoid selling products that have run
+          out of stock, or let you know when you need to order or make more of
+          your product. You can set up inventory tracking, view your inventory,
+          and adjust your inventory levels in the Inventory area of{" "}
+          <b>WareHouse</b>. You can also view the history of inventory
+          adjustments for products and variants whose inventory is being tracked
+          by <b>WareHouse</b>.
+        </p>
+       
+      </div>
+      <div className="row gx-5">
+        <div className="col">
+          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card.Body>
+              <Link to={`/AddItem/`}>
                 <MdAddCircleOutline
-                  style={{ color: "#ffca28", paddingRight: 7 }}
+                  style={{ color: "#ff650b"}}
                   size={100}
                 />
-                <Card.Text>
-                  <h5>
-                    {" "}
-                    <Badge pill bg="info">
-                      Add new item
-                    </Badge>
-                  </h5>
-                
-                </Card.Text>
-              </Card.Body>
-            </Link>
+              </Link>
+              <Card.Text>
+                <h5 style={{ color: "#ff650b"}}>
+                  Add new item
+                </h5>
+                <p style={{ color: "#fbfbfb"}}>
+                The <b>WareHouse</b> Add section allows you to add a new product to the <b>WareHouse</b>.
+                 
+                </p>
+              </Card.Text>
+            </Card.Body>
           </Card>
         </div>
 
-        <div class="col">
-          <Card border="info" style={{ width: "20rem", background: "#011627" }}>
-            <Link to={`/Search/`}>
-              <Card.Body>
+        <div className="col">
+          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card.Body>
+              <Link to={`/Search/`}>
                 <MdOutlineScreenSearchDesktop
-                  style={{ color: "#ffca28", paddingRight: 7 }}
+                  style={{ color: "#ff650b"}}
                   size={100}
                 />
-                <Card.Text>
-                  <h5>
-                    {" "}
-                    <Badge pill bg="secondary">
-                      Search 
-                    </Badge>
-                  </h5>
-                
-                </Card.Text>
-              </Card.Body>
-            </Link>
+              </Link>
+              <Card.Text>
+                <h5 style={{ color: "#ff650b"}}>Search</h5>
+                <p style={{ color: "#fbfbfb"}}>
+                  The <b>WareHouse</b> Search section allows you to look up any
+                  product in the <b>WareHouse</b>.{" "}
+                </p>
+              </Card.Text>
+            </Card.Body>
           </Card>
         </div>
       </div>
-      <Card border="info" style={{ width: "20rem", background: "#011627" }}>
-      <Link to={`/Inventory/`}>
+      <Card style={{ width: "20rem", background: "#1b1b1b" }}>
         <Card.Body>
-          <VscGraph
-            style={{ color: "#ffca28", paddingRight: 7 }}
-            size={100}
-          />
+          <Link to={`/Inventory/`}>
+            <VscGraph
+              style={{ color: "#ff650b" }}
+              size={100}
+            />
+          </Link>
           <Card.Text>
-            <h5>
-              {" "}
-              <Badge pill bg="secondary">
-                Inventory
-              </Badge>
-            </h5>
-           
+            <h5 style={{ color: "#ff650b"}}>Inventory</h5>
+            <p style={{ color: "#fbfbfb" }}>
+              You can add or update information about a product such as
+              variants, and availability from the Inventory page in your
+              <b> WareHouse</b> app.{" "}
+            </p>
           </Card.Text>
         </Card.Body>
-        </Link>
       </Card>
+     
     </div>
   );
 }
