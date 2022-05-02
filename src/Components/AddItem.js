@@ -1,10 +1,7 @@
 import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import {
-  VscTrash,
-  VscEdit,
-  VscInfo,
-  VscSearch,
+ 
   VscCheck,
 } from "react-icons/vsc";
 import Inventory from "./Inventory";
