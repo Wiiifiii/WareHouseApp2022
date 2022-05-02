@@ -1,0 +1,212 @@
+{
+  "stock": [
+    {
+      "id": 1,
+      "img": "https://media.partioaitta.fi/detail/7323450490454_FW19_a_keb_gaiter_trousers_m_fjaellraeven_21.png",
+      "name": "Fjällräven KEB GAITER ",
+      "categorie": "Pants",
+      "productnumber": "F80808",
+      "shelfid": "B-05",
+      "action": "Out",
+      "actiondate": "6.3.2022",
+      "quantity": -15
+    },
+    {
+      "itemid": 2,
+      "name": "Merrell ALPINE SNEAKER",
+      "categorie": "Casual shoes",
+      "productnumber": "1008470",
+      "shelfid": "A-02",
+      "action": "Out",
+      "actiondate": "7.3.2022",
+      "img": "https://media.partioaitta.fi/detail/884506816033_a_alpine_sneaker_merrell_110.jpg",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "img": "https://media.partioaitta.fi/detail/2400000960843_a_soelden_meindl_110.jpg",
+      "name": "Meindl SÖLDEN",
+      "categorie": " Talvi-kengät",
+      "productnumber": "1008062",
+      "shelfid": "C-03",
+      "action": "Out",
+      "actiondate": "10.7.2021",
+      "quantity": -1
+    },
+    {
+      "itemid": 4,
+      "name": "Patagonia BIVY VEST ",
+      "categorie": " Toppaliivit",
+      "productnumber": "2006806",
+      "shelfid": "D-07",
+      "action": "Out",
+      "img": "https://media.partioaitta.fi/detail/192964645325_d_m_s_reversible_bivy_down_vest_patagonia_110.jpg",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "img": "https://media.partioaitta.fi/detail/303502007_a_expedition_down_lite_vest_m_fjaellraeven_1.jpg",
+      "name": "Fjällräven LITE VEST",
+      "categorie": " Toppaliivit",
+      "productnumber": "F84606",
+      "shelfid": "D-07",
+      "action": "In",
+      "actiondate": "3.2.2022",
+      "quantity": 4
+    },
+    {
+      "id": 6,
+      "img": "https://media.partioaitta.fi/detail/5637655018_duodiqk_huettenschuh_plakolm_24.jpg",
+      "name": "Plakolm HÜTTENSCHUH Unisex",
+      "categorie": "Sandaalit",
+      "productnumber": "3003204",
+      "shelfid": "M-21",
+      "action": "In",
+      "actiondate": "14.3.2022",
+      "quantity": 6
+    },
+    {
+      "id": 7,
+      "img": "https://media.partioaitta.fi/detail/7323450720346_a_oevik_comfort_flannel_shirt_m_fjaellraeven_20.jpg",
+      "name": "Fjällräven ÖVIK",
+      "categorie": "Shirts",
+      "productnumber": "F84132",
+      "shelfid": "X-12",
+      "action": "In",
+      "actiondate": "7.2.2022",
+      "quantity": 23
+    },
+    {
+      "id": 8,
+      "img": "https://media.partioaitta.fi/detail/7332380295213_a_organic_cotton_tee_m_tierra_20.jpg",
+      "name": "Tierra ORGANIC COTTON TEE",
+      "categorie": "Shirts",
+      "productnumber": "T1024700",
+      "shelfid": "Z-06",
+      "action": "In",
+      "actiondate": "10.3.2022",
+      "quantity": 38
+    },
+    {
+      "id": 9,
+      "img": "https://media.partioaitta.fi/detail/7332380295213_a_organic_cotton_tee_m_tierra_20.jpg",
+      "name": "Tierra ORGANIC COTTON TEE",
+      "categorie": "Shirts",
+      "productnumber": "T1024700",
+      "shelfid": "Z-06",
+      "action": "Out",
+      "actiondate": "12.10.2021",
+      "quantity": -20
+    },
+    {
+      "id": 10,
+      "img": "https://media.partioaitta.fi/detail/7323450490454_FW19_a_keb_gaiter_trousers_m_fjaellraeven_21.png",
+      "name": "Fjällräven KEB GAITER ",
+      "categorie": "Pants",
+      "productnumber": "F80808",
+      "shelfid": "B-05",
+      "action": "In",
+      "actiondate": "10.12.2021",
+      "quantity": 66
+    },
+    {
+      "id": 11,
+      "img": "https://media.partioaitta.fi/detail/884506816033_a_alpine_sneaker_merrell_110.jpg",
+      "name": "Merrell ALPINE SNEAKER",
+      "categorie": "Casual shoes",
+      "productnumber": "1008470",
+      "shelfid": "A-01",
+      "action": "In",
+      "actiondate": "1.8.2010",
+      "quantity": 5
+    },
+    {
+      "id": 12,
+      "img": "https://media.partioaitta.fi/detail/2400000960843_a_soelden_meindl_110.jpg",
+      "name": "Meindl SÖLDEN",
+      "categorie": " Talvi-kengät",
+      "productnumber": "1008062",
+      "shelfid": "C-03",
+      "action": "In",
+      "actiondate": "4.4.2022",
+      "quantity": 4
+    },
+    {
+      "id": 13,
+      "img": "https://media.partioaitta.fi/detail/192964645325_d_m_s_reversible_bivy_down_vest_patagonia_110.jpg",
+      "name": "Patagonia BIVY VEST ",
+      "categorie": " Toppaliivit",
+      "productnumber": "2006806",
+      "shelfid": "D-07",
+      "action": "In",
+      "actiondate": "5.7.2021",
+      "quantity": 10
+    },
+    {
+      "id": 14,
+      "img": "https://media.partioaitta.fi/detail/303502007_a_expedition_down_lite_vest_m_fjaellraeven_1.jpg",
+      "name": "Fjällräven LITE VEST",
+      "categorie": " Toppaliivit",
+      "productnumber": "F84606",
+      "shelfid": "D-07",
+      "action": "Out",
+      "actiondate": "5.12.2011",
+      "quantity": -4
+    },
+    {
+      "id": 15,
+      "img": "https://media.partioaitta.fi/detail/5637655018_duodiqk_huettenschuh_plakolm_24.jpg",
+      "name": "Plakolm HÜTTENSCHUH Unisex",
+      "categorie": "Sandaalit",
+      "productnumber": "3003204",
+      "shelfid": "M-21",
+      "action": "Out",
+      "actiondate": "10.9.2021",
+      "quantity": -4
+    },
+    {
+      "id": 16,
+      "img": "https://media.partioaitta.fi/detail/7323450720346_a_oevik_comfort_flannel_shirt_m_fjaellraeven_20.jpg",
+      "name": "Fjällräven ÖVIK",
+      "categorie": "Shirts",
+      "productnumber": "F84132",
+      "shelfid": "X-12",
+      "action": "Out",
+      "actiondate": "2.12.2020",
+      "quantity": -3
+    },
+    {
+      "id": 17,
+      "img": "https://media.partioaitta.fi/detail/7332380295213_a_organic_cotton_tee_m_tierra_20.jpg",
+      "name": "Tierra ORGANIC COTTON TEE",
+      "categorie": "Shirts",
+      "productnumber": "T1024700",
+      "shelfid": "Z-06",
+      "action": "Out",
+      "actiondate": "1.4.2020",
+      "quantity": -6
+    },
+    {
+      "id": 18,
+      "img": "https://media.partioaitta.fi/detail/7332380295213_a_organic_cotton_tee_m_tierra_20.jpg",
+      "name": "Tierra ORGANIC COTTON TEE",
+      "categorie": "Shirts",
+      "productnumber": "T1024700",
+      "shelfid": "Z-06",
+      "action": "In",
+      "actiondate": "9.1.2022",
+      "quantity": 10
+    },
+    {
+      "img": "https://media.partioaitta.fi/detail/4047761406999_a_kofel_mid_special_edition_hanwag_110.png",
+      "name": "Hanwag KOFEL MID SPECIAL EDITION",
+      "categorie": "Arkikengät",
+      "productnumber": "H1140",
+      "shelfid": "F-06",
+      "action": "In",
+      "actiondate": "2022-04-19",
+      "quantity": "25",
+      "id": 19
+    }
+  ]
+}
