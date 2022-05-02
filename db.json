@@ -23,6 +23,7 @@
       "id": 2
     },
     {
+<<<<<<< HEAD
       "id": 3,
       "img": "https://media.partioaitta.fi/detail/2400000960843_a_soelden_meindl_110.jpg",
       "name": "Meindl SÖLDEN",
@@ -55,6 +56,8 @@
       "quantity": 4
     },
     {
+=======
+>>>>>>> 6fb74b2d3aaac428662aacd83930cef9ec125950
       "id": 6,
       "img": "https://media.partioaitta.fi/detail/5637655018_duodiqk_huettenschuh_plakolm_24.jpg",
       "name": "Plakolm HÜTTENSCHUH Unisex",
@@ -207,6 +210,20 @@
       "actiondate": "2022-04-19",
       "quantity": "25",
       "id": 19
+<<<<<<< HEAD
+=======
+    },
+    {
+      "img": "https://media.partioaitta.fi/detail/2400000614326_a_mila_jacket_junior_hagloefs_110.jpg",
+      "name": "Haglöfs MILA JACKET ",
+      "categorie": "Pants",
+      "productnumber": "1005229",
+      "shelfid": "V-01",
+      "action": "In",
+      "actionDate": "2022-05-01",
+      "quantity": "15",
+      "id": 20
+>>>>>>> 6fb74b2d3aaac428662aacd83930cef9ec125950
     }
   ]
 }
