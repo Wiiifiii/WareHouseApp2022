@@ -6,7 +6,7 @@ import {
   MdAddCircleOutline,
   MdOutlineScreenSearchDesktop,
 } from "react-icons/md";
-import { FcStatistics } from "react-icons/fc";
+
 
 function Home() {
   return (
