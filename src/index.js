@@ -22,7 +22,7 @@ root.render(
   <BrowserRouter>
   <NavBar/>
    <Routes>
-     
+   <Route path="/" element={<Home/>} />
   <Route path="/Home" element={<Home />} />
   <Route path="AddItem" element={<AddItem />} />
   <Route path="Inventory" element={<Inventory />} />
@@ -30,7 +30,6 @@ root.render(
   <Route path="/EditItem/:id" element={<EditItem />} />
   <Route path="Search/"  element={<Search />} />
    </Routes>
-    <App />
     <Footer/>
     
   </BrowserRouter>

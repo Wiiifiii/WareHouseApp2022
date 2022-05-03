@@ -3,6 +3,9 @@ import React from "react";
 
 function Footer() {
   return (
+    <div>
+
+    
     <div className="footer" >
       <div className="container">
         <div className="row">
@@ -12,6 +15,7 @@ function Footer() {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }

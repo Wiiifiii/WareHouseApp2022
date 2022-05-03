@@ -210,17 +210,6 @@
       "id": 19
     },
     {
-      "img": "https://images.alko.fi/images/cs_srgb,f_auto,t_medium/cdn/944686/piedemonte-grandes-tierras-2016.jpg",
-      "name": "Piedemonte Grandes Tierras 2016",
-      "categorie": "Red wine",
-      "productnumber": " 944686",
-      "shelfid": "B-05",
-      "action": "In",
-      "actionDate": "2022-05-03",
-      "quantity": "6",
-      "id": 20
-    },
-    {
       "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/1d50c5f4504244bfae51ade5010e3aaf_9366/Gazelle_Shoes_Green_GZ4354_01_standard.jpg",
       "name": "Gazelle Shoes",
       "categorie": "Shoes",
@@ -230,6 +219,17 @@
       "actionDate": "2022-05-03",
       "quantity": "15",
       "id": 21
+    },
+    {
+      "img": "",
+      "name": "",
+      "categorie": "",
+      "productnumber": "",
+      "shelfid": "",
+      "action": "",
+      "actionDate": "",
+      "quantity": "",
+      "id": 26
     }
   ]
 }

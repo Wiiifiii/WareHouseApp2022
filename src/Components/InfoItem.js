@@ -76,16 +76,16 @@ function ItemInfo() {
       <table className="table table-striped table-dark">
         <thead>
           <tr>
-            <th>#</th>
-            <th>IMG</th>
-            <th>NAME</th>
-            <th>CATEGORIE</th>
-            <th>CODE</th>
-            <th>SHELF ID</th>
-            <th>ACTION</th>
-            <th>ACTION DATE</th>
-            <th>QUANTITY</th>
-            <th colSpan="3">OPTIONS</th>
+          <th>ID</th>
+                <th>IMG</th>
+                <th>PRODUCT NAME</th>
+                <th>PRODUCT CATEGORIE</th>
+                <th>PRODUCT CODE</th>
+                <th>SHELF CODE</th>
+                <th>ACTION</th>
+                <th>ACTION DATE</th>
+                <th >PRODUCT QUANTITY</th>
+                <th colSpan="3">OPTIONS</th>
           </tr>
         </thead>
         <tbody>{outPutData}</tbody>

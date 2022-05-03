@@ -89,19 +89,19 @@ function Inventory() {
 
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
-          <VscInfo style={{ color: "#45bbfb" }} />
+          <VscInfo  style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
         <Link to={`/EditItem/${item.id}`}  onClick={() => {
             // seletItem(item.id);
           }}>
-          <VscEdit />
+          <VscEdit style={{ color: "#d6d6d6" }}/>
         </Link>
       </td>
       <td>
         <VscTrash
-          style={{ color: "#e3334f" }}
+          style={{ color: "#d6d6d6" }}
           onClick={() => {
             deleteItem(item.id);
           }}
@@ -114,18 +114,18 @@ function Inventory() {
     
     <div>
         <div>
-          <table className="table table-striped table-dark">
+          <table className="table table-hover table-dark">
             <thead>
               <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>IMG</th>
                 <th>PRODUCT NAME</th>
-                <th>CATEGORIE</th>
-                <th>CODE</th>
-                <th>SHELF ID</th>
+                <th>PRODUCT CATEGORIE</th>
+                <th>PRODUCT CODE</th>
+                <th>SHELF CODE</th>
                 <th>ACTION</th>
                 <th>ACTION DATE</th>
-                <th >QUANTITY</th>
+                <th >PRODUCT QUANTITY</th>
                 <th colSpan="3">OPTIONS</th>
               </tr>
             </thead>

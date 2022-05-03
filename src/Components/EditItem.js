@@ -22,7 +22,7 @@ function ItemEdit() {
   const [actionDate, setActionDate] = useState("");
   const [input, setInput] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
-  const [Message, setMessage] = useState("");
+  const [Message, setMessage] = useState(false);
 
   useEffect(() => {
     getUsers();
@@ -72,7 +72,7 @@ function seletItem(id){
       });
     });
 
-    alert("Item has been updated");
+    // alert("Item has been updated");
   }
   
   function getAllItems() {
@@ -215,12 +215,12 @@ function seletItem(id){
             </Col>
           </Row>
 
-          <div><Button   type='submit'  onClick={() => {
+          <div><Button   variant="outline-secondary" type='button'  onClick={() => {
               updateItem();
+              setMessage(true)
               
             }}> Update </Button>
-          </div>
-          <div>{Message && (
+              <div>{Message && (
             <Alert variant="success">
               <Alert.Heading>Item Updated Saved!</Alert.Heading>
               <p>
@@ -235,22 +235,24 @@ function seletItem(id){
             </Alert>
           )}
           </div>
+          </div>
+        
         </Form>
 
         <div>
         <table className="table table-striped table-dark">
           <thead>
             <tr>
-              <th>#</th>
-              <th>IMG</th>
-              <th>PRODUCT NAME</th>
-              <th>CATEGORIE</th>
-              <th>CODE</th>
-              <th>SHELF ID</th>
-              <th>ACTION</th>
-              <th>ACTION DATE</th>
-              <th>QUANTITY</th>
-              <th colSpan="3">OPTIONS</th>
+            <th>ID</th>
+                <th>IMG</th>
+                <th>PRODUCT NAME</th>
+                <th>PRODUCT CATEGORIE</th>
+                <th>PRODUCT CODE</th>
+                <th>SHELF CODE</th>
+                <th>ACTION</th>
+                <th>ACTION DATE</th>
+                <th >PRODUCT QUANTITY</th>
+                <th colSpan="3">OPTIONS</th>
             </tr>
           </thead>
           <tbody>

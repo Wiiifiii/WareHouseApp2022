@@ -16,6 +16,7 @@ function Search() {
   const [input, setInput] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState("");
+  const [showBtn, setBtnState] = useState(true);
 
   console.log(action);
   //To fetch the right data from api, handle click to take the input name or +ress
@@ -85,8 +86,12 @@ function Search() {
     setAction("");
     setQuantity("");
   };
+
+  const changeBtnState =()=>{
+    setBtnState(false)
+  }
   useEffect(() => {
-    setTimeout(() => {
+   
       if (input !== "") {
         fetch(url + `${input}`)
           .then((res) => {
@@ -104,11 +109,11 @@ function Search() {
             }
           });
       }
-    }, 50); //to Do later
+     //to Do later
   }, [input]);
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+  function refreshPage() {
+    window.location.reload(false);
+  }
   function getAllItems() {
     fetch(url).then((result) => {
       result.json().then((res) => {
@@ -229,7 +234,7 @@ function Search() {
           </Col>
         </Row>
         <div>
-          <Button
+          {/* <Button
             variant="outline-secondary"
             onClick={() => {
               handleInputClick();
@@ -237,28 +242,28 @@ function Search() {
             }}
           >
             Search
-          </Button>
+          </Button> */}
 
-          {/* {showBtn ? (
-          <Button variant="outline-primary" onClick={() => { handleInputClick(); handleClearClick(); changeBtnState()}}>Search</Button>
+          {showBtn ? (
+          <Button variant="outline-secondary"onClick={() => { handleInputClick(); handleClearClick(); changeBtnState()}}>Search</Button>
           ) : (
-        <Button variant="outline-dark" onClick={() => {refreshPage(); changeBtnState()}}>New Search</Button> )} */}
+        <Button variant="outline-secondary" onClick={() => { handleInputClick(); handleClearClick();}}>New Search</Button> )}
         </div>
       </Form>
       <div>
         <table className="table table-striped table-dark">
           <thead>
             <tr>
-              <th>#</th>
-              <th>IMG</th>
-              <th>PRODUCT NAME</th>
-              <th>CATEGORIE</th>
-              <th>CODE</th>
-              <th>SHELF ID</th>
-              <th>ACTION</th>
-              <th>ACTION DATE</th>
-              <th>QUANTITY</th>
-              <th colSpan="3">OPTIONS</th>
+            <th>ID</th>
+                <th>IMG</th>
+                <th>PRODUCT NAME</th>
+                <th>PRODUCT CATEGORIE</th>
+                <th>PRODUCT CODE</th>
+                <th>SHELF CODE</th>
+                <th>ACTION</th>
+                <th>ACTION DATE</th>
+                <th >PRODUCT QUANTITY</th>
+                <th colSpan="3">OPTIONS</th>
             </tr>
           </thead>
           <tbody>

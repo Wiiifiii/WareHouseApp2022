@@ -1,9 +1,6 @@
 import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import {
- 
-  VscCheck,
-} from "react-icons/vsc";
+import { VscCheck } from "react-icons/vsc";
 import Inventory from "./Inventory";
 
 function AddModal() {
@@ -24,12 +21,13 @@ function AddModal() {
   const [input, setInput] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState(false);
+  const [showBtn, setBtnState] = useState(true);
 
   function save() {
     fetch("http://localhost:8000/stock/", {
       method: "POST",
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -42,14 +40,15 @@ function AddModal() {
         actionDate,
         quantity,
       }),
-    }).then(response => response.json())
-    .then((result) =>{
-      console.log(result);
-    });
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+      });
   }
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+  function refreshPage() {
+    window.location.reload(false);
+  }
   const handleClearClick = () => {
     setname("");
     setcategorie("");
@@ -60,18 +59,21 @@ function AddModal() {
     setImg("");
     setActionDate("");
   };
+  const changeBtnState = () => {
+    setBtnState(false);
+  };
   return (
     <div>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Add Item
-      </Button> */}
-      <Modal show={show} onHide={handleClose}  size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Add new Item</Modal.Title>
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header style={{ backgroundColor: "#ff600b" }} closeButton>
+          <Modal.Title>
+            {" "}
+            <b>Add New Product</b>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -82,8 +84,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -94,7 +95,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -105,8 +106,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -117,8 +117,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Select
@@ -131,7 +130,7 @@ function AddModal() {
                 </Form.Select>
               </Col>
             </Row>
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -142,7 +141,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -153,7 +152,7 @@ function AddModal() {
                 />
               </Col>
             </Row>
-            <Row >
+            <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -166,7 +165,9 @@ function AddModal() {
             <div>
               {Message && (
                 <Alert variant="success">
-                  <Alert.Heading>Item Updated Saved!</Alert.Heading>
+                  <Alert.Heading>
+                    Your new product was successfully added!
+                  </Alert.Heading>
                   <p>
                     <VscCheck size={30} />
                   </p>
@@ -183,23 +184,44 @@ function AddModal() {
                 </Alert>
               )}
             </div>
-            
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button  variant="outline-secondary" onClick={() => { setMessage(false); handleClose()} }>
+          <Button
+            variant="outline-secondary"
+            onClick={() => {
+              setMessage(false);
+              handleClose();
+            }}
+          >
             Close
           </Button>
-          <div>
-              <Button  variant="outline-secondary" type="submit" onClick={() => {save(); setMessage(true); handleClearClick()} }>
-                {" "}
-                Send{" "}
-              </Button>
-            </div>
-           
-          {/* <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
+
+          {showBtn ? (
+            <Button
+              type="submit"
+              variant="outline-secondary"
+              onClick={() => {
+                save();
+                setMessage(true);
+                handleClearClick();
+                changeBtnState();
+              }}
+            >
+              ADD PRODUCT
+            </Button>
+          ) : (
+            <Button
+              variant="outline-secondary"
+              onClick={() => {
+                refreshPage();
+                changeBtnState();
+                setMessage(false);
+              }}
+            >
+              ADD MORE PRODUCT
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
       <div>
