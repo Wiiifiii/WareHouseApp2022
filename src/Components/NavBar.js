@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { VscHome, VscSearch, VscGraph,VscSquirrel,VscDiffAdded } from "react-icons/vsc";
+import { VscHome, VscSearch, VscGraph,VscSquirrel,VscDiffAdded,VscEdit } from "react-icons/vsc";
 import { Navbar,Container,Card, Button} from "react-bootstrap";
 
 
@@ -30,6 +30,8 @@ export const NavBar = () => {
                   size={30}
                 />
               </NavLink>
+
+              
   </Navbar>
   </nav>
  

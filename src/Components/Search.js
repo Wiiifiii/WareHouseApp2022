@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { VscTrash, VscEdit, VscInfo, VscSearch } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row, Button,Table } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
@@ -109,7 +109,6 @@ function Search() {
             }
           });
       }
-     //to Do later
   }, [input]);
   function refreshPage() {
     window.location.reload(false);
@@ -151,17 +150,17 @@ function Search() {
 
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
-          <VscInfo style={{ color: "#45bbfb" }} />
+          <VscInfo style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
         <Link to={`/EditItem/${item.id}`}>
-          <VscEdit />
+          <VscEdit style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
         <VscTrash
-          style={{ color: "#e3334f" }}
+          style={{ color: "#d6d6d6" }}
           onClick={() => {
             deleteItem(item.id);
           }}
@@ -251,7 +250,7 @@ function Search() {
         </div>
       </Form>
       <div>
-        <table className="table table-striped table-dark">
+        <Table className="table table-striped table-dark">
           <thead>
             <tr>
             <th>ID</th>
@@ -276,7 +275,7 @@ function Search() {
               </tr>
             )}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );

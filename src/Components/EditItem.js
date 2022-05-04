@@ -1,49 +1,43 @@
-import { useEffect, useState } from "react";
+import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
+// import Inventory from "./Inventory";
 import { useParams } from "react-router-dom";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
 import { VscTrash, VscEdit, VscInfo, VscSearch, VscCheck } from "react-icons/vsc";
 
 const url = "http://localhost:8000/stock/" 
 
-function ItemEdit() {
 
+
+function EditItemII() {
+    
+  const [show, setShow] = useState(true);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const params = useParams();
-  console.log(params.id);
+  
   const [products, setproducts] = useState([]);
+  const [id, setId] = useState("");
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
   const [productnumber, setProductNumber] = useState("");
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState();
   const [img, setImg] = useState("");
-  const [actionDate, setActionDate] = useState("");
+  const [actionDate, setActionDate] = useState(new Date());
   const [input, setInput] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState(false);
+  const [showBtn, setBtnState] = useState(true);
 
-  useEffect(() => {
-    getUsers();
-  }, [])
-function seletItem(id){
-  let item = products[id-1];
-  
-        setname(item.name)
-        setcategorie(item.categorie)
-        setProductNumber(item.productnumber)
-        setShelfId(item.shelfid)
-        setAction(item.action)
-        setQuantity(item.quantity)
-        setImg(item.img)
-        setActionDate(item.actionDate)
-}
   function getUsers() {
     fetch( "http://localhost:8000/stock?id=" + params.id).then((result) => {
       result.json().then((resp) => {
         console.log(resp)
         setproducts(resp)
+        setId(resp[0].id)
         setname(resp[0].name)
         setcategorie(resp[0].categorie)
         setProductNumber(resp[0].productnumber)
@@ -53,28 +47,14 @@ function seletItem(id){
         setImg(resp[0].img)
         setActionDate(resp[0].actionDate)
       })
+      
     })
   }
-  function updateItem()  {
-    let item = {name,categorie,productnumber,shelfid,action,actionDate,img}
-   console.warn(name,categorie,productnumber,shelfid,action,actionDate,img);
-    fetch(url + `${item.id}`, {
-      method: "PUT",
-      headers: {
-        'Accept' : ' application/json',
-        'Content-Type': ' application/json'
-      },
-      body: JSON.stringify(item)
-    }).then((result) => {
-      result.json().then((res) => {
-        console.log(res);
-        getAllItems();
-      });
-    });
+  useEffect(() => {
+    getUsers();
+   
+  }, [])
 
-    // alert("Item has been updated");
-  }
-  
   function getAllItems() {
     fetch(url).then((result) => {
       result.json().then((res) => {
@@ -82,19 +62,36 @@ function seletItem(id){
       });
     });
   }
-
-  function deleteItem(id) {
-    fetch(url + `${id}`, {
-      method: "DELETE",
-    }).then((result) => {
-      result.json().then((res) => {
-        console.log(res);
-        getAllItems();
-      });
-    });
-
-    alert("Item has been deleted");
+  function seletItem(id){
+    let item = products[id-1];
+    
+          setname(item.name)
+          setcategorie(item.categorie)
+          setProductNumber(item.productnumber)
+          setShelfId(item.shelfid)
+          setAction(item.action)
+          setQuantity(item.quantity)
+          setImg(item.img)
+          setActionDate(item.actionDate)
   }
+
+  
+  function updateProduct () {
+    let products = {name,categorie,productnumber,shelfid,action,actionDate,img,quantity}
+      console.log('products', products)
+        fetch(`http://localhost:8000/stock/${id}`,{
+            method: 'PUT',
+            headers: 
+            { 'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }, body:JSON.stringify(products)
+   
+    }).then(response =>{
+        console.log(response);
+    })
+    }
+   
+
   const outPutData = products.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -111,135 +108,218 @@ function seletItem(id){
 
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
-          <VscInfo style={{ color: "#45bbfb" }} />
+          <VscInfo style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
         <Link to={`/EditItem/${item.id}`}  onClick={() => {
-            //  seletItem(item.id);
+             
+              // updateProduct(item.id);
+              seletItem(item.id);
+              setShow(true);
+              setBtnState(true);
           }}>
-          <VscEdit />
+          <VscEdit style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
         <VscTrash
-          style={{ color: "#e3334f" }}
+          style={{ color: "#d6d6d6" }}
           onClick={() => {
-            deleteItem(item.id);
+            // deleteItem(item.id);
           }}
         />
       </td>
     </tr>
   ));
   return (
+      
     <div>
-     <Form>
-          <Row className="mb-3">
-            <Col xs={7}>
-              {" "}
-              <Form.Control
-                action="text"
-                placeholder="name"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-              />
-            </Col>
-            <Col>
-              {" "}
-              <Form.Control
-                action="text"
-                placeholder="categorie"
-                value={categorie}
-                onChange={(e) => setcategorie( e.target.value)}
-              />
-            </Col>
-            <Col>
-              {" "}
-              <Form.Control
-                action="text"
-                placeholder="productnumber"
-                value={productnumber}
-                onChange={(e) => setProductNumber( e.target.value )}
-              />
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col>
-              {" "}
-              <Form.Control
-                action="text"
-                placeholder="shelfid"
-                value={shelfid}
-                onChange={(e) => setShelfId( e.target.value )}
-              />
-            </Col>
-            <Col>
-              {" "}
-              <Form.Select
-              value={action}
-                onChange={(e) =>setAction(e.target.value )}>
-                <option>Action...</option>
-                <option>In</option>
-                <option>Out</option>
-              </Form.Select>
-            </Col>
-            <Col xs={3}>
-              {" "}
-              <Form.Control
-                type="number"
-                placeholder="quantity"
-                value={quantity}
-                onChange={(e) => setQuantity( e.target.value )}
-              />
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col>
-              {" "}
-              <Form.Control
-                action="text"
-                placeholder="img url"
-                value={img}
-                onChange={(e) => setImg( e.target.value )}
-              />
-            </Col>
-
-            <Col xs={3}>
-              {" "}
-              <Form.Control
-                type="date"
-              
-                value={actionDate}
-                onChange={(e) => setActionDate(e.target.value)}
-              />
-            </Col>
-          </Row>
-
-          <div><Button   variant="outline-secondary" type='button'  onClick={() => {
-              updateItem();
-              setMessage(true)
-              
-            }}> Update </Button>
-              <div>{Message && (
-            <Alert variant="success">
-              <Alert.Heading>Item Updated Saved!</Alert.Heading>
-              <p>
-                <VscCheck size={30} />
-              </p>
-              <hr />
-              <div className="d-flex justify-content-end">
-                <Button type='submit' onClick={() =>  setMessage(false)} variant="outline-success">
-                  Done!
-                </Button>
-              </div>
-            </Alert>
-          )}
-          </div>
-          </div>
+      <Modal show={show} onHide={handleClose} size="lg">
+      
+        <Modal.Header style={{ backgroundColor: "#ff600b" }}>
+          <Modal.Title>
+            {" "}
+            <b>Edit Product</b>
+          </Modal.Title>
+        </Modal.Header>
+       
+        <Modal.Body>
+          <Form>
+          <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="ID"
+                  value={id}
+                  disabled
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="Product name"
+                  value={name}
+                  onChange={(e) => setname(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="Product Category"
+                  value={categorie}
+                  onChange={(e) => setcategorie(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="Product code"
+                  value={productnumber}
+                  onChange={(e) => setProductNumber(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="Shelf code"
+                  value={shelfid}
+                  onChange={(e) => setShelfId(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Select
+                  value={action}
+                  onChange={(e) => setAction(e.target.value)}
+                >
+                  <option>Action...</option>
+                  <option>In</option>
+                  <option>Out</option>
+                </Form.Select>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="number"
+                  placeholder="Product Quantity"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                  type="text"
+                  placeholder="Product Image URL"
+                  value={img}
+                  onChange={(e) => setImg(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {" "}
+                <Form.Control
+                   type="date"
+                  
+                  value={actionDate}
+                  onChange={(e) => setActionDate(e.target.value)}
+                />
+              </Col>
+            </Row>
+            <div>
+              {Message && (
+                <Alert variant="success">
+                  <Alert.Heading>
+                    Your new product was successfully Updated!
+                  </Alert.Heading>
+                  <p>
+                    <VscCheck size={30} />
+                  </p>
+                  <hr />
+                  {/* <div className="d-flex justify-content-end">
+                    <Button
+                      type="submit"
+                      onClick={() => {setMessage(false); {handleClose()}}}
+                      variant="outline-success"
+                    >
+                      Done!
+                    </Button>
+                  </div> */}
+                </Alert>
+              )}
+            </div>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
         
-        </Form>
-
-        <div>
+          <Button
+            variant="outline-secondary"
+            onClick={() => {
+              setMessage(false);
+              handleClose();
+              
+            }}
+          >
+            Close
+          </Button>
+        
+          {showBtn ? (
+              
+            <Button
+              type="submit"
+              variant="outline-secondary"
+              onClick={() => {
+                // updateItem();
+                setMessage(true);
+                // handleClearClick();
+                 setBtnState(false);
+                 updateProduct()
+               
+             
+              }}
+            >
+              SAVE CHANGES
+            </Button>
+           
+          ) : (
+            // <Button
+            //   variant="outline-secondary"
+            //   onClick={() => {
+            //     refreshPage();
+            //     changeBtnState();
+            //     setMessage(false);
+              
+            //   }}
+            // >
+            //   Edit MORE PRODUCT
+            // </Button>
+            <div></div>
+          )}
+        </Modal.Footer>
+      </Modal>
+      <div>
         <table className="table table-striped table-dark">
           <thead>
             <tr>
@@ -271,4 +351,5 @@ function seletItem(id){
   );
 }
 
-export default ItemEdit;
+
+export default EditItemII;

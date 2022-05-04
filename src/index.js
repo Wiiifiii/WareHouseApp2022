@@ -4,34 +4,30 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Search from "./Components/Search";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "./Components/NavBar";
 import AddItem from "./Components/AddItem";
- import Home from "./Components/Home";
- import Inventory from "./Components/Inventory";
- import InfoItem from "./Components/InfoItem";
-// import ItemAdd from "./Components/ItemAdd";
- import EditItem from "./Components/EditItem";
-// import AddModal from "./Components/AddModal";
-// import GetAllData from "./Components/GetAllData";
+import Home from "./Components/Home";
+import Inventory from "./Components/Inventory";
+import InfoItem from "./Components/InfoItem";
+import EditItem from "./Components/EditItem";
 import Search from "./Components/Search";
 import Footer from "./Components/Footer";
-const root = ReactDOMClient.createRoot(document.getElementById('root'));
+
+const root = ReactDOMClient.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  <NavBar/>
-   <Routes>
-   <Route path="/" element={<Home/>} />
-  <Route path="/Home" element={<Home />} />
-  <Route path="AddItem" element={<AddItem />} />
-  <Route path="Inventory" element={<Inventory />} />
-  <Route path="/InfoItem/:productnumber" element={<InfoItem />} />
-  <Route path="/EditItem/:id" element={<EditItem />} />
-  <Route path="Search/"  element={<Search />} />
-   </Routes>
-    <Footer/>
-    
+    <NavBar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/Home" element={<Home />} />
+      <Route path="/AddItem" element={<AddItem />} />
+      <Route path="/Inventory" element={<Inventory />} />
+      <Route path="/InfoItem/:productnumber" element={<InfoItem />} />
+      <Route path="/EditItem/:id" element={<EditItem />} />
+      <Route path="Search/" element={<Search />} />
+    </Routes>
+    {/* <Footer/> */}
   </BrowserRouter>
 );
 

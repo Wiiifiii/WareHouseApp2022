@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { VscCheck } from "react-icons/vsc";
 import Inventory from "./Inventory";
 
-function AddModal() {
+function AddItem() {
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
@@ -15,9 +15,9 @@ function AddModal() {
   const [productnumber, setProductNumber] = useState("");
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState(new Number ());
   const [img, setImg] = useState("");
-  const [actionDate, setActionDate] = useState("");
+  const [actionDate, setActionDate] = useState(new Date());
   const [input, setInput] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState(false);
@@ -38,7 +38,7 @@ function AddModal() {
         shelfid,
         action,
         actionDate,
-        quantity,
+         quantity,
       }),
     })
       .then((response) => response.json())
@@ -46,6 +46,7 @@ function AddModal() {
         console.log(result);
       });
   }
+ 
   function refreshPage() {
     window.location.reload(false);
   }
@@ -65,7 +66,7 @@ function AddModal() {
   return (
     <div>
       <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header style={{ backgroundColor: "#ff600b" }} closeButton>
+        <Modal.Header style={{ backgroundColor: "#ff600b" }} >
           <Modal.Title>
             {" "}
             <b>Add New Product</b>
@@ -136,6 +137,9 @@ function AddModal() {
                 <Form.Control
                   type="number"
                   placeholder="Product Quantity"
+                  id="quantity"
+                  min={1}
+                  max={100}
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
@@ -157,6 +161,8 @@ function AddModal() {
                 {" "}
                 <Form.Control
                   type="date"
+                  
+                 disabled
                   value={actionDate}
                   onChange={(e) => setActionDate(e.target.value)}
                 />
@@ -231,4 +237,4 @@ function AddModal() {
   );
 }
 
-export default AddModal;
+export default AddItem;

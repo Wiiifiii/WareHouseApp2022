@@ -21,8 +21,9 @@ function ItemInfo() {
     fetchData();
   }, []);
 
+ 
   const stockTotal = info.reduce((accumulater, currentElement) => {
-    return accumulater + currentElement.quantity;
+    return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
   const outPutData = info.map((item) => (
@@ -41,7 +42,7 @@ function ItemInfo() {
 
       <td>
         <Link to={`/InfoItem/${item.id}`}>
-          <VscInfo style={{ color: "#45bbfb" }} />
+          <VscInfo style={{ color: "#d6d6d6" }} />
         </Link>
       </td>
       <td>
@@ -51,7 +52,7 @@ function ItemInfo() {
       </td>
       <td>
         <VscTrash
-          style={{ color: "#e3334f" }}
+          style={{ color: "#d6d6d6" }}
           onClick={() => {
             deleteItem(item.id);
           }}
