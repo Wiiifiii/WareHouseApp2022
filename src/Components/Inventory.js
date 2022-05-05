@@ -35,7 +35,7 @@ class Inventory extends Component {
 
     this.getAllItems();
 
-    alert("Item has been deleted");
+    // alert("Item has been deleted");
   }
   itemsTable = () => {
     return this.state.products.map((item) => {
