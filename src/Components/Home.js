@@ -31,7 +31,7 @@ function Home() {
                 <MdAddCircleOutline style={{ color: "#ff650b" }} size={100} />
               </Link>
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}>Add new item</h5>
+                <h5 style={{ color: "#ff650b" }}>ADD NEW PRODUCT</h5>
                 <p style={{ color: "#fbfbfb" }}>
                   The <b>WareHouse</b> Add section allows you to add a new
                   product to the <b>WareHouse</b>.
@@ -51,7 +51,7 @@ function Home() {
                 />
               </Link>
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}>Search</h5>
+                <h5 style={{ color: "#ff650b" }}>SEARCH</h5>
                 <p style={{ color: "#fbfbfb" }}>
                   The <b>WareHouse</b> Search section allows you to look up any
                   product in the <b>WareHouse</b>.{" "}
@@ -67,7 +67,7 @@ function Home() {
             <VscGraph style={{ color: "#ff650b" }} size={100} />
           </Link>
           <Card.Text>
-            <h5 style={{ color: "#ff650b" }}>Inventory</h5>
+            <h5 style={{ color: "#ff650b" }}>INVENTORY</h5>
             <p style={{ color: "#fbfbfb" }}>
               You can add or update information about a product such as
               variants, and availability from the Inventory page in your

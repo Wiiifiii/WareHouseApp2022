@@ -24,14 +24,6 @@ export const NavBar = () => {
       <NavLink to={"/Inventory"}>
         <VscGraph style={{ color: "#ff650b" }} size={25} />
       </NavLink>
-      <NavLink to={`/AddItem/`}>
-                <VscDiffAdded
-                  style={{ color: "#ff650b"}}
-                  size={30}
-                />
-              </NavLink>
-
-              
   </Navbar>
   </nav>
  
