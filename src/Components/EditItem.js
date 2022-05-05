@@ -74,7 +74,6 @@ function EditItemII() {
           setImg(item.img)
           setActionDate(item.actionDate)
   }
-
   
   function updateProduct () {
     let products = {name,categorie,productnumber,shelfid,action,actionDate,img,quantity}
@@ -87,10 +86,13 @@ function EditItemII() {
         }, body:JSON.stringify(products)
    
     }).then(response =>{
-        console.log(response);
+        console.log('res :',response);
+        
     })
     }
-   
+    function refreshPage() {
+      window.location.reload(false);
+    }
 
   const outPutData = products.map((item) => (
     <tr key={item.id}>
@@ -103,9 +105,7 @@ function EditItemII() {
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
       <td>{item.action}</td>
-      <td>{item.actiondate}</td>
       <td>{item.quantity}</td>
-
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
           <VscInfo style={{ color: "#d6d6d6" }} />
@@ -113,8 +113,6 @@ function EditItemII() {
       </td>
       <td>
         <Link to={`/EditItem/${item.id}`}  onClick={() => {
-             
-              // updateProduct(item.id);
               seletItem(item.id);
               setShow(true);
               setBtnState(true);
@@ -194,12 +192,69 @@ function EditItemII() {
             <Row>
               <Col>
                 {" "}
-                <Form.Control
-                  type="text"
-                  placeholder="Shelf code"
-                  value={shelfid}
-                  onChange={(e) => setShelfId(e.target.value)}
-                />
+                <Form.Select
+              
+              value={shelfid}
+              onChange={(e) => setShelfId(e.target.value)}
+            >
+               <option>Shelf Code...</option>
+               <option>A-01</option>
+              <option>A-02</option>
+              <option>B-01</option>
+              <option>B-02</option>
+              <option>C-01</option>
+              <option>C-02</option>
+              <option>D-01</option>
+              <option>D-02</option>
+              <option>C-01</option>
+              <option>C-02</option>
+              <option>D-01</option>
+              <option>D-02</option>
+              <option>E-01</option>
+              <option>E-02</option>
+              <option>F-01</option>
+              <option>F-02</option>
+              <option>G-01</option>
+              <option>G-02</option>
+              <option>H-01</option>
+              <option>H-02</option>
+              <option>I-01</option>
+              <option>I-02</option>
+              <option>J-01</option>
+              <option>J-02</option>
+              <option>K-01</option>
+              <option>K-02</option>
+              <option>L-01</option>
+              <option>L-02</option>
+              <option>M-01</option>
+              <option>M-02</option>
+              <option>N-01</option>
+              <option>N-02</option>
+              <option>O-01</option>
+              <option>O-02</option>
+              <option>P-01</option>
+              <option>P-02</option>
+              <option>Q-01</option>
+              <option>Q-02</option>
+              <option>R-01</option>
+              <option>R-02</option>
+              <option>S-01</option>
+              <option>S-02</option>
+              <option>T-01</option>
+              <option>T-02</option>
+              <option>U-01</option>
+              <option>U-02</option>
+              <option>V-01</option>
+              <option>V-02</option>
+              <option>W-01</option>
+              <option>W-02</option>
+              <option>X-01</option>
+              <option>X-02</option>
+              <option>Y-01</option>
+              <option>Y-02</option>
+              <option>Z-01</option>
+              <option>Z-02</option>
+             </Form.Select>
               </Col>
             </Row>
             <Row>
@@ -242,7 +297,8 @@ function EditItemII() {
                 {" "}
                 <Form.Control
                    type="date"
-                  
+                   hidden
+                  disabled
                   value={actionDate}
                   onChange={(e) => setActionDate(e.target.value)}
                 />
@@ -258,63 +314,39 @@ function EditItemII() {
                     <VscCheck size={30} />
                   </p>
                   <hr />
-                  {/* <div className="d-flex justify-content-end">
-                    <Button
-                      type="submit"
-                      onClick={() => {setMessage(false); {handleClose()}}}
-                      variant="outline-success"
-                    >
-                      Done!
-                    </Button>
-                  </div> */}
                 </Alert>
               )}
             </div>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-        
+        {/* <Link to={'/Inventory/'}> */}
           <Button
             variant="outline-secondary"
             onClick={() => {
               setMessage(false);
               handleClose();
-              
+             
             }}
           >
             Close
           </Button>
-        
+        {/* </Link> */}
           {showBtn ? (
               
             <Button
               type="submit"
               variant="outline-secondary"
               onClick={() => {
-                // updateItem();
                 setMessage(true);
-                // handleClearClick();
                  setBtnState(false);
                  updateProduct()
                
-             
               }}
             >
               SAVE CHANGES
             </Button>
-           
           ) : (
-            // <Button
-            //   variant="outline-secondary"
-            //   onClick={() => {
-            //     refreshPage();
-            //     changeBtnState();
-            //     setMessage(false);
-              
-            //   }}
-            // >
-            //   Edit MORE PRODUCT
-            // </Button>
             <div></div>
           )}
         </Modal.Footer>
@@ -330,7 +362,6 @@ function EditItemII() {
                 <th>PRODUCT CODE</th>
                 <th>SHELF CODE</th>
                 <th>ACTION</th>
-                <th>ACTION DATE</th>
                 <th >PRODUCT QUANTITY</th>
                 <th colSpan="3">OPTIONS</th>
             </tr>
