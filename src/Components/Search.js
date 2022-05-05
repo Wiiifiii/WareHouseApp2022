@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { VscTrash, VscEdit, VscInfo, VscSearch } from "react-icons/vsc";
+import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { Form, Col, Row, Button,Table } from "react-bootstrap";
+import { Form, Col, Row, Button,Table,Card } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
@@ -98,9 +99,9 @@ function Search() {
             return res.json();
           })
           .then((data) => {
-            console.log(data);
+            console.log('data:' ,data);
             if (data.length === 0) {
-              setMessage("Data Not Found");
+              setMessage("No Data Found");
               setproducts([]);
             } else {
               setproducts(data);
@@ -133,8 +134,9 @@ function Search() {
 
     alert("Item has been deleted");
   }
-
+ 
   const outPutData = products.map((item) => (
+    
     <tr key={item.id}>
       <td>{item.id}</td>
       <td>
@@ -144,9 +146,11 @@ function Search() {
       <td>{item.categorie}</td>
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
-      <td>{item.action}</td>
-      <td>{item.actiondate}</td>
       <td>{item.quantity}</td>
+      <td>{item.action}</td>
+
+      
+     
 
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
@@ -204,12 +208,69 @@ function Search() {
         <Row className="mb-3">
           <Col>
             {" "}
-            <Form.Control
-              action="text"
-              placeholder="Shelf code"
+            <Form.Select
+              
               value={shelfid}
               onChange={(e) => setShelfId(e.target.value)}
-            />
+            >
+               <option>Shelf Code...</option>
+              <option>A-01</option>
+              <option>A-02</option>
+              <option>B-01</option>
+              <option>B-02</option>
+              <option>C-01</option>
+              <option>C-02</option>
+              <option>D-01</option>
+              <option>D-02</option>
+              <option>C-01</option>
+              <option>C-02</option>
+              <option>D-01</option>
+              <option>D-02</option>
+              <option>E-01</option>
+              <option>E-02</option>
+              <option>F-01</option>
+              <option>F-02</option>
+              <option>G-01</option>
+              <option>G-02</option>
+              <option>H-01</option>
+              <option>H-02</option>
+              <option>I-01</option>
+              <option>I-02</option>
+              <option>J-01</option>
+              <option>J-02</option>
+              <option>K-01</option>
+              <option>K-02</option>
+              <option>L-01</option>
+              <option>L-02</option>
+              <option>M-01</option>
+              <option>M-02</option>
+              <option>N-01</option>
+              <option>N-02</option>
+              <option>O-01</option>
+              <option>O-02</option>
+              <option>P-01</option>
+              <option>P-02</option>
+              <option>Q-01</option>
+              <option>Q-02</option>
+              <option>R-01</option>
+              <option>R-02</option>
+              <option>S-01</option>
+              <option>S-02</option>
+              <option>T-01</option>
+              <option>T-02</option>
+              <option>U-01</option>
+              <option>U-02</option>
+              <option>V-01</option>
+              <option>V-02</option>
+              <option>W-01</option>
+              <option>W-02</option>
+              <option>X-01</option>
+              <option>X-02</option>
+              <option>Y-01</option>
+              <option>Y-02</option>
+              <option>Z-01</option>
+              <option>Z-02</option>
+             </Form.Select>
           </Col>
           <Col>
             {" "}
@@ -233,24 +294,14 @@ function Search() {
           </Col>
         </Row>
         <div>
-          {/* <Button
-            variant="outline-secondary"
-            onClick={() => {
-              handleInputClick();
-              handleClearClick();
-            }}
-          >
-            Search
-          </Button> */}
-
-          {showBtn ? (
+                   {showBtn ? (
           <Button variant="outline-secondary"onClick={() => { handleInputClick(); handleClearClick(); changeBtnState()}}>Search</Button>
           ) : (
         <Button variant="outline-secondary" onClick={() => { handleInputClick(); handleClearClick();}}>New Search</Button> )}
         </div>
       </Form>
       <div>
-        <Table className="table table-striped table-dark">
+        <Table className="table table-hover table-dark">
           <thead>
             <tr>
             <th>ID</th>
@@ -259,23 +310,23 @@ function Search() {
                 <th>PRODUCT CATEGORIE</th>
                 <th>PRODUCT CODE</th>
                 <th>SHELF CODE</th>
+                <th>PRODUCT QUANTITY</th>
                 <th>ACTION</th>
-                <th>ACTION DATE</th>
-                <th >PRODUCT QUANTITY</th>
                 <th colSpan="3">OPTIONS</th>
             </tr>
           </thead>
           <tbody>
             {outPutData}
-            {Message && (
-              <tr>
-                <td colSpan="12">
-                  <b>{Message}</b>
-                </td>
-              </tr>
-            )}
           </tbody>
         </Table>
+        {Message && (
+        <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+        <Card.Body>
+      <h1 style={{ color: "#fbfbfb"}}>{Message}</h1>  
+      <ImSad style={{ color: "#ff650b" , paddingRight: 7}} size={45}/>
+        </Card.Body>
+      </Card>
+      )}
       </div>
     </div>
   );
