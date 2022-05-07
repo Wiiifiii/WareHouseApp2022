@@ -1,6 +1,6 @@
 import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { VscCheck } from "react-icons/vsc";
+import { VscCheck,VscError} from "react-icons/vsc";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 function AddItem() {
@@ -22,14 +22,68 @@ function AddItem() {
   // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState(false);
   const [showBtn, setBtnState] = useState(true);
+  const [validation, setValidation] = useState("");
+  const [isValid, setIsValid] = useState(false);
 
+ 
+  function inputValidation() {
+    if (name === "") {
+      setValidation("Product name should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    }
+    else if (categorie === "") {
+      setValidation("Product category should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    }
+    else if (productnumber === "") {
+      setValidation("Product code should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    } 
+    else  if (shelfid === "") {
+      setValidation("Shelf code should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    }
+    else   if (action === "" ) {
+      setValidation("Operation action be required, please");
+      setMessage(false);
+      setIsValid(true);
+
+     
+    
+    
+    } 
+    else if (quantity < 0 || quantity > 100 || quantity === '') {
+      setValidation("Max. 100 products per shelf");
+      setMessage(false);
+      setIsValid(true);
+    }
+    else if(img === '' || img === ' '){
+      save();
+      setMessage(true);
+      setIsValid(false);
+    }
+    
+    else {
+      
+      save();
+      setMessage(true);
+      setIsValid(false);
+    }
+  }
   function save() {
+   
     fetch("http://localhost:8000/stock/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      
+
       body: JSON.stringify({
         img,
         name,
@@ -38,15 +92,17 @@ function AddItem() {
         shelfid,
         action,
         actionDate,
-         quantity,
+        quantity,
       }),
     })
+    
+    
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
       });
   }
- 
+
   function refreshPage() {
     window.location.reload(false);
   }
@@ -66,7 +122,7 @@ function AddItem() {
   return (
     <div>
       <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header style={{ backgroundColor: "#ff600b" }} >
+        <Modal.Header style={{ backgroundColor: "#ff600b" }}>
           <Modal.Title>
             {" "}
             <b>Add New Product</b>
@@ -111,68 +167,67 @@ function AddItem() {
               <Col>
                 {" "}
                 <Form.Select
-              
-              value={shelfid}
-              onChange={(e) => setShelfId(e.target.value)}
-            >
-               <option>Shelf Code...</option>
-               <option>A-01</option>
-              <option>A-02</option>
-              <option>B-01</option>
-              <option>B-02</option>
-              <option>C-01</option>
-              <option>C-02</option>
-              <option>D-01</option>
-              <option>D-02</option>
-              <option>C-01</option>
-              <option>C-02</option>
-              <option>D-01</option>
-              <option>D-02</option>
-              <option>E-01</option>
-              <option>E-02</option>
-              <option>F-01</option>
-              <option>F-02</option>
-              <option>G-01</option>
-              <option>G-02</option>
-              <option>H-01</option>
-              <option>H-02</option>
-              <option>I-01</option>
-              <option>I-02</option>
-              <option>J-01</option>
-              <option>J-02</option>
-              <option>K-01</option>
-              <option>K-02</option>
-              <option>L-01</option>
-              <option>L-02</option>
-              <option>M-01</option>
-              <option>M-02</option>
-              <option>N-01</option>
-              <option>N-02</option>
-              <option>O-01</option>
-              <option>O-02</option>
-              <option>P-01</option>
-              <option>P-02</option>
-              <option>Q-01</option>
-              <option>Q-02</option>
-              <option>R-01</option>
-              <option>R-02</option>
-              <option>S-01</option>
-              <option>S-02</option>
-              <option>T-01</option>
-              <option>T-02</option>
-              <option>U-01</option>
-              <option>U-02</option>
-              <option>V-01</option>
-              <option>V-02</option>
-              <option>W-01</option>
-              <option>W-02</option>
-              <option>X-01</option>
-              <option>X-02</option>
-              <option>Y-01</option>
-              <option>Y-02</option>
-              <option>Z-01</option>
-              <option>Z-02</option>
-             </Form.Select>
+                  value={shelfid}
+                  onChange={(e) => setShelfId(e.target.value)}
+                >
+                  <option>Shelf Code...</option>
+                  <option>A-01</option>
+                  <option>A-02</option>
+                  <option>B-01</option>
+                  <option>B-02</option>
+                  <option>C-01</option>
+                  <option>C-02</option>
+                  <option>D-01</option>
+                  <option>D-02</option>
+                  <option>C-01</option>
+                  <option>C-02</option>
+                  <option>D-01</option>
+                  <option>D-02</option>
+                  <option>E-01</option>
+                  <option>E-02</option>
+                  <option>F-01</option>
+                  <option>F-02</option>
+                  <option>G-01</option>
+                  <option>G-02</option>
+                  <option>H-01</option>
+                  <option>H-02</option>
+                  <option>I-01</option>
+                  <option>I-02</option>
+                  <option>J-01</option>
+                  <option>J-02</option>
+                  <option>K-01</option>
+                  <option>K-02</option>
+                  <option>L-01</option>
+                  <option>L-02</option>
+                  <option>M-01</option>
+                  <option>M-02</option>
+                  <option>N-01</option>
+                  <option>N-02</option>
+                  <option>O-01</option>
+                  <option>O-02</option>
+                  <option>P-01</option>
+                  <option>P-02</option>
+                  <option>Q-01</option>
+                  <option>Q-02</option>
+                  <option>R-01</option>
+                  <option>R-02</option>
+                  <option>S-01</option>
+                  <option>S-02</option>
+                  <option>T-01</option>
+                  <option>T-02</option>
+                  <option>U-01</option>
+                  <option>U-02</option>
+                  <option>V-01</option>
+                  <option>V-02</option>
+                  <option>W-01</option>
+                  <option>W-02</option>
+                  <option>X-01</option>
+                  <option>X-02</option>
+                  <option>Y-01</option>
+                  <option>Y-02</option>
+                  <option>Z-01</option>
+                  <option>Z-02</option>
+                </Form.Select>
               </Col>
             </Row>
             <Row>
@@ -195,8 +250,6 @@ function AddItem() {
                   type="number"
                   placeholder="Product Quantity"
                   id="quantity"
-                  min={1}
-                  max={100}
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                 />
@@ -219,7 +272,7 @@ function AddItem() {
                 <Form.Control
                   type="date"
                   hidden
-                 disabled
+                  disabled
                   value={actionDate}
                   onChange={(e) => setActionDate(e.target.value)}
                 />
@@ -232,27 +285,29 @@ function AddItem() {
                     Your new product was successfully added!
                   </Alert.Heading>
                   <p>
-                    <VscCheck size={30} />
+                    <VscCheck size={40} />
                   </p>
                   <hr />
-                  {/* <div className="d-flex justify-content-end">
-                    <Button
-                      type="submit"
-                      onClick={() => {setMessage(false); {handleClose()}}}
-                      variant="outline-success"
-                    >
-                      Done!
-                    </Button>
-                  </div> */}
                 </Alert>
+              )}
+            </div>
+            <div>
+              {isValid && (
+                <Alert variant="danger ">
+                  <Alert.Heading>{validation}</Alert.Heading>
+                  <p>
+                    <VscError size={40} />
+                  </p>
+                  <hr />
+                  </Alert>
               )}
             </div>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-        <Link to={`/Inventory/`}>
-              <Button variant="outline-secondary">Go to Inventory</Button>
-            </Link>
+          <Link to={`/Inventory/`}>
+            <Button variant="outline-secondary">Go to Inventory</Button>
+          </Link>
           <Button
             variant="outline-secondary"
             onClick={() => {
@@ -263,45 +318,45 @@ function AddItem() {
             Close
           </Button>
 
-          {showBtn ? (
-            <Button
-              type="submit"
-              variant="outline-secondary"
-              onClick={() => {
-                save();
-                setMessage(true);
-                handleClearClick();
-                changeBtnState();
-              }}
-            >
-              ADD PRODUCT
-            </Button>
-          ) : (
-            <Button
-              variant="outline-secondary"
-              onClick={() => {
-                refreshPage();
-                changeBtnState();
-                setMessage(false);
-              }}
-            >
-              ADD MORE PRODUCT
-            </Button>
-          )}
+          <Button
+            type="submit"
+            variant="outline-secondary"
+            onClick={() => {
+              inputValidation();
+             
+              changeBtnState();
+            }}
+          >
+            ADD PRODUCT
+          </Button>
+          <Button
+            variant="outline-secondary"
+            onClick={() => {
+              setMessage(false);
+              setIsValid(false);
+              // handleClose();
+              handleClearClick();
+              
+            }}
+          >
+            Clear
+          </Button>
         </Modal.Footer>
       </Modal>
-      <div style={{padding: '20px'}}> 
-      <Link to={`/AddItem/`}>
-      <Button 
-              variant="outline-secondary"
-              onClick={() => {
-                refreshPage();
-                changeBtnState();
-                setMessage(false);
-              }}
-            >Add Product</Button>
-            </Link>
-            </div>
+      <div style={{ padding: "20px" }}>
+        <Link to={`/AddItem/`}>
+          <Button
+            variant="outline-secondary"
+            onClick={() => {
+              refreshPage();
+              changeBtnState();
+              setMessage(false);
+            }}
+          >
+            Add Product
+          </Button>
+        </Link>
+      </div>
       <div>
         <Inventory />
       </div>
