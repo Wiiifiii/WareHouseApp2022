@@ -83,3 +83,6 @@ float: none; /* Added */
   margin: auto;
 
 }
+.modal{
+  background-image: url("./img/bg15.jpg"); 
+}

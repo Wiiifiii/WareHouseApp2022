@@ -8,7 +8,7 @@
       "action": "In",
       "actionDate": "2022-05-04T13:46:24.746Z",
       "img": "https://media.partioaitta.fi/detail/194187770433_a_boardshort_label_trad_cap_patagonia_110.jpg",
-      "quantity": "105",
+      "quantity": "100",
       "id": 20
     },
     {
@@ -19,7 +19,7 @@
       "shelfid": "W-01",
       "action": "In",
       "actionDate": "2022-05-05T18:17:09.568Z",
-      "quantity": "56",
+      "quantity": "12",
       "id": 43
     },
     {
@@ -30,7 +30,7 @@
       "action": "In",
       "actionDate": "2022-05-05T20:26:00.936Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/106477/04/sv01/fnd/EEA/fmt/png/ULTRA-1.3-FG/AG-Football-Boots",
-      "quantity": "77",
+      "quantity": "17",
       "id": 44
     },
     {
@@ -41,7 +41,7 @@
       "action": "In",
       "actionDate": "2022-05-05T20:27:25.074Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/106738/01/sv01/fnd/EEA/fmt/png/ULTRA-3.4-FG/AG-Youth-Football-Boots",
-      "quantity": "147",
+      "quantity": "17",
       "id": 45
     },
     {
@@ -52,7 +52,7 @@
       "action": "In",
       "actionDate": "2022-05-05T20:28:58.868Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/534434/48/fnd/EEA/fmt/png/PUMA-x-GARFIELD-Printed-Men's-Tee",
-      "quantity": "188",
+      "quantity": "18",
       "id": 46
     },
     {
@@ -63,7 +63,7 @@
       "shelfid": "W-02",
       "action": "In",
       "actionDate": "2022-05-05T20:31:19.493Z",
-      "quantity": "123",
+      "quantity": "13",
       "id": 47
     },
     {
@@ -74,7 +74,7 @@
       "shelfid": "V-02",
       "action": "In",
       "actionDate": "2022-05-05T20:33:04.227Z",
-      "quantity": "112",
+      "quantity": "11",
       "id": 48
     },
     {
@@ -118,7 +118,7 @@
       "action": "Out",
       "actionDate": "2022-05-05T20:40:05.512Z",
       "img": "https://media.partioaitta.fi/detail/194187770433_a_boardshort_label_trad_cap_patagonia_110.jpg",
-      "quantity": "-8",
+      "quantity": "-18",
       "id": 52
     },
     {
@@ -155,14 +155,14 @@
       "id": 55
     },
     {
-      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/376153/01/sv01/fnd/EEA/fmt/png/PUMA-x-HELLY-HANSEN-Voyage-Nitro-Running-Shoes",
       "name": "PUMA x HELLY",
       "categorie": "Sneakers ",
       "productnumber": "376153",
       "shelfid": "W-01",
       "action": "Out",
       "actionDate": "2022-05-05T18:17:09.568Z",
-      "quantity": "-16",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/376153/01/sv01/fnd/EEA/fmt/png/PUMA-x-HELLY-HANSEN-Voyage-Nitro-Running-Shoes",
+      "quantity": "-10",
       "id": 56
     },
     {
@@ -184,7 +184,7 @@
       "action": "Out",
       "actionDate": "2022-05-05T20:27:25.074Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/106738/01/sv01/fnd/EEA/fmt/png/ULTRA-3.4-FG/AG-Youth-Football-Boots",
-      "quantity": "-68",
+      "quantity": "-8",
       "id": 58
     },
     {
@@ -195,7 +195,7 @@
       "action": "Out",
       "actionDate": "2022-05-05T20:28:58.868Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/534434/48/fnd/EEA/fmt/png/PUMA-x-GARFIELD-Printed-Men's-Tee",
-      "quantity": "-106",
+      "quantity": "-10",
       "id": 59
     },
     {
@@ -217,7 +217,7 @@
       "shelfid": "V-02",
       "action": "Out",
       "actionDate": "2022-05-05T20:33:04.227Z",
-      "quantity": "-66",
+      "quantity": "-6",
       "id": 61
     },
     {
@@ -228,7 +228,7 @@
       "shelfid": "T-02",
       "action": "Out",
       "actionDate": "2022-05-05T20:34:57.617Z",
-      "quantity": "-24",
+      "quantity": "-4",
       "id": 62
     },
     {
@@ -239,7 +239,7 @@
       "shelfid": "V-01",
       "action": "Out",
       "actionDate": "2022-05-05T20:36:32.581Z",
-      "quantity": "-99",
+      "quantity": "-9",
       "id": 63
     },
     {
@@ -250,7 +250,7 @@
       "shelfid": "U-01",
       "action": "Out",
       "actionDate": "2022-05-05T20:38:03.752Z",
-      "quantity": "-23",
+      "quantity": "-3",
       "id": 64
     },
     {
@@ -272,7 +272,7 @@
       "shelfid": "A-02",
       "action": "In",
       "actionDate": "2022-05-05T22:22:43.931Z",
-      "quantity": "63",
+      "quantity": "6",
       "id": 66
     },
     {
@@ -283,8 +283,118 @@
       "shelfid": "A-02",
       "action": "Out",
       "actionDate": "2022-05-05T22:36:45.268Z",
-      "quantity": "-26",
+      "quantity": "-6",
       "id": 67
+    },
+    {
+      "name": "ACM Prematch",
+      "categorie": "Men's Jersey ",
+      "productnumber": "765053",
+      "shelfid": "Q-02",
+      "action": "In",
+      "actionDate": "2022-05-07T21:45:42.030Z",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/765053/02/mod01/fnd/EEA/fmt/png/ACM-Prematch-Men's-Jersey",
+      "quantity": "19",
+      "id": 68
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/765058/02/fnd/EEA/fmt/png/ACM-Prematch-Youth-Football-Jacket",
+      "name": "ACM Prematch",
+      "categorie": "Football Jacket ",
+      "productnumber": "765058",
+      "shelfid": "R-01",
+      "action": "In",
+      "actionDate": "2022-05-05T20:28:58.868Z",
+      "quantity": "80",
+      "id": 69
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/759068/03/fnd/EEA/fmt/png/BVB-Cup-Replica-Men's-Jersey-21/22",
+      "name": "BVB Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "759068",
+      "shelfid": "V-01",
+      "action": "In",
+      "actionDate": "2022-05-05T18:17:09.568Z",
+      "quantity": "74",
+      "id": 70
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/759068/03/fnd/EEA/fmt/png/BVB-Cup-Replica-Men's-Jersey-21/22",
+      "name": "BVB Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "759068",
+      "shelfid": "V-01",
+      "action": "Out",
+      "actionDate": "2022-05-04T13:46:24.746Z",
+      "quantity": "-74",
+      "id": 71
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/759803/08/fnd/EEA/fmt/png/FIGC-Away-Men's-Replica-Jersey",
+      "name": "FIGC Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "759803",
+      "shelfid": "I-01",
+      "action": "In",
+      "actionDate": "2022-05-05T20:27:25.074Z",
+      "quantity": "99",
+      "id": 72
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/759803/08/fnd/EEA/fmt/png/FIGC-Away-Men's-Replica-Jersey",
+      "name": "FIGC Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "759803",
+      "shelfid": "I-01",
+      "action": "Out",
+      "actionDate": "2022-05-05T20:26:00.936Z",
+      "quantity": "-37",
+      "id": 73
+    },
+    {
+      "name": "Egypt Home Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "757541",
+      "shelfid": "A-01",
+      "action": "In",
+      "actionDate": "2022-05-05T18:17:09.568Z",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/757541/01/fnd/EEA/fmt/png/Egypt-Home-Replica-Men's-Jersey",
+      "quantity": "33",
+      "id": 74
+    },
+    {
+      "name": "Egypt Home Jersey",
+      "categorie": "Men's Jersey",
+      "productnumber": "757541",
+      "shelfid": "A-01",
+      "action": "Out",
+      "actionDate": "2022-05-04T13:46:24.746Z",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/757541/01/fnd/EEA/fmt/png/Egypt-Home-Replica-Men's-Jersey",
+      "quantity": "-27",
+      "id": 75
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/530079/24/fnd/EEA/fmt/png/Iconic-T7-Women's-Track-Jacket",
+      "name": "Iconic T7",
+      "categorie": "Jacket ",
+      "productnumber": " 530079",
+      "shelfid": "W-02",
+      "action": "In",
+      "actionDate": "2022-05-07T22:05:41.618Z",
+      "quantity": "77",
+      "id": 76
+    },
+    {
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/530079/24/fnd/EEA/fmt/png/Iconic-T7-Women's-Track-Jacket",
+      "name": "Iconic T7",
+      "categorie": "Jacket ",
+      "productnumber": " 530079",
+      "shelfid": "W-02",
+      "action": "Out",
+      "actionDate": "2022-05-07T22:05:41.618Z",
+      "quantity": "-19",
+      "id": 77
     }
   ]
 }

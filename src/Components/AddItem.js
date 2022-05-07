@@ -1,8 +1,11 @@
 import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { VscCheck,VscError} from "react-icons/vsc";
+import { VscCheck, VscError } from "react-icons/vsc";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
+import { BiCommentError } from "react-icons/bi";
+
+
 function AddItem() {
   const [show, setShow] = useState(true);
 
@@ -15,7 +18,7 @@ function AddItem() {
   const [productnumber, setProductNumber] = useState("");
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState('');
   const [img, setImg] = useState("");
   const [actionDate, setActionDate] = useState(new Date());
   const [input, setInput] = useState("");
@@ -24,66 +27,50 @@ function AddItem() {
   const [showBtn, setBtnState] = useState(true);
   const [validation, setValidation] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const [isDelete, setDelete] = useState(false);
 
- 
   function inputValidation() {
     if (name === "") {
       setValidation("Product name should be required, please");
       setMessage(false);
       setIsValid(true);
-    }
-    else if (categorie === "") {
+    } else if (categorie === "") {
       setValidation("Product category should be required, please");
       setMessage(false);
       setIsValid(true);
-    }
-    else if (productnumber === "") {
+    } else if (productnumber === "") {
       setValidation("Product code should be required, please");
       setMessage(false);
       setIsValid(true);
-    } 
-    else  if (shelfid === "") {
+    } else if (shelfid === "") {
       setValidation("Shelf code should be required, please");
       setMessage(false);
       setIsValid(true);
-    }
-    else   if (action === "" ) {
+    } else if (action === "") {
       setValidation("Operation action be required, please");
       setMessage(false);
       setIsValid(true);
-
-     
-    
-    
-    } 
-    else if (quantity < 0 || quantity > 100 || quantity === '') {
-      setValidation("Max. 100 products per shelf");
+    } else if (quantity < -100 || quantity > 100 || quantity === "") {
+      setValidation("You can change the shelf capacity from -100 (Out) to +100 (In).");
       setMessage(false);
       setIsValid(true);
-    }
-    else if(img === '' || img === ' '){
+    } else if (img === "" || img ==! "") {
       save();
       setMessage(true);
       setIsValid(false);
-    }
-    
-    else {
-      
+    } else {
       save();
       setMessage(true);
       setIsValid(false);
     }
   }
   function save() {
-   
     fetch("http://localhost:8000/stock/", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      
-
       body: JSON.stringify({
         img,
         name,
@@ -95,8 +82,6 @@ function AddItem() {
         quantity,
       }),
     })
-    
-    
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
@@ -119,6 +104,7 @@ function AddItem() {
   const changeBtnState = () => {
     setBtnState(false);
   };
+
   return (
     <div>
       <Modal show={show} onHide={handleClose} size="lg">
@@ -296,10 +282,10 @@ function AddItem() {
                 <Alert variant="danger ">
                   <Alert.Heading>{validation}</Alert.Heading>
                   <p>
-                    <VscError size={40} />
+                    <BiCommentError size={40} />
                   </p>
                   <hr />
-                  </Alert>
+                </Alert>
               )}
             </div>
           </Form>
@@ -307,6 +293,9 @@ function AddItem() {
         <Modal.Footer>
           <Link to={`/Inventory/`}>
             <Button variant="outline-secondary">Go to Inventory</Button>
+          </Link>
+          <Link to={`/Search/`}>
+            <Button variant="outline-secondary">Go to Search</Button>
           </Link>
           <Button
             variant="outline-secondary"
@@ -323,11 +312,11 @@ function AddItem() {
             variant="outline-secondary"
             onClick={() => {
               inputValidation();
-             
+              
               changeBtnState();
             }}
           >
-            ADD PRODUCT
+            SAVE PRODUCT
           </Button>
           <Button
             variant="outline-secondary"
@@ -336,7 +325,6 @@ function AddItem() {
               setIsValid(false);
               // handleClose();
               handleClearClick();
-              
             }}
           >
             Clear
@@ -357,11 +345,11 @@ function AddItem() {
           </Button>
         </Link>
       </div>
+      
       <div>
         <Inventory />
       </div>
     </div>
   );
 }
-
 export default AddItem;

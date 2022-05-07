@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { VscTrash, VscEdit, VscInfo ,VscSymbolNamespace} from "react-icons/vsc";
-import { FaSitemap} from "react-icons/fa";
+import {
+  VscTrash,
+  VscEdit,
+  VscInfo,
+  VscSymbolNamespace,
+} from "react-icons/vsc";
+import { FaSitemap } from "react-icons/fa";
 
 import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { Form, Col, Row, Button,Table,Card } from "react-bootstrap";
+import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
@@ -17,60 +22,40 @@ function Search() {
   const [action, setAction] = useState("");
   const [quantity, setQuantity] = useState("");
   const [input, setInput] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState("");
   const [showBtn, setBtnState] = useState(true);
 
-  console.log(action);
-  //To fetch the right data from api, handle click to take the input name or +ress
-  //and + to the the end of the url.
   const handleInputClick = () => {
     if (name !== "") {
-      setInput("?name=" +
-        name.charAt(0).toUpperCase() +
-        name.slice(1));
-      // setIsLoading(true);
+      setInput("?name=" + name.charAt(0).toUpperCase() + name.slice(1));
     }
     if (categorie !== "") {
       setInput(
-        "?categorie=" +
-        categorie.charAt(0).toUpperCase() +
-        categorie.slice(1)
+        "?categorie=" + categorie.charAt(0).toUpperCase() + categorie.slice(1)
       );
-      // setIsLoading(true);
     }
     if (productnumber !== "") {
       setInput(
         "?productnumber=" +
-        productnumber.charAt(0).toUpperCase() +
-        productnumber.slice(1)
+          productnumber.charAt(0).toUpperCase() +
+          productnumber.slice(1)
       );
-      // setIsLoading(true);
     }
     if (shelfid !== "") {
       setInput(
-        "?shelfid=" +
-        shelfid.charAt(0).toUpperCase() +
-        shelfid.slice(1)
+        "?shelfid=" + shelfid.charAt(0).toUpperCase() + shelfid.slice(1)
       );
-      // setIsLoading(true);
     }
     if (action !== "") {
-      setInput("?action=" +
-        action.charAt(0).toUpperCase() +
-        action.slice(1));
-      // setIsLoading(true);
+      setInput("?action=" + action.charAt(0).toUpperCase() + action.slice(1));
     }
     if (quantity !== "") {
       // if(quantity > 100){
       //   alert('Max on 100')
       // }
       setInput(
-        "?quantity=" + 
-        quantity.charAt(0).toUpperCase() + 
-        quantity.slice(1)
+        "?quantity=" + quantity.charAt(0).toUpperCase() + quantity.slice(1)
       );
-      // setIsLoading(true);
     }
     if (
       name === "" &&
@@ -81,7 +66,6 @@ function Search() {
       quantity === ""
     ) {
       setInput("/");
-      // setIsLoading(true);
     }
   };
   const handleClearClick = () => {
@@ -92,54 +76,53 @@ function Search() {
     setAction("");
     setQuantity("");
   };
-
-  const changeBtnState =()=>{
-    setBtnState(false)
-  }
+  const changeBtnState = () => {
+    setBtnState(false);
+  };
   useEffect(() => {
-   
-      if (input !== "") {
-        fetch(url + `${input}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-            console.log('data:' ,data);
-            if (data.length === 0) {
-              setMessage("No Data Found");
-              setproducts([]);
-            } else {
-              setproducts(data);
-              // setIsLoading(false);
-              setMessage("");
-            }
-          });
-      }
+    if (input !== "") {
+      fetch(url + `${input}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("data:", data);
+          if (data.length === 0) {
+            setMessage("No Data Found");
+            setproducts([]);
+          } else {
+            setproducts(data);
+            setMessage("");
+          }
+        });
+    }
   }, [input]);
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+
   const shelfstock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-   const shelfSpace = () =>{
- let Space = shelfSpace;
- if( products.shelfid === shelfid) {
-  Space = 
-  products.length * 100 - shelfstock;
- }
-
-    if(products.shelfid !== shelfid)
-    {
-     Space =  100 - shelfstock;
+  const shelfSpace = () => {
+    let Space = shelfSpace;
+    if (products.shelfid === shelfid || products.length <= 2) {
+      Space =  100 - shelfstock;
     }
-    if(shelfstock === 0)
-    {
+
+    if(products.length > 2 && products.shelfid === shelfid  ){
+      Space = 100  - shelfstock ;
+    }
+    if(products.length > 2 && products.shelfid !== shelfid  ){
+      Space = (26*100 )  - shelfstock ;
+    }
+    // if (products.shelfid !== shelfid) {
+    //   Space = 100 - shelfstock;
+    // }
+    if (shelfstock === 0 || shelfstock === 100) {
       Space = 0;
     }
+    
     return Space;
-  }
+  };
 
   function getAllItems() {
     fetch(url).then((result) => {
@@ -161,13 +144,12 @@ function Search() {
 
     alert("Item has been deleted");
   }
- 
+
   const outPutData = products.map((item) => (
-    
     <tr key={item.id}>
       <td>{item.id}</td>
       <td>
-        <img src={item.img} alt={('')}/>
+        <img src={item.img} alt={""} />
       </td>
       <td>{item.name}</td>
       <td>{item.categorie}</td>
@@ -198,7 +180,6 @@ function Search() {
 
   return (
     <div>
-
       <Form>
         <Row className="mb-3">
           <Col xs={7}>
@@ -233,11 +214,10 @@ function Search() {
           <Col>
             {" "}
             <Form.Select
-              
               value={shelfid}
               onChange={(e) => setShelfId(e.target.value)}
             >
-               <option>Shelf Code...</option>
+              <option>Shelf Code...</option>
               <option>A-01</option>
               <option>A-02</option>
               <option>B-01</option>
@@ -294,7 +274,7 @@ function Search() {
               <option>Y-02</option>
               <option>Z-01</option>
               <option>Z-02</option>
-             </Form.Select>
+            </Form.Select>
           </Col>
           <Col>
             {" "}
@@ -318,27 +298,47 @@ function Search() {
           </Col>
         </Row>
         <div>
-                   {showBtn ? (
-          <Button variant="outline-secondary"onClick={() => { handleInputClick(); handleClearClick(); changeBtnState()}}>Search</Button>
+          {showBtn ? (
+            <Button
+              variant="outline-secondary"
+              onClick={() => {
+                handleInputClick();
+                handleClearClick();
+                changeBtnState();
+              }}
+            >
+              Search
+            </Button>
           ) : (
-        <Button variant="outline-secondary" onClick={() => { handleInputClick(); handleClearClick();}}>New Search</Button> )}
+            <Button
+              variant="outline-secondary"
+              onClick={() => {
+                handleInputClick();
+                handleClearClick();
+              }}
+            >
+              New Search
+            </Button>
+          )}
         </div>
       </Form>
       <div className="row gx-5">
         <div className="col">
           <Card style={{ width: "20rem", background: "#1b1b1b" }}>
             <Card.Body>
-              
-                <FaSitemap style={{ color: "#ff650b" }} size={100} />
-              
+              <FaSitemap style={{ color: "#ff650b" }} size={100} />
+
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}>TOTAL STOCK</h5>
-                <p style={{ color: "#fbfbfb" }}>
-                  {shelfstock}
-                </p>
+                <h5 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h5>
+                <p style={{ color: "#fbfbfb" , fontSize: 40}}>{shelfstock}</p>
                 <Link to={`/Inventory/`}>
-              <Button variant="outline-secondary" style={{ marginRight: '5px'}} >Go to Inventory</Button>
-            </Link>
+                  <Button
+                    variant="outline-secondary"
+                    style={{ marginRight: "5px" }}
+                  >
+                    Go to Inventory
+                  </Button>
+                </Link>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -347,62 +347,46 @@ function Search() {
         <div className="col">
           <Card style={{ width: "20rem", background: "#1b1b1b" }}>
             <Card.Body>
-              
-                <VscSymbolNamespace
-                  style={{ color: "#ff650b" }}
-                  size={100}
-                />
-              
+              <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
+
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}> SHELF  SPACE </h5>
-                <p style={{ color: "#fbfbfb" }}>
-                  {shelfSpace()} 
-                </p>
+                <h5 style={{ color: "#ff650b"}}>SHELF SPACE AVAILABLE</h5>
+                <p style={{ color: "#fbfbfb", fontSize: 40 }}>{shelfSpace()}</p>
                 <Link to={`/Search/`}>
-              <Button variant="outline-secondary">Go to Search</Button>
-            </Link>
+                  <Button variant="outline-secondary">Go to Search</Button>
+                </Link>
               </Card.Text>
             </Card.Body>
           </Card>
         </div>
       </div>
-      
-      
-     
       <div>
-     
         <Table className="table table-hover table-dark">
           <thead>
             <tr>
-            <th>ID</th>
-                <th>IMG</th>
-                <th>PRODUCT NAME</th>
-                <th>PRODUCT CATEGORIE</th>
-                <th>PRODUCT CODE</th>
-                <th>SHELF CODE</th>
-                <th>PRODUCT QUANTITY</th>
-                <th>ACTION</th>
-                <th colSpan="3">OPTIONS</th>
+              <th>ID</th>
+              <th>IMG</th>
+              <th>PRODUCT NAME</th>
+              <th>PRODUCT CATEGORIE</th>
+              <th>PRODUCT CODE</th>
+              <th>SHELF CODE</th>
+              <th>PRODUCT QUANTITY</th>
+              <th>ACTION</th>
+              <th colSpan="3">OPTIONS</th>
             </tr>
           </thead>
-          <tbody>
-            {outPutData}
-          </tbody>
+          <tbody>{outPutData}</tbody>
         </Table>
         {Message && (
-        <Card style={{ width: "20rem", background: "#1b1b1b" }}>
-        <Card.Body>
-      <h1 style={{ color: "#fbfbfb"}}>{Message}</h1>  
-      <ImSad style={{ color: "#ff650b" , paddingRight: 7}} size={45}/>
-        </Card.Body>
-      </Card>
-      )}
-
-       
-     
+          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card.Body>
+              <h1 style={{ color: "#fbfbfb" }}>{Message}</h1>
+              <ImSad style={{ color: "#ff650b", paddingRight: 7 }} size={45} />
+            </Card.Body>
+          </Card>
+        )}
       </div>
     </div>
   );
 }
-
 export default Search;

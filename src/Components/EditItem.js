@@ -349,6 +349,12 @@ function EditItem() {
           ) : (
             <div></div>
           )}
+          <Link to={`/Inventory/`}>
+              <Button variant="outline-secondary" style={{ marginRight: '5px'}} >Go to Inventory</Button>
+            </Link>
+            <Link to={`/Search/`}>
+              <Button variant="outline-secondary">Go to Search</Button>
+            </Link>
         </Modal.Footer>
       </Modal>
       <div>
