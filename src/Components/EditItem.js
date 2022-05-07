@@ -9,14 +9,10 @@ const url = "http://localhost:8000/stock/"
 
 
 
-function EditItemII() {
+function EditItem() {
     
   const [show, setShow] = useState(true);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const params = useParams();
-  
   const [products, setproducts] = useState([]);
   const [id, setId] = useState("");
   const [name, setname] = useState("");
@@ -52,9 +48,13 @@ function EditItemII() {
   }
   useEffect(() => {
     getUsers();
+  // seletItem();
    
   }, [])
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   function getAllItems() {
     fetch(url).then((result) => {
       result.json().then((res) => {
@@ -62,18 +62,18 @@ function EditItemII() {
       });
     });
   }
-  function seletItem(id){
-    let item = products[id-1];
+  // const  seletItem = (id) =>{
+  //   let item = products[id-1];
     
-          setname(item.name)
-          setcategorie(item.categorie)
-          setProductNumber(item.productnumber)
-          setShelfId(item.shelfid)
-          setAction(item.action)
-          setQuantity(item.quantity)
-          setImg(item.img)
-          setActionDate(item.actionDate)
-  }
+  //         setname(item.name)
+  //         setcategorie(item.categorie)
+  //         setProductNumber(item.productnumber)
+  //         setShelfId(item.shelfid)
+  //         setAction(item.action)
+  //         setQuantity(item.quantity)
+  //         setImg(item.img)
+  //         setActionDate(item.actionDate)
+  // }
   
   function updateProduct () {
     let products = {name,categorie,productnumber,shelfid,action,actionDate,img,quantity}
@@ -112,13 +112,11 @@ function EditItemII() {
         </Link>
       </td>
       <td>
-        <Link to={`/EditItem/${item.id}`}  onClick={() => {
-              seletItem(item.id);
-              setShow(true);
-              setBtnState(true);
-          }}>
-          <VscEdit style={{ color: "#d6d6d6" }} />
-        </Link>
+          <VscEdit style={{ color: "#d6d6d6" }}
+          onClick={() => {
+            setShow(true);
+            setBtnState(true);
+        }} />
       </td>
       <td>
         <VscTrash
@@ -326,6 +324,7 @@ function EditItemII() {
             onClick={() => {
               setMessage(false);
               handleClose();
+              setShow(false)
              
             }}
           >
@@ -341,6 +340,7 @@ function EditItemII() {
                 setMessage(true);
                  setBtnState(false);
                  updateProduct()
+                 
                
               }}
             >
@@ -383,4 +383,4 @@ function EditItemII() {
 }
 
 
-export default EditItemII;
+export default EditItem;

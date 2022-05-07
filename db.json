@@ -8,19 +8,8 @@
       "action": "In",
       "actionDate": "2022-05-04T13:46:24.746Z",
       "img": "https://media.partioaitta.fi/detail/194187770433_a_boardshort_label_trad_cap_patagonia_110.jpg",
-      "quantity": "122",
+      "quantity": "105",
       "id": 20
-    },
-    {
-      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/380190/08/sv01/fnd/EEA/fmt/png/CA-Pro-Classic-Trainers",
-      "name": "CA Pro Classic",
-      "categorie": "Sneakers ",
-      "productnumber": "380190",
-      "shelfid": "W-01",
-      "action": "In",
-      "actionDate": "2022-05-05T18:15:16.918Z",
-      "quantity": "88",
-      "id": 42
     },
     {
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/376153/01/sv01/fnd/EEA/fmt/png/PUMA-x-HELLY-HANSEN-Voyage-Nitro-Running-Shoes",
@@ -56,14 +45,14 @@
       "id": 45
     },
     {
-      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/534434/48/fnd/EEA/fmt/png/PUMA-x-GARFIELD-Printed-Men's-Tee",
       "name": "PUMA x GARFIELD",
       "categorie": "T-Shirts",
       "productnumber": "534434",
       "shelfid": "C-01",
       "action": "In",
       "actionDate": "2022-05-05T20:28:58.868Z",
-      "quantity": "156",
+      "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/534434/48/fnd/EEA/fmt/png/PUMA-x-GARFIELD-Printed-Men's-Tee",
+      "quantity": "188",
       "id": 46
     },
     {
@@ -122,14 +111,14 @@
       "id": 51
     },
     {
-      "img": "https://media.partioaitta.fi/detail/194187770433_a_boardshort_label_trad_cap_patagonia_110.jpg",
       "name": "TRAD CAP ",
       "categorie": "Hats & Caps ",
       "productnumber": "3002088",
       "shelfid": "Z-01",
       "action": "Out",
       "actionDate": "2022-05-05T20:40:05.512Z",
-      "quantity": "-7",
+      "img": "https://media.partioaitta.fi/detail/194187770433_a_boardshort_label_trad_cap_patagonia_110.jpg",
+      "quantity": "-8",
       "id": 52
     },
     {

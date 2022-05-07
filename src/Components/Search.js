@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { VscTrash, VscEdit, VscInfo, VscSearch } from "react-icons/vsc";
+import { VscTrash, VscEdit, VscInfo ,VscSymbolNamespace} from "react-icons/vsc";
+import { FaSitemap} from "react-icons/fa";
+
 import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Button,Table,Card } from "react-bootstrap";
@@ -23,13 +25,13 @@ function Search() {
   //To fetch the right data from api, handle click to take the input name or +ress
   //and + to the the end of the url.
   const handleInputClick = () => {
-    if (name != "") {
+    if (name !== "") {
       setInput("?name=" +
         name.charAt(0).toUpperCase() +
         name.slice(1));
       // setIsLoading(true);
     }
-    if (categorie != "") {
+    if (categorie !== "") {
       setInput(
         "?categorie=" +
         categorie.charAt(0).toUpperCase() +
@@ -37,7 +39,7 @@ function Search() {
       );
       // setIsLoading(true);
     }
-    if (productnumber != "") {
+    if (productnumber !== "") {
       setInput(
         "?productnumber=" +
         productnumber.charAt(0).toUpperCase() +
@@ -45,7 +47,7 @@ function Search() {
       );
       // setIsLoading(true);
     }
-    if (shelfid != "") {
+    if (shelfid !== "") {
       setInput(
         "?shelfid=" +
         shelfid.charAt(0).toUpperCase() +
@@ -53,13 +55,16 @@ function Search() {
       );
       // setIsLoading(true);
     }
-    if (action != "") {
+    if (action !== "") {
       setInput("?action=" +
         action.charAt(0).toUpperCase() +
         action.slice(1));
       // setIsLoading(true);
     }
-    if (quantity != "") {
+    if (quantity !== "") {
+      // if(quantity > 100){
+      //   alert('Max on 100')
+      // }
       setInput(
         "?quantity=" + 
         quantity.charAt(0).toUpperCase() + 
@@ -111,9 +116,31 @@ function Search() {
           });
       }
   }, [input]);
-  function refreshPage() {
-    window.location.reload(false);
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
+  const shelfstock = products.reduce((accumulater, currentElement) => {
+    return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
+  }, 0);
+
+   const shelfSpace = () =>{
+ let Space = shelfSpace;
+ if( products.shelfid === shelfid) {
+  Space = 
+  products.length * 100 - shelfstock;
+ }
+
+    if(products.shelfid !== shelfid)
+    {
+     Space =  100 - shelfstock;
+    }
+    if(shelfstock === 0)
+    {
+      Space = 0;
+    }
+    return Space;
   }
+
   function getAllItems() {
     fetch(url).then((result) => {
       result.json().then((res) => {
@@ -140,7 +167,7 @@ function Search() {
     <tr key={item.id}>
       <td>{item.id}</td>
       <td>
-        <img src={item.img} />
+        <img src={item.img} alt={('')}/>
       </td>
       <td>{item.name}</td>
       <td>{item.categorie}</td>
@@ -148,10 +175,6 @@ function Search() {
       <td>{item.shelfid}</td>
       <td>{item.quantity}</td>
       <td>{item.action}</td>
-
-      
-     
-
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
           <VscInfo style={{ color: "#d6d6d6" }} />
@@ -175,6 +198,7 @@ function Search() {
 
   return (
     <div>
+
       <Form>
         <Row className="mb-3">
           <Col xs={7}>
@@ -300,7 +324,53 @@ function Search() {
         <Button variant="outline-secondary" onClick={() => { handleInputClick(); handleClearClick();}}>New Search</Button> )}
         </div>
       </Form>
+      <div className="row gx-5">
+        <div className="col">
+          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card.Body>
+              
+                <FaSitemap style={{ color: "#ff650b" }} size={100} />
+              
+              <Card.Text>
+                <h5 style={{ color: "#ff650b" }}>TOTAL STOCK</h5>
+                <p style={{ color: "#fbfbfb" }}>
+                  {shelfstock}
+                </p>
+                <Link to={`/Inventory/`}>
+              <Button variant="outline-secondary" style={{ marginRight: '5px'}} >Go to Inventory</Button>
+            </Link>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+
+        <div className="col">
+          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card.Body>
+              
+                <VscSymbolNamespace
+                  style={{ color: "#ff650b" }}
+                  size={100}
+                />
+              
+              <Card.Text>
+                <h5 style={{ color: "#ff650b" }}> SHELF  SPACE </h5>
+                <p style={{ color: "#fbfbfb" }}>
+                  {shelfSpace()} 
+                </p>
+                <Link to={`/Search/`}>
+              <Button variant="outline-secondary">Go to Search</Button>
+            </Link>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+      
+      
+     
       <div>
+     
         <Table className="table table-hover table-dark">
           <thead>
             <tr>
@@ -327,6 +397,9 @@ function Search() {
         </Card.Body>
       </Card>
       )}
+
+       
+     
       </div>
     </div>
   );

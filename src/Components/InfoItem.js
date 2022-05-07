@@ -26,9 +26,9 @@ function ItemInfo() {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  const thedate = info.map((item) => (
-      new Date(item.actiondate) 
-    ));
+  // const thedate = info.map((item) => (
+  //     new Date(item.actiondate) 
+  //   ));
 
   const outPutData = info.map((item) => (
     

@@ -39,6 +39,7 @@ th {
   text-align: center;
   vertical-align: middle;
   margin: auto;
+  
   /* background-image: url("./img/bg20.jpg");   */
 }
 
@@ -68,6 +69,7 @@ float: none; /* Added */
 .card {
   margin: 0 auto; /* Added */
   margin-bottom: 10px; /* Added */
+  margin-top: 10px;
 }
 
 .footer {
