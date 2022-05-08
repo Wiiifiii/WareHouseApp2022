@@ -24,23 +24,22 @@ function ItemInfo() {
     getProduct();
   }, []);
 
+  let filterIn = info.filter(stock => stock.action === "In" )
+  console.log('filter-In' , filterIn);
 
-  // if(info.action === 'Out'){
-  //   setCurrentElement('-' + currentElement.quantity)
-  // }
-  // console.log(currentElement.quantity);
-  const stockTotal = info.reduce((total, currentElement) => {
+  let filterOut = info.filter(stock => stock.action === "Out" )
+  console.log('filter-Out' , filterOut);
+
+  const stockIn = filterIn.reduce((total, currentElement) => {
     return JSON.parse(total) + JSON.parse(currentElement.quantity);
-    
   }, 0);
-  
-  // const thedate = info.map((item) => (
-  //     new Date(item.actiondate) 
-  //   ));
 
+  const stockOut = filterOut.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
+  }, 0);
+
+  const stockTotal = stockIn - stockOut;
   const outPutData = info.map((item) => (
-    
-  
     <tr key={item.id}>
       <td>{item.id}</td>
       <td>

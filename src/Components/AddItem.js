@@ -4,7 +4,15 @@ import { VscCheck, VscError } from "react-icons/vsc";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 import { BiCommentError } from "react-icons/bi";
-import { VscHome, VscSearch, VscGraph,VscSquirrel,VscAdd,VscEdit ,VscClose} from "react-icons/vsc";
+import {
+  VscHome,
+  VscSearch,
+  VscGraph,
+  VscSquirrel,
+  VscAdd,
+  VscEdit,
+  VscClose,
+} from "react-icons/vsc";
 
 import { useParams } from "react-router-dom";
 
@@ -20,7 +28,7 @@ function AddItem() {
   const [productnumber, setProductNumber] = useState("");
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
-  const [quantity, setQuantity] = useState('');
+  const [quantity, setQuantity] = useState("");
   const [img, setImg] = useState("");
   const [actionDate, setActionDate] = useState(new Date());
   const [input, setInput] = useState("");
@@ -29,69 +37,94 @@ function AddItem() {
   const [showBtn, setBtnState] = useState(true);
   const [validation, setValidation] = useState("");
   const [isValid, setIsValid] = useState(false);
-  const [isDelete, setDelete] = useState(false);
-  
+  const [isDisable, setDisable] = useState(false);
+
   const url = "http://localhost:8000/stock/";
   const params = useParams();
   const [info, setInfo] = useState([]);
 
-  
   async function getProduct() {
-    let response = await fetch(
-      "http://localhost:8000/stock/"
-    );
+    let response = await fetch(url + "?shelfid=" + shelfid);
     let data = await response.json();
     console.log(data);
     setproducts(data);
-    
   }
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [shelfid]);
 
-  // const stockTotal = info.reduce((total, currentElement) => {
-  //   return JSON.parse(total) + JSON.parse(currentElement.quantity);
-  // }, 0);
+  const shelfstock = products.reduce((accumulater, currentElement) => {
+    return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
+  }, 0);
 
- 
-  function inputValidation() {
-    if (name === "") {
-      setValidation("Product name should be required, please");
+  const shelfSapce = 100 - shelfstock;
+  console.log("space", shelfSapce);
+  console.log("stock", shelfstock);
+
+  function checkshelfstatus() {
+    if (shelfstock >= 100) {
+      setValidation("Shelf is full");
+      setMessage(false);
+      // setIsValid(true);
       // setMessage(false);
-      setIsValid(true);
-    } else if (categorie === "") {
-      setValidation("Product category should be required, please");
-      // setMessage(false);
-      setIsValid(true);
-    } else if (productnumber === "") {
-      setValidation("Product code should be required, please");
-      // setMessage(false);
-      setIsValid(true);
-    } else if (shelfid === "") {
-      
-      setValidation("Shelf code should be required, please");
-      // setMessage(false);
-      setIsValid(true);
-    } else if (action === "") {
-      setValidation("Operation action be required, please");
-      // setMessage(false);
-      setIsValid(true);
-    } else if (quantity < -100 || quantity > 100 || quantity === "") {
-      setValidation("You can change the shelf capacity from -100 (Out) to +100 (In).");
-      // setMessage(false);
-      setIsValid(true);
-    } else if (img === "" || img ==! "") {
-      addProduct();
-      setMessage(true);
-      setIsValid(false);
+    }
+    if (quantity > shelfSapce) {
+      setValidation("Shelf have spesce for " + shelfSapce);
+      setMessage(false);
+      // setIsValid(true);
     } else {
       addProduct();
       setMessage(true);
       setIsValid(false);
+      setDisable(true);
     }
-
-    
   }
+
+  function inputValidation() {
+    if (name === "") {
+      setValidation("Product name should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    } else if (categorie === "") {
+      setValidation("Product category should be required, please");
+      setMessage(false);
+      setIsValid(true);
+    } else if (productnumber === "") {
+      setValidation("Product code should be required, please");
+      //  setMessage(false);
+      setIsValid(true);
+    } else if (shelfid === "") {
+      setValidation("Shelf code should be required, please");
+
+      //  setMessage(false);
+      setIsValid(true);
+    } else if (action === "") {
+      setValidation("Operation action be required, please");
+      setMessage(false);
+      setIsValid(true);
+    } else if (quantity < -100 || quantity > 100 || quantity === "") {
+      setValidation(
+        "You can change the shelf capacity from -100 (Out) to +100 (In)."
+      );
+      setMessage(false);
+      setIsValid(true);
+    } else if (img === "" || img == !"") {
+      // addProduct();
+      // setMessage(true);
+      // setIsValid(false);
+      checkshelfstatus();
+    } else {
+      // addProduct();
+      // setMessage(true);
+      // setIsValid(false);
+      // setDisable(true);
+      checkshelfstatus();
+    }
+  }
+  console.log(quantity);
+  console.log(shelfid);
+  console.log(products.shelfid);
+
   function addProduct() {
     fetch("http://localhost:8000/stock/", {
       method: "POST",
@@ -115,7 +148,7 @@ function AddItem() {
         console.log(result);
       });
 
-      getProduct();
+    getProduct();
   }
 
   function refreshPage() {
@@ -130,9 +163,11 @@ function AddItem() {
     setQuantity("");
     setImg("");
     setActionDate("");
+    setIsValid(false);
   };
   const changeBtnState = () => {
     setBtnState(false);
+    // setDisable(false);
   };
 
   return (
@@ -180,7 +215,7 @@ function AddItem() {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col style={{paddingRight:0}}>
                 {" "}
                 <Form.Select
                   value={shelfid}
@@ -244,6 +279,13 @@ function AddItem() {
                   <option>Z-01</option>
                   <option>Z-02</option>
                 </Form.Select>
+               
+              </Col>
+              <Col style={{paddingLeft:0 }}>
+              <Form.Control type="text"  
+              style={{backgroundColor: '#e9e9ed', fontStyle:'oblique'}}
+              disabled
+              value=  {'Shelf Space Available { ' + shelfSapce + ' }'}/>
               </Col>
             </Row>
             <Row>
@@ -321,21 +363,21 @@ function AddItem() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-        <Link style={{ color: "#ff650b" }} to={"/Home"}>
-        <Button variant="outline-secondary">
-        <VscHome style={{ color: "#ff650b" }} size={30} />
-        </Button>
-      </Link>
-        <Link to={"/Inventory"}>
-        <Button variant="outline-secondary">
-        <VscGraph style={{ color: "#ff650b" }} size={25} />
-        </Button>
-        </Link>
-        <Link style={{ color: "#ff650b" }} to={"/Search"}>
-        <Button variant="outline-secondary">
-        <VscSearch style={{ color: "#ff650b" }}size={25} />
-        </Button>
-      </Link>
+          <Link style={{ color: "#ff650b" }} to={"/Home"}>
+            <Button variant="outline-secondary">
+              <VscHome style={{ color: "#ff650b" }} size={30} />
+            </Button>
+          </Link>
+          <Link to={"/Inventory"}>
+            <Button variant="outline-secondary">
+              <VscGraph style={{ color: "#ff650b" }} size={25} />
+            </Button>
+          </Link>
+          <Link style={{ color: "#ff650b" }} to={"/Search"}>
+            <Button variant="outline-secondary">
+              <VscSearch style={{ color: "#ff650b" }} size={25} />
+            </Button>
+          </Link>
           <Button
             variant="outline-secondary"
             onClick={() => {
@@ -349,9 +391,10 @@ function AddItem() {
           <Button
             type="submit"
             variant="outline-secondary"
+            disabled={isDisable}
             onClick={() => {
               inputValidation();
-              
+
               changeBtnState();
             }}
           >
@@ -359,11 +402,11 @@ function AddItem() {
           </Button>
           <Button
             variant="outline-secondary"
+            // disabled={isDisable}
             onClick={() => {
               setMessage(false);
-              setIsValid(false);
-              // handleClose();
               handleClearClick();
+             setDisable(false);
             }}
           >
             Clear
@@ -384,7 +427,7 @@ function AddItem() {
           </Button>
         </Link>
       </div>
-      
+
       <div>
         <Inventory />
       </div>
