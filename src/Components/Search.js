@@ -24,37 +24,45 @@ function Search() {
   const [input, setInput] = useState("");
   const [Message, setMessage] = useState("");
   const [showBtn, setBtnState] = useState(true);
+  const [disaple, setDisable] = useState(false)
 
   const handleInputClick = () => {
     if (name !== "") {
-      setInput("?name=" + name.charAt(0).toUpperCase() + name.slice(1));
+      setInput("?name=" +
+        name.charAt(0).toUpperCase() +
+        name.slice(1));
     }
     if (categorie !== "") {
       setInput(
-        "?categorie=" + categorie.charAt(0).toUpperCase() + categorie.slice(1)
+        "?categorie=" +
+        categorie.charAt(0).toUpperCase() +
+        categorie.slice(1)
       );
     }
     if (productnumber !== "") {
       setInput(
         "?productnumber=" +
-          productnumber.charAt(0).toUpperCase() +
-          productnumber.slice(1)
+        productnumber.charAt(0).toUpperCase() +
+        productnumber.slice(1)
       );
     }
     if (shelfid !== "") {
       setInput(
-        "?shelfid=" + shelfid.charAt(0).toUpperCase() + shelfid.slice(1)
+        "?shelfid=" +
+        shelfid.charAt(0).toUpperCase() +
+        shelfid.slice(1)
       );
     }
     if (action !== "") {
-      setInput("?action=" + action.charAt(0).toUpperCase() + action.slice(1));
+      setInput("?action=" +
+        action.charAt(0).toUpperCase() +
+        action.slice(1));
     }
     if (quantity !== "") {
-      // if(quantity > 100){
-      //   alert('Max on 100')
-      // }
       setInput(
-        "?quantity=" + quantity.charAt(0).toUpperCase() + quantity.slice(1)
+        "?quantity=" +
+        quantity.charAt(0).toUpperCase() +
+        quantity.slice(1)
       );
     }
     if (
@@ -103,16 +111,17 @@ function Search() {
   }, 0);
 
   const shelfSpace = () => {
+    
     let Space = shelfSpace;
-    if (products.shelfid === shelfid || products.length <= 2) {
-      Space =  100 - shelfstock;
-    }
+    // if (products.shelfid === shelfid || products.length <= 2) {
+    //   Space = 100 - shelfstock;
+    // }
 
-    if(products.length > 2 && products.shelfid === shelfid  ){
-      Space = 100  - shelfstock ;
-    }
-    if(products.length > 2 && products.shelfid !== shelfid  ){
-      Space = (26*100 )  - shelfstock ;
+    // if (products.length > 2 && products.shelfid === shelfid) {
+    //   Space = 100 - shelfstock;
+    // }
+    if (products.length > 2 && products.shelfid !== shelfid) {
+      Space = 26 * 100 - shelfstock;
     }
     // if (products.shelfid !== shelfid) {
     //   Space = 100 - shelfstock;
@@ -121,6 +130,10 @@ function Search() {
       Space = 0;
     }
     
+    if (shelfstock < 100 ) {
+      Space = 100 - shelfstock;
+    }
+  
     return Space;
   };
 
@@ -132,7 +145,7 @@ function Search() {
     });
   }
 
-  function deleteItem(id) {
+  function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
     }).then((result) => {
@@ -142,7 +155,7 @@ function Search() {
       });
     });
 
-    alert("Item has been deleted");
+    // alert("Item has been deleted");
   }
 
   const outPutData = products.map((item) => (
@@ -156,6 +169,7 @@ function Search() {
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
       <td>{item.quantity}</td>
+      <td>{item.actionDate}</td>
       <td>{item.action}</td>
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
@@ -171,7 +185,7 @@ function Search() {
         <VscTrash
           style={{ color: "#d6d6d6" }}
           onClick={() => {
-            deleteItem(item.id);
+            deleteProduct(item.id);
           }}
         />
       </td>
@@ -298,28 +312,23 @@ function Search() {
           </Col>
         </Row>
         <div>
-          {showBtn ? (
-            <Button
-              variant="outline-secondary"
-              onClick={() => {
-                handleInputClick();
-                handleClearClick();
-                changeBtnState();
-              }}
-            >
-              Search
-            </Button>
-          ) : (
-            <Button
-              variant="outline-secondary"
-              onClick={() => {
-                handleInputClick();
-                handleClearClick();
-              }}
-            >
-              New Search
-            </Button>
-          )}
+          <Button
+            variant="outline-secondary"
+            onClick={() => {
+              handleInputClick();
+              changeBtnState();
+            }}
+          >
+            Search
+          </Button>
+          <Button style={{marginLeft: 10}}
+            variant="outline-secondary"
+            onClick={() => {
+              handleClearClick();
+            }}
+          >
+            Clear
+          </Button>
         </div>
       </Form>
       <div className="row gx-5">
@@ -330,15 +339,8 @@ function Search() {
 
               <Card.Text>
                 <h5 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h5>
-                <p style={{ color: "#fbfbfb" , fontSize: 40}}>{shelfstock}</p>
-                <Link to={`/Inventory/`}>
-                  <Button
-                    variant="outline-secondary"
-                    style={{ marginRight: "5px" }}
-                  >
-                    Go to Inventory
-                  </Button>
-                </Link>
+                <p style={{ color: "#fbfbfb", fontSize: 40 }}>{shelfstock}</p>
+            
               </Card.Text>
             </Card.Body>
           </Card>
@@ -350,11 +352,9 @@ function Search() {
               <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
 
               <Card.Text>
-                <h5 style={{ color: "#ff650b"}}>SHELF SPACE AVAILABLE</h5>
+                <h5 style={{ color: "#ff650b" }}>SHELF SPACE AVAILABLE</h5>
                 <p style={{ color: "#fbfbfb", fontSize: 40 }}>{shelfSpace()}</p>
-                <Link to={`/Search/`}>
-                  <Button variant="outline-secondary">Go to Search</Button>
-                </Link>
+                
               </Card.Text>
             </Card.Body>
           </Card>
@@ -371,6 +371,7 @@ function Search() {
               <th>PRODUCT CODE</th>
               <th>SHELF CODE</th>
               <th>PRODUCT QUANTITY</th>
+              <th>ACTION DATE</th>
               <th>ACTION</th>
               <th colSpan="3">OPTIONS</th>
             </tr>

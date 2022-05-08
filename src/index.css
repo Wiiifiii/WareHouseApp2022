@@ -39,9 +39,7 @@ th {
   text-align: center;
   vertical-align: middle;
   margin: auto;
-  
-  /* background-image: url("./img/bg20.jpg");   */
-}
+  }
 
 
 nav {
@@ -75,7 +73,7 @@ float: none; /* Added */
 .footer {
   color: white;
   background-color: #1b1b1b;
-  position: fixed;
+  position: relative;
   padding-top: 1rem;
   bottom: 0;
   width: 100%;

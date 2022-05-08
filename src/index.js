@@ -21,13 +21,13 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Home" element={<Home />} />
-      <Route path="/AddItem" element={<AddItem />} />
+      <Route path="/AddItem/" element={<AddItem />} />
       <Route path="/Inventory" element={<Inventory />} />
       <Route path="/InfoItem/:productnumber" element={<InfoItem />} />
       <Route path="/EditItem/:id" element={<EditItem />} />
       <Route path="Search/" element={<Search />} />
     </Routes>
-    {/* <Footer/> */}
+    <Footer/>
   </BrowserRouter>
 );
 

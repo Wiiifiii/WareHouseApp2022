@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
+// import  DeleteConfirmation  from "./Components/DeleteConfirmation";
 const url = "http://localhost:8000/stock/";
 
 class Inventory extends Component {
@@ -34,8 +35,9 @@ class Inventory extends Component {
     });
 
     this.getAllItems();
-
+    // DeleteConfirmation();
     // alert("Item has been deleted");
+
   }
   itemsTable = () => {
     return this.state.products.map((item) => {
@@ -43,7 +45,7 @@ class Inventory extends Component {
         <tr key={item.id}>
           <td>{item.id}</td>
           <td>
-            <img src={item.img} />
+            <img src={item.img}/>
           </td>
           <td>{item.name}</td>
           <td>{item.categorie}</td>
@@ -117,6 +119,7 @@ class Inventory extends Component {
     ) : (
       <div></div>
     );
+
   }
 }
 

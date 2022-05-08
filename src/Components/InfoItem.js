@@ -9,23 +9,31 @@ function ItemInfo() {
   const url = "http://localhost:8000/stock/";
   const params = useParams();
   const [info, setInfo] = useState([]);
+  // const [currentElement, setCurrentElement] = useState();
 
-  async function fetchData() {
+  async function getProduct() {
     let response = await fetch(
       "http://localhost:8000/stock?productnumber=" + params.productnumber
     );
     let data = await response.json();
     console.log(data);
     setInfo(data);
+    
   }
   useEffect(() => {
-    fetchData();
+    getProduct();
   }, []);
 
-  const stockTotal = info.reduce((accumulater, currentElement) => {
-    return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
-  }, 0);
 
+  // if(info.action === 'Out'){
+  //   setCurrentElement('-' + currentElement.quantity)
+  // }
+  // console.log(currentElement.quantity);
+  const stockTotal = info.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
+    
+  }, 0);
+  
   // const thedate = info.map((item) => (
   //     new Date(item.actiondate) 
   //   ));
@@ -43,6 +51,7 @@ function ItemInfo() {
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
       <td>{item.action}</td>
+      <td>{item.actionDate}</td>
       <td>{item.quantity}</td>
       <td>
         <Link to={`/InfoItem/${item.id}`}>
@@ -58,19 +67,19 @@ function ItemInfo() {
         <VscTrash
           style={{ color: "#d6d6d6" }}
           onClick={() => {
-            deleteItem(item.id);
+            deleteProduct(item.id);
           }}
         />
       </td>
     </tr>
   ));
-  function deleteItem(id) {
+  function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((res) => {
         console.log(res);
-        fetchData();
+        getProduct();
       });
     });
     alert("Item has been deleted");
@@ -88,6 +97,7 @@ function ItemInfo() {
             <th>PRODUCT CODE</th>
             <th>SHELF CODE</th>
             <th>ACTION</th>
+            <th>ACTION DATE</th>
             <th>PRODUCT QUANTITY</th>
             <th colSpan="3">OPTIONS</th>
           </tr>

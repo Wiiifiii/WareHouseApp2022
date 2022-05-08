@@ -16,16 +16,26 @@ export const NavBar = () => {
       WareHouse App 
       </Navbar.Brand>
       <NavLink style={{ color: "#ff650b" }} to={"/Home"}>
-        <VscHome size={30} />
+        <Button variant="outline-secondary">
+        <VscHome style={{ color: "#ff650b" }} size={30} />
+        </Button>
       </NavLink>
       <NavLink style={{ color: "#ff650b" }} to={"/Search"}>
-        <VscSearch size={25} />
+        <Button variant="outline-secondary">
+        <VscSearch style={{ color: "#ff650b" }}size={25} />
+        </Button>
+        
       </NavLink>
       <NavLink to={"/Inventory"}>
+        <Button variant="outline-secondary">
         <VscGraph style={{ color: "#ff650b" }} size={25} />
+        </Button>
+       
       </NavLink>
       <NavLink to={"/AddItem"}>
+      <Button variant="outline-secondary">
         <VscAdd style={{ color: "#ff650b" }} size={30} />
+        </Button>
       </NavLink>
   </Navbar>
   </nav>

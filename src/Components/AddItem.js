@@ -4,7 +4,9 @@ import { VscCheck, VscError } from "react-icons/vsc";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 import { BiCommentError } from "react-icons/bi";
+import { VscHome, VscSearch, VscGraph,VscSquirrel,VscAdd,VscEdit ,VscClose} from "react-icons/vsc";
 
+import { useParams } from "react-router-dom";
 
 function AddItem() {
   const [show, setShow] = useState(true);
@@ -28,43 +30,69 @@ function AddItem() {
   const [validation, setValidation] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isDelete, setDelete] = useState(false);
+  
+  const url = "http://localhost:8000/stock/";
+  const params = useParams();
+  const [info, setInfo] = useState([]);
 
+  
+  async function getProduct() {
+    let response = await fetch(
+      "http://localhost:8000/stock/"
+    );
+    let data = await response.json();
+    console.log(data);
+    setproducts(data);
+    
+  }
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  // const stockTotal = info.reduce((total, currentElement) => {
+  //   return JSON.parse(total) + JSON.parse(currentElement.quantity);
+  // }, 0);
+
+ 
   function inputValidation() {
     if (name === "") {
       setValidation("Product name should be required, please");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (categorie === "") {
       setValidation("Product category should be required, please");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (productnumber === "") {
       setValidation("Product code should be required, please");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (shelfid === "") {
+      
       setValidation("Shelf code should be required, please");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (action === "") {
       setValidation("Operation action be required, please");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (quantity < -100 || quantity > 100 || quantity === "") {
       setValidation("You can change the shelf capacity from -100 (Out) to +100 (In).");
-      setMessage(false);
+      // setMessage(false);
       setIsValid(true);
     } else if (img === "" || img ==! "") {
-      save();
+      addProduct();
       setMessage(true);
       setIsValid(false);
     } else {
-      save();
+      addProduct();
       setMessage(true);
       setIsValid(false);
     }
+
+    
   }
-  function save() {
+  function addProduct() {
     fetch("http://localhost:8000/stock/", {
       method: "POST",
       headers: {
@@ -86,6 +114,8 @@ function AddItem() {
       .then((result) => {
         console.log(result);
       });
+
+      getProduct();
   }
 
   function refreshPage() {
@@ -291,12 +321,21 @@ function AddItem() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Link to={`/Inventory/`}>
-            <Button variant="outline-secondary">Go to Inventory</Button>
-          </Link>
-          <Link to={`/Search/`}>
-            <Button variant="outline-secondary">Go to Search</Button>
-          </Link>
+        <Link style={{ color: "#ff650b" }} to={"/Home"}>
+        <Button variant="outline-secondary">
+        <VscHome style={{ color: "#ff650b" }} size={30} />
+        </Button>
+      </Link>
+        <Link to={"/Inventory"}>
+        <Button variant="outline-secondary">
+        <VscGraph style={{ color: "#ff650b" }} size={25} />
+        </Button>
+        </Link>
+        <Link style={{ color: "#ff650b" }} to={"/Search"}>
+        <Button variant="outline-secondary">
+        <VscSearch style={{ color: "#ff650b" }}size={25} />
+        </Button>
+      </Link>
           <Button
             variant="outline-secondary"
             onClick={() => {
