@@ -6,7 +6,6 @@ import {
   VscSymbolNamespace,
 } from "react-icons/vsc";
 import { FaSitemap } from "react-icons/fa";
-
 import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
@@ -23,46 +22,35 @@ function Search() {
   const [quantity, setQuantity] = useState("");
   const [input, setInput] = useState("");
   const [Message, setMessage] = useState("");
-  const [showBtn, setBtnState] = useState(true);
-  const [disaple, setDisable] = useState(false)
+  const [isDisable, setDisable] = useState(false);
 
   const handleInputClick = () => {
     if (name !== "") {
-      setInput("?name=" +
-        name.charAt(0).toUpperCase() +
-        name.slice(1));
+      setInput("?name=" + name.charAt(0).toUpperCase() + name.slice(1));
     }
     if (categorie !== "") {
       setInput(
-        "?categorie=" +
-        categorie.charAt(0).toUpperCase() +
-        categorie.slice(1)
+        "?categorie=" + categorie.charAt(0).toUpperCase() + categorie.slice(1)
       );
     }
     if (productnumber !== "") {
       setInput(
         "?productnumber=" +
-        productnumber.charAt(0).toUpperCase() +
-        productnumber.slice(1)
+          productnumber.charAt(0).toUpperCase() +
+          productnumber.slice(1)
       );
     }
     if (shelfid !== "") {
       setInput(
-        "?shelfid=" +
-        shelfid.charAt(0).toUpperCase() +
-        shelfid.slice(1)
+        "?shelfid=" + shelfid.charAt(0).toUpperCase() + shelfid.slice(1)
       );
     }
     if (action !== "") {
-      setInput("?action=" +
-        action.charAt(0).toUpperCase() +
-        action.slice(1));
+      setInput("?action=" + action.charAt(0).toUpperCase() + action.slice(1));
     }
     if (quantity !== "") {
       setInput(
-        "?quantity=" +
-        quantity.charAt(0).toUpperCase() +
-        quantity.slice(1)
+        "?quantity=" + quantity.charAt(0).toUpperCase() + quantity.slice(1)
       );
     }
     if (
@@ -75,6 +63,7 @@ function Search() {
     ) {
       setInput("/");
     }
+    setDisable(true);
   };
   const handleClearClick = () => {
     setname("");
@@ -84,9 +73,7 @@ function Search() {
     setAction("");
     setQuantity("");
   };
-  const changeBtnState = () => {
-    setBtnState(false);
-  };
+  
   useEffect(() => {
     if (input !== "") {
       fetch(url + `${input}`)
@@ -106,37 +93,32 @@ function Search() {
     }
   }, [input]);
 
-  const shelfstock = products.reduce((accumulater, currentElement) => {
-    return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
+  let filterIn = products.filter((stock) => stock.action === "In");
+  console.log("filter-In", filterIn);
+
+  let filterOut = products.filter((stock) => stock.action === "Out");
+  console.log("filter-Out", filterOut);
+
+  const stockIn = filterIn.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  const shelfSpace = () => {
-    
-    let Space = shelfSpace;
-    // if (products.shelfid === shelfid || products.length <= 2) {
-    //   Space = 100 - shelfstock;
-    // }
+  const stockOut = filterOut.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
+  }, 0);
 
-    // if (products.length > 2 && products.shelfid === shelfid) {
-    //   Space = 100 - shelfstock;
-    // }
+  const stockTotal = stockIn - stockOut;
+
+  const shelfSpace = () => {
+    let Space = 0;
     if (products.length > 2 && products.shelfid !== shelfid) {
-      Space = 26 * 100 - shelfstock;
+      Space = 26 * 100 - stockTotal; //26 is the number of shelves.
+      
+    }  if (stockTotal < 100 && products.length !== 0 ) {
+      Space = 100 - stockTotal;
     }
-    // if (products.shelfid !== shelfid) {
-    //   Space = 100 - shelfstock;
-    // }
-    if (shelfstock === 0 || shelfstock === 100) {
-      Space = 0;
-    }
-    
-    if (shelfstock < 100 ) {
-      Space = 100 - shelfstock;
-    }
-  
     return Space;
   };
-
   function getAllItems() {
     fetch(url).then((result) => {
       result.json().then((res) => {
@@ -144,7 +126,6 @@ function Search() {
       });
     });
   }
-
   function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
@@ -169,8 +150,9 @@ function Search() {
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
       <td>{item.quantity}</td>
-      <td>{item.actionDate}</td>
       <td>{item.action}</td>
+      <td>{item.actionDate}</td>
+
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
           <VscInfo style={{ color: "#d6d6d6" }} />
@@ -198,7 +180,7 @@ function Search() {
         <Row className="mb-3">
           <Col xs={7}>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Product Name</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>Product Name</Form.Label>
             <Form.Control
               action="text"
               placeholder="Product name"
@@ -208,7 +190,9 @@ function Search() {
           </Col>
           <Col>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Product Category</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>
+              Product Category
+            </Form.Label>
             <Form.Control
               action="text"
               placeholder="Product Category"
@@ -218,7 +202,7 @@ function Search() {
           </Col>
           <Col>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Product Code</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>Product Code</Form.Label>
             <Form.Control
               action="text"
               placeholder="Product code"
@@ -230,7 +214,7 @@ function Search() {
         <Row className="mb-3">
           <Col>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Shelf Code</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>Shelf Code</Form.Label>
             <Form.Select
               value={shelfid}
               onChange={(e) => setShelfId(e.target.value)}
@@ -240,10 +224,6 @@ function Search() {
               <option>A-02</option>
               <option>B-01</option>
               <option>B-02</option>
-              <option>C-01</option>
-              <option>C-02</option>
-              <option>D-01</option>
-              <option>D-02</option>
               <option>C-01</option>
               <option>C-02</option>
               <option>D-01</option>
@@ -296,7 +276,7 @@ function Search() {
           </Col>
           <Col>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Action</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
             <Form.Select
               value={action}
               onChange={(e) => setAction(e.target.value)}
@@ -308,7 +288,9 @@ function Search() {
           </Col>
           <Col xs={3}>
             {" "}
-            <Form.Label style={{color: '#ff600b'}}>Product Quantity</Form.Label>
+            <Form.Label style={{ color: "#ff600b" }}>
+              Product Quantity
+            </Form.Label>
             <Form.Control
               type="number"
               placeholder="Product Quantity"
@@ -320,17 +302,22 @@ function Search() {
         <div>
           <Button
             variant="outline-secondary"
+            disabled={isDisable}
             onClick={() => {
               handleInputClick();
-              changeBtnState();
+              // changeBtnState();
             }}
           >
             Search
           </Button>
-          <Button style={{marginLeft: 10}}
+          <Button
+            style={{ marginLeft: 10 }}
             variant="outline-secondary"
             onClick={() => {
               handleClearClick();
+              getAllItems();
+              setDisable(false);
+              setMessage(false);
             }}
           >
             Clear
@@ -344,23 +331,20 @@ function Search() {
               <FaSitemap style={{ color: "#ff650b" }} size={100} />
 
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h5>
-                <p style={{ color: "#fbfbfb", fontSize: 40 }}>{shelfstock}</p>
-            
+                <h3 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h3>
+                <h1 style={{ color: "#fbfbfb" }}>{stockTotal}</h1>
               </Card.Text>
             </Card.Body>
           </Card>
         </div>
-
         <div className="col">
           <Card style={{ width: "20rem", background: "#1b1b1b" }}>
             <Card.Body>
               <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
 
               <Card.Text>
-                <h5 style={{ color: "#ff650b" }}>SHELF SPACE AVAILABLE</h5>
-                <p style={{ color: "#fbfbfb", fontSize: 40 }}>{shelfSpace()}</p>
-                
+                <h3 style={{ color: "#ff650b" }}>SHELF SPACE AVAILABLE</h3>
+                <h1 style={{ color: "#fbfbfb" }}>{shelfSpace()}</h1>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -377,8 +361,8 @@ function Search() {
               <th>PRODUCT CODE</th>
               <th>SHELF CODE</th>
               <th>PRODUCT QUANTITY</th>
-              <th>ACTION DATE</th>
               <th>ACTION</th>
+              <th>ACTION DATE</th>
               <th colSpan="3">OPTIONS</th>
             </tr>
           </thead>

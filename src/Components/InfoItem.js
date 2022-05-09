@@ -49,9 +49,10 @@ function ItemInfo() {
       <td>{item.categorie}</td>
       <td>{item.productnumber}</td>
       <td>{item.shelfid}</td>
+      <td>{item.quantity}</td>
       <td>{item.action}</td>
       <td>{item.actionDate}</td>
-      <td>{item.quantity}</td>
+     
       <td>
         <Link to={`/InfoItem/${item.id}`}>
           <VscInfo style={{ color: "#d6d6d6" }} />
@@ -95,9 +96,9 @@ function ItemInfo() {
             <th>PRODUCT CATEGORIE</th>
             <th>PRODUCT CODE</th>
             <th>SHELF CODE</th>
+            <th>PRODUCT QUANTITY</th>
             <th>ACTION</th>
             <th>ACTION DATE</th>
-            <th>PRODUCT QUANTITY</th>
             <th colSpan="3">OPTIONS</th>
           </tr>
         </thead>

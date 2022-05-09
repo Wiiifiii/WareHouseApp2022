@@ -1,27 +1,15 @@
 import { Form, Col, Row, Button, Modal, Alert } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { VscCheck, VscError } from "react-icons/vsc";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 import { BiCommentError } from "react-icons/bi";
-import {
-  VscHome,
-  VscSearch,
-  VscGraph,
-  VscSquirrel,
-  VscAdd,
-  VscEdit,
-  VscClose,
-} from "react-icons/vsc";
-
+import {VscHome,VscSearch,VscGraph,VscCheck,VscDiffAdded} from "react-icons/vsc";
 import { useParams } from "react-router-dom";
 
 function AddItem() {
   const [show, setShow] = useState(true);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const [products, setproducts] = useState([]);
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
@@ -31,17 +19,13 @@ function AddItem() {
   const [quantity, setQuantity] = useState("");
   const [img, setImg] = useState("");
   const [actionDate, setActionDate] = useState(new Date());
-  const [input, setInput] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
   const [Message, setMessage] = useState(false);
   const [showBtn, setBtnState] = useState(true);
   const [validation, setValidation] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isDisable, setDisable] = useState(false);
-
   const url = "http://localhost:8000/stock/";
   const params = useParams();
-  const [info, setInfo] = useState([]);
 
   async function getProduct() {
     let response = await fetch(url + "?shelfid=" + shelfid);
@@ -53,20 +37,18 @@ function AddItem() {
     getProduct();
   }, [shelfid]);
 
-  const shelfstock = products.reduce((accumulater, currentElement) => {
+  const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  const shelfSapce = 100 - shelfstock;
+  const shelfSapce = 100 - shelfStock;
   console.log("space", shelfSapce);
-  console.log("stock", shelfstock);
+  console.log("stock", shelfStock);
 
-  function checkshelfstatus() {
-    if (shelfstock >= 100) {
+  function checkShelfStatus() {
+    if (shelfStock >= 100) {
       setValidation("Shelf is full");
       setMessage(false);
-      // setIsValid(true);
-      // setMessage(false);
     }
     if (quantity > shelfSapce) {
       setValidation("Shelf has space for only " + shelfSapce + " items"  );
@@ -91,12 +73,9 @@ function AddItem() {
       setIsValid(true);
     } else if (productnumber === "") {
       setValidation("Product code should be required, please");
-      //  setMessage(false);
       setIsValid(true);
     } else if (shelfid === "") {
       setValidation("Shelf code should be required, please");
-
-      //  setMessage(false);
       setIsValid(true);
     } else if (action === "") {
       setValidation("Operation action be required, please");
@@ -109,16 +88,9 @@ function AddItem() {
       setMessage(false);
       setIsValid(true);
     } else if (img === "" || img == !"") {
-      // addProduct();
-      // setMessage(true);
-      // setIsValid(false);
-      checkshelfstatus();
+      checkShelfStatus();
     } else {
-      // addProduct();
-      // setMessage(true);
-      // setIsValid(false);
-      // setDisable(true);
-      checkshelfstatus();
+      checkShelfStatus();
     }
   }
   console.log(quantity);
@@ -167,7 +139,6 @@ function AddItem() {
   };
   const changeBtnState = () => {
     setBtnState(false);
-    // setDisable(false);
   };
 
   return (
@@ -177,6 +148,7 @@ function AddItem() {
           <Modal.Title>
             {" "}
             <b>Add New Product</b>
+            <VscDiffAdded style={{ color: "#1b1b1b" , paddingLeft: 7}} size={45}/>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -227,63 +199,58 @@ function AddItem() {
                 >
                   <option>Shelf Code...</option>
                   <option>A-01</option>
-                  <option>A-02</option>
-                  <option>B-01</option>
-                  <option>B-02</option>
-                  <option>C-01</option>
-                  <option>C-02</option>
-                  <option>D-01</option>
-                  <option>D-02</option>
-                  <option>C-01</option>
-                  <option>C-02</option>
-                  <option>D-01</option>
-                  <option>D-02</option>
-                  <option>E-01</option>
-                  <option>E-02</option>
-                  <option>F-01</option>
-                  <option>F-02</option>
-                  <option>G-01</option>
-                  <option>G-02</option>
-                  <option>H-01</option>
-                  <option>H-02</option>
-                  <option>I-01</option>
-                  <option>I-02</option>
-                  <option>J-01</option>
-                  <option>J-02</option>
-                  <option>K-01</option>
-                  <option>K-02</option>
-                  <option>L-01</option>
-                  <option>L-02</option>
-                  <option>M-01</option>
-                  <option>M-02</option>
-                  <option>N-01</option>
-                  <option>N-02</option>
-                  <option>O-01</option>
-                  <option>O-02</option>
-                  <option>P-01</option>
-                  <option>P-02</option>
-                  <option>Q-01</option>
-                  <option>Q-02</option>
-                  <option>R-01</option>
-                  <option>R-02</option>
-                  <option>S-01</option>
-                  <option>S-02</option>
-                  <option>T-01</option>
-                  <option>T-02</option>
-                  <option>U-01</option>
-                  <option>U-02</option>
-                  <option>V-01</option>
-                  <option>V-02</option>
-                  <option>W-01</option>
-                  <option>W-02</option>
-                  <option>X-01</option>
-                  <option>X-02</option>
-                  <option>Y-01</option>
-                  <option>Y-02</option>
-                  <option>Z-01</option>
-                  <option>Z-02</option>
+              <option>A-02</option>
+              <option>B-01</option>
+              <option>B-02</option>
+              <option>C-01</option>
+              <option>C-02</option>
+              <option>D-01</option>
+              <option>D-02</option>
+              <option>E-01</option>
+              <option>E-02</option>
+              <option>F-01</option>
+              <option>F-02</option>
+              <option>G-01</option>
+              <option>G-02</option>
+              <option>H-01</option>
+              <option>H-02</option>
+              <option>I-01</option>
+              <option>I-02</option>
+              <option>J-01</option>
+              <option>J-02</option>
+              <option>K-01</option>
+              <option>K-02</option>
+              <option>L-01</option>
+              <option>L-02</option>
+              <option>M-01</option>
+              <option>M-02</option>
+              <option>N-01</option>
+              <option>N-02</option>
+              <option>O-01</option>
+              <option>O-02</option>
+              <option>P-01</option>
+              <option>P-02</option>
+              <option>Q-01</option>
+              <option>Q-02</option>
+              <option>R-01</option>
+              <option>R-02</option>
+              <option>S-01</option>
+              <option>S-02</option>
+              <option>T-01</option>
+              <option>T-02</option>
+              <option>U-01</option>
+              <option>U-02</option>
+              <option>V-01</option>
+              <option>V-02</option>
+              <option>W-01</option>
+              <option>W-02</option>
+              <option>X-01</option>
+              <option>X-02</option>
+              <option>Y-01</option>
+              <option>Y-02</option>
+              <option>Z-01</option>
+              <option>Z-02</option>
                 </Form.Select>
-               
               </Col>
               <Col style={{paddingLeft:0 }}>
               <Form.Label style={{color: '#ff600b'}}>Shelf Space Available</Form.Label>
@@ -389,6 +356,7 @@ function AddItem() {
             variant="outline-secondary"
             onClick={() => {
               setMessage(false);
+              
               handleClose();
             }}
           >

@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
-import { Alert } from "bootstrap";
-// import  DeleteConfirmation  from "./Components/DeleteConfirmation";
+
 const url = "http://localhost:8000/stock/";
 
 class Inventory extends Component {
@@ -15,7 +14,6 @@ class Inventory extends Component {
       IsError: false,
     };
   }
-
   componentDidMount() {
     this.getAllItems();
   }
@@ -29,19 +27,15 @@ class Inventory extends Component {
       this.setState({ IsError: true, isLoading: false });
     }
   }
-
   async deleteItem(id) {
     await fetch(url + `${id}`, {
       method: "DELETE",
     });
 
     this.getAllItems();
-  
     alert("The item has been successfully deleted");
-   
-  
-
   }
+  
   itemsTable = () => {
     return this.state.products.map((item) => {
       return (
@@ -54,10 +48,9 @@ class Inventory extends Component {
           <td>{item.categorie}</td>
           <td>{item.productnumber}</td>
           <td>{item.shelfid}</td>
+          <td>{item.quantity}</td>
           <td>{item.action}</td>
           <td>{item.actionDate}</td>
-          <td>{item.quantity}</td>
-
           <td>
             <Link to={`/InfoItem/${item.productnumber}`}>
               <VscInfo style={{ color: "#d6d6d6" }} />
@@ -82,7 +75,7 @@ class Inventory extends Component {
     });
   };
   render() {
-    const { products, isLoading, IsError } = this.state;
+    const { products, isLoading } = this.state;
     if (isLoading) {
       return (
         <div
@@ -109,9 +102,9 @@ class Inventory extends Component {
                 <th>PRODUCT CATEGORIE</th>
                 <th>PRODUCT CODE</th>
                 <th>SHELF CODE</th>
+                <th>PRODUCT QUANTITY</th>
                 <th>ACTION</th>
                 <th>ACTION DATE</th>
-                <th>PRODUCT QUANTITY</th>
                 <th colSpan="3">OPTIONS</th>
               </tr>
             </thead>

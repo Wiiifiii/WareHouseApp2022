@@ -4,7 +4,6 @@ import { VscHome, VscSearch, VscGraph,VscSquirrel,VscAdd,VscEdit } from "react-i
 import { Navbar,Container,Card, Button} from "react-bootstrap";
 import { HiViewGridAdd} from "react-icons/hi";
 
-
 //Navbar component to navigate between the single pages application.
 export const NavBar = () => {
   return (
@@ -24,13 +23,11 @@ export const NavBar = () => {
         <Button variant="outline-secondary">
         <VscSearch style={{ color: "#ff650b" }}size={25} />
         </Button>
-        
       </NavLink>
       <NavLink to={"/Inventory"}>
         <Button variant="outline-secondary">
         <VscGraph style={{ color: "#ff650b" }} size={25} />
         </Button>
-       
       </NavLink>
       <NavLink to={"/AddItem"}>
       <Button variant="outline-secondary">
@@ -39,7 +36,6 @@ export const NavBar = () => {
       </NavLink>
   </Navbar>
   </nav>
- 
 </div>
   );
 };
