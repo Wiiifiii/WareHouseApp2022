@@ -69,9 +69,9 @@ function AddItem() {
       // setMessage(false);
     }
     if (quantity > shelfSapce) {
-      setValidation("Shelf have spesce for " + shelfSapce);
+      setValidation("Shelf has space for only " + shelfSapce + " items"  );
       setMessage(false);
-      // setIsValid(true);
+       setIsValid(true);
     } else {
       addProduct();
       setMessage(true);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { Alert } from "bootstrap";
 // import  DeleteConfirmation  from "./Components/DeleteConfirmation";
 const url = "http://localhost:8000/stock/";
 
@@ -35,8 +36,10 @@ class Inventory extends Component {
     });
 
     this.getAllItems();
-    // DeleteConfirmation();
-    // alert("Item has been deleted");
+  
+    alert("The item has been successfully deleted");
+   
+  
 
   }
   itemsTable = () => {

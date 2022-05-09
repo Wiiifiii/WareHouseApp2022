@@ -81,7 +81,7 @@ function ItemInfo() {
         getProduct();
       });
     });
-    alert("Item has been deleted");
+    alert("The item has been successfully deleted");
   }
 
   return (

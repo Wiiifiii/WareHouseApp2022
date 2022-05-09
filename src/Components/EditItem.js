@@ -64,18 +64,17 @@ function EditItem() {
       });
     });
   }
-  // const  seletItem = (id) =>{
-  //   let item = products[id-1];
-
-  //         setname(item.name)
-  //         setcategorie(item.categorie)
-  //         setProductNumber(item.productnumber)
-  //         setShelfId(item.shelfid)
-  //         setAction(item.action)
-  //         setQuantity(item.quantity)
-  //         setImg(item.img)
-  //         setActionDate(item.actionDate)
-  // }
+  function deleteProduct(id) {
+    fetch(url + `${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((res) => {
+        console.log(res);
+        getProduct();
+      });
+    });
+    alert("The item has been successfully deleted");
+  }
   function getProduct(id) {
     fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
       result.json().then((res) => {
@@ -138,7 +137,7 @@ function EditItem() {
         <VscTrash
           style={{ color: "#d6d6d6" }}
           onClick={() => {
-            // deleteItem(item.id);
+            deleteProduct(item.id);
           }}
         />
       </td>

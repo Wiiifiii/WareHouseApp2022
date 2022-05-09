@@ -155,7 +155,7 @@ function Search() {
       });
     });
 
-    // alert("Item has been deleted");
+    alert("The item has been successfully deleted");
   }
 
   const outPutData = products.map((item) => (
