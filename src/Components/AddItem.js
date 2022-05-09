@@ -184,6 +184,7 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product name"
@@ -195,6 +196,7 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Category</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product Category"
@@ -206,6 +208,7 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Code</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product code"
@@ -217,6 +220,7 @@ function AddItem() {
             <Row>
               <Col style={{paddingRight:0}}>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Shelf Code</Form.Label>
                 <Form.Select
                   value={shelfid}
                   onChange={(e) => setShelfId(e.target.value)}
@@ -282,15 +286,17 @@ function AddItem() {
                
               </Col>
               <Col style={{paddingLeft:0 }}>
+              <Form.Label style={{color: '#ff600b'}}>Shelf Space Available</Form.Label>
               <Form.Control type="text"  
-              style={{backgroundColor: '#e9e9ed', fontStyle:'oblique'}}
+              style={{backgroundColor: '#e9e9ed'}}
               disabled
-              value=  {'Shelf Space Available { ' + shelfSapce + ' }'}/>
+              value=  {shelfSapce }/>
               </Col>
             </Row>
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Action</Form.Label>
                 <Form.Select
                   value={action}
                   onChange={(e) => setAction(e.target.value)}
@@ -304,6 +310,7 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Quantity</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Product Quantity"
@@ -313,7 +320,7 @@ function AddItem() {
                 />
               </Col>
             </Row>
-            <Row>
+            {/* <Row>
               <Col>
                 {" "}
                 <Form.Control
@@ -323,7 +330,7 @@ function AddItem() {
                   onChange={(e) => setImg(e.target.value)}
                 />
               </Col>
-            </Row>
+            </Row> */}
             <Row>
               <Col>
                 {" "}

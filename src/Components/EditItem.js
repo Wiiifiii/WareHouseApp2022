@@ -158,6 +158,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product ID</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="ID"
@@ -170,6 +171,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product name"
@@ -181,6 +183,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Category</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product Category"
@@ -192,6 +195,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Code</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product code"
@@ -203,6 +207,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Shelf Code</Form.Label>
                 <Form.Select
                   value={shelfid}
                   onChange={(e) => setShelfId(e.target.value)}
@@ -270,6 +275,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Action</Form.Label>
                 <Form.Select
                   value={action}
                   onChange={(e) => setAction(e.target.value)}
@@ -283,6 +289,7 @@ function EditItem() {
             <Row>
               <Col>
                 {" "}
+                <Form.Label style={{color: '#ff600b'}}>Product Quantity</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Product Quantity"
@@ -292,7 +299,7 @@ function EditItem() {
               </Col>
             </Row>
             <Row>
-              <Col>
+              {/* <Col>
                 {" "}
                 <Form.Control
                   type="text"
@@ -300,11 +307,12 @@ function EditItem() {
                   value={img}
                   onChange={(e) => setImg(e.target.value)}
                 />
-              </Col>
+              </Col> */}
             </Row>
             <Row>
               <Col>
                 {" "}
+                
                 <Form.Control
                   type="date"
                   hidden

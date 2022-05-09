@@ -198,6 +198,7 @@ function Search() {
         <Row className="mb-3">
           <Col xs={7}>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Product Name</Form.Label>
             <Form.Control
               action="text"
               placeholder="Product name"
@@ -207,6 +208,7 @@ function Search() {
           </Col>
           <Col>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Product Category</Form.Label>
             <Form.Control
               action="text"
               placeholder="Product Category"
@@ -216,6 +218,7 @@ function Search() {
           </Col>
           <Col>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Product Code</Form.Label>
             <Form.Control
               action="text"
               placeholder="Product code"
@@ -227,6 +230,7 @@ function Search() {
         <Row className="mb-3">
           <Col>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Shelf Code</Form.Label>
             <Form.Select
               value={shelfid}
               onChange={(e) => setShelfId(e.target.value)}
@@ -292,6 +296,7 @@ function Search() {
           </Col>
           <Col>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Action</Form.Label>
             <Form.Select
               value={action}
               onChange={(e) => setAction(e.target.value)}
@@ -303,6 +308,7 @@ function Search() {
           </Col>
           <Col xs={3}>
             {" "}
+            <Form.Label style={{color: '#ff600b'}}>Product Quantity</Form.Label>
             <Form.Control
               type="number"
               placeholder="Product Quantity"
