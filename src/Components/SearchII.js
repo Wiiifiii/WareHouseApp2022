@@ -12,7 +12,7 @@ import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
-function Search() {
+function SearchII() {
   const [products, setproducts] = useState([]);
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
@@ -23,47 +23,8 @@ function Search() {
   const [input, setInput] = useState("");
   const [Message, setMessage] = useState("");
   const [stockStatus, setStockStatus] = useState(false)
+  const [suggestions, setSuggestions] = useState([])
 
-  const handleInputClick = () => {
-    if (name !== "") {
-      setInput("?name=" + name.charAt(0).toUpperCase() + name.slice(1));
-    }
-    if (categorie !== "") {
-      setInput(
-        "?categorie=" + categorie.charAt(0).toUpperCase() + categorie.slice(1)
-      );
-    }
-    if (productnumber !== "") {
-      setInput(
-        "?productnumber=" +
-          productnumber.charAt(0).toUpperCase() +
-          productnumber.slice(1)
-      );
-    }
-    if (shelfid !== "") {
-      setInput(
-        "?shelfid=" + shelfid.charAt(0).toUpperCase() + shelfid.slice(1)
-      );
-    }
-    if (action !== "") {
-      setInput("?action=" + action.charAt(0).toUpperCase() + action.slice(1));
-    }
-    if (quantity !== "") {
-      setInput(
-        "?quantity=" + quantity.charAt(0).toUpperCase() + quantity.slice(1)
-      );
-    }
-    if (
-      name === "" &&
-      categorie === "" &&
-      productnumber === "" &&
-      shelfid === "" &&
-      action === "" &&
-      quantity === ""
-    ) {
-      setInput("/");
-    }
-  };
   const handleClearClick = () => {
     setname("");
     setcategorie("");
@@ -71,26 +32,100 @@ function Search() {
     setShelfId("");
     setAction("");
     setQuantity("");
+    setSuggestions([])
   };
+  const handleNameInput = (name) =>{
+ let output = []
+ if(name.length > 0){
+output = products.filter(pro => {
+    const regex = new RegExp(`${name}` , "gi");
+    return pro.name.match(regex)
+})
+ console.log('output', output);
+setSuggestions(name)
+setname(name)
+ setproducts(output)
+ setStockStatus(false);
+}
+}
+
+const handleCategoryInput = (categorie) =>{
+    let output = []
+    if(categorie.length > 0){
+   output = products.filter(pro => {
+       const regex = new RegExp(`${categorie}` , "gi");
+       return pro.categorie.match(regex)
+   })
+    console.log('output', output);
+   setSuggestions(categorie)
+   setcategorie(categorie)
+    setproducts(output)
+    setStockStatus(false);
+    handleClearClick()
+   }
+   }
+   const handleProductCodeInput = (productnumber) =>{
+    let output = []
+    if(productnumber.length > 0){
+   output = products.filter(pro => {
+       const regex = new RegExp(`${productnumber}` , "gi");
+       return pro.categorie.match(regex)
+   })
+    console.log('output', output);
+   setSuggestions(productnumber)
+   setProductNumber(productnumber)
+    setproducts(output)
+    setStockStatus(false);
+   }
+   }
+   const handleShelfCodeInput = (shelfid) =>{
+    let output = []
+    if(shelfid.length > 0){
+   output = products.filter(pro => {
+       const regex = new RegExp(`${shelfid}` , "gi");
+       return pro.shelfid.match(regex)
+   })
+    console.log('output', output);
+   setSuggestions(shelfid)
+   setShelfId(shelfid)
+    setproducts(output)
+    setStockStatus(false);
+   }
+   }
+   const handleActionInput = (action) =>{
+    let output = []
+    if(action.length > 0){
+   output = products.filter(pro => {
+       const regex = new RegExp(`${action}` , "gi");
+       return pro.action.match(regex)
+   })
+    console.log('output', output);
+   setSuggestions(action)
+   setAction(action)
+    setproducts(output)
+    setStockStatus(false);
+   }
+   }
+   const handleQuantityInput = (quantity) =>{
+    let output = []
+    if(quantity.length > 0){
+   output = products.filter(pro => {
+       const regex = new RegExp(`${quantity}` , "gi");
+       return pro.quantity.match(regex)
+   })
+    console.log('output', output);
+    setSuggestions(quantity)
+   setQuantity(quantity)
+    setproducts(output)
+    setStockStatus(false);
+   }
   
+   }
+   
   useEffect(() => {
-    if (input !== "") {
-      fetch(url + `${input}`)
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log("data:", data);
-          if (data.length === 0) {
-            setMessage("No Data Found");
-            setproducts([]);
-          } else {
-            setproducts(data);
-            setMessage("");
-          }
-        });
-    }
-  }, [input]);
+    
+    getAllItems();
+  }, []);
 
   let filterIn = products.filter((stock) => stock.action === "In");
   console.log("filter-In", filterIn);
@@ -174,6 +209,7 @@ function Search() {
         />
       </td>
     </tr>
+    
   ));
 
   return (
@@ -187,7 +223,7 @@ function Search() {
               action="text"
               placeholder="Product name"
               value={name}
-              onChange={(e) => setname(e.target.value)}
+              onChange={(e) => handleNameInput(e.target.value)}
             />
           </Col>
           <Col>
@@ -199,7 +235,7 @@ function Search() {
               action="text"
               placeholder="Product Category"
               value={categorie}
-              onChange={(e) => setcategorie(e.target.value)}
+              onChange={(e) => handleCategoryInput(e.target.value)}
             />
           </Col>
           <Col>
@@ -209,7 +245,7 @@ function Search() {
               action="text"
               placeholder="Product code"
               value={productnumber}
-              onChange={(e) => setProductNumber(e.target.value)}
+              onChange={(e) => handleProductCodeInput(e.target.value)}
             />
           </Col>
         </Row>
@@ -219,7 +255,7 @@ function Search() {
             <Form.Label style={{ color: "#ff600b" }}>Shelf Code</Form.Label>
             <Form.Select
               value={shelfid}
-              onChange={(e) => setShelfId(e.target.value)}
+              onChange={(e) => handleShelfCodeInput(e.target.value)}
             >
               <option>Shelf Code...</option>
               <option>A-01</option>
@@ -280,8 +316,8 @@ function Search() {
             {" "}
             <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
             <Form.Select
-              value={action}
-              onChange={(e) => setAction(e.target.value)}
+               value={action}
+               onChange={(e) => handleActionInput(e.target.value)}
             >
               <option>Action...</option>
               <option>In</option>
@@ -297,7 +333,7 @@ function Search() {
               type="number"
               placeholder="Product Quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => handleQuantityInput(e.target.value)}
             />
           </Col>
         </Row>
@@ -305,8 +341,8 @@ function Search() {
           <Button  data-testid='bsearch'
             variant="outline-secondary"
             onClick={() => {
-              handleInputClick();
-              setStockStatus(false);
+            //   handleInputClick();
+            //   setStockStatus(false);
             }}
           >
             Search
@@ -401,4 +437,4 @@ function Search() {
     </div>
   );
 }
-export default Search;
+export default SearchII;

@@ -11,7 +11,7 @@ import Home from "./Components/Home";
 import Inventory from "./Components/Inventory";
 import InfoItem from "./Components/InfoItem";
 import EditItem from "./Components/EditItem";
-import Search from "./Components/Search";
+import SearchII from "./Components/SearchII";
 import Footer from "./Components/Footer";
 
 const root = ReactDOMClient.createRoot(document.getElementById("root"));
@@ -25,7 +25,7 @@ root.render(
       <Route path="/Inventory" element={<Inventory />} />
       <Route path="/InfoItem/:productnumber" element={<InfoItem />} />
       <Route path="/EditItem/:id" element={<EditItem />} />
-      <Route path="Search/" element={<Search />} />
+      <Route path="SearchII/" element={<SearchII />} />
     </Routes>
     <Footer/>
   </BrowserRouter>
