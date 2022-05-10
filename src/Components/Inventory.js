@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
+import { VscTrash, VscEdit, VscInfo,VscError } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
@@ -53,7 +53,7 @@ class Inventory extends Component {
           <td>{item.actionDate}</td>
           <td>
             <Link to={`/InfoItem/${item.productnumber}`}>
-              <VscInfo style={{ color: "#d6d6d6" }} name= 'info'/>
+              <VscInfo  style={{ color: "#d6d6d6" }} />
             </Link>
           </td>
           <td>

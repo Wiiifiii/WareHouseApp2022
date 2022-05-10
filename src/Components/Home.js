@@ -25,7 +25,7 @@ function Home() {
       </span>
       <hr></hr>
 
-      <Card className="col" style={{ width: "30rem", background: "#1b1b1b" }}>
+      <Card className="col" style={{ width: "25rem", background: "#1b1b1b" }}>
         <Card.Body>
           <Link to={`/AddItem/`}>
             <MdAddCircleOutline style={{ color: "#ff650b" }} size={100} />
@@ -40,7 +40,7 @@ function Home() {
         </Card.Body>
       </Card>
 
-      <Card className="col" style={{ width: "30rem", background: "#1b1b1b" }}>
+      <Card className="col" style={{ width: "25rem", background: "#1b1b1b" }}>
         <Card.Body>
           <Link to={`/Search/`}>
             <MdOutlineScreenSearchDesktop
@@ -58,7 +58,7 @@ function Home() {
         </Card.Body>
       </Card>
 
-      <Card className="col" style={{ width: "30rem", background: "#1b1b1b" }}>
+      <Card className="col" style={{ width: "25rem", background: "#1b1b1b" }}>
         <Card.Body>
           <Link to={`/Inventory/`}>
             <VscGraph style={{ color: "#ff650b" }} size={100} />
