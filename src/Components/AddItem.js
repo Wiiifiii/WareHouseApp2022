@@ -41,7 +41,17 @@ function AddItem() {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  const shelfSapce = 100 - shelfStock;
+  function shelfSapce () {
+    let space = 0;
+    if (shelfStock < 100 && action === 'Out'){
+      space = shelfStock;
+    }
+    if (shelfStock < 100 && action === 'In'){
+      space = 100 - shelfStock;
+    }
+    
+    return space;
+  } 
   console.log("space", shelfSapce);
   console.log("stock", shelfStock);
 
@@ -50,11 +60,13 @@ function AddItem() {
       setValidation("Shelf is full");
       setMessage(false);
     }
-    if (quantity > shelfSapce) {
-      setValidation("Shelf has space for only " + shelfSapce + " items"  );
+    if (quantity > shelfSapce()) {
+      setValidation("Only this value " + shelfSapce() + " can lead to action" );
       setMessage(false);
        setIsValid(true);
-    } else {
+    } 
+  
+    else {
       addProduct();
       setMessage(true);
       setIsValid(false);
@@ -257,7 +269,7 @@ function AddItem() {
               <Form.Control type="text"  
               style={{backgroundColor: '#e9e9ed'}}
               disabled
-              value=  {shelfSapce }/>
+              value=  {shelfSapce() }/>
               </Col>
             </Row>
             <Row>

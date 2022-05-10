@@ -67,7 +67,7 @@ function EditItem() {
     });
     alert("The item has been successfully deleted");
   }
-  function getProduct(id) {
+  function getProduct() {
     fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
       result.json().then((res) => {
         setproducts(res);
@@ -103,11 +103,13 @@ function EditItem() {
       setValidation("Shelf is full");
       setMessage(false);
     }
-    if (quantity > shelfSapce) {
-      setValidation("Shelf has space for only " + shelfSapce + " items");
+    if (quantity + shelfSapce > shelfSapce()  ) {
+      setValidation("Only this value " + shelfSapce() + " can lead to action" );
       setMessage(false);
       setIsValid(true);
-    } else {
+    }
+    
+    else {
       updateProduct();
       setMessage(true);
       setIsValid(false);
@@ -135,7 +137,7 @@ function EditItem() {
       setIsValid(true);
     } else if (quantity < -100 || quantity > 100 || quantity === "") {
       setValidation(
-        "You can change the shelf capacity from -100 (Out) to +100 (In)."
+        "The shelf capacity is 100."
       );
       setMessage(false);
       setIsValid(true);
@@ -146,22 +148,49 @@ function EditItem() {
     }
   }
 
-  async function getProduct() {
-    let response = await fetch(url + "?shelfid=" + shelfid);
-    let data = await response.json();
-    console.log(data);
-    setproducts(data);
-  }
-  useEffect(() => {
-    getProduct();
-  }, [shelfid]);
+  // async function getProduct() {
+  //   let response = await fetch(url + "?shelfid=" + shelfid);
+  //   let data = await response.json();
+  //   console.log(data);
+  //   setproducts(data);
+  // }
+  // useEffect(() => {
+  //   getProduct();
+  // }, [shelfid]);
 
   const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  const shelfSapce = 100 - shelfStock;
-  console.log("space", shelfSapce);
+  let filterIn = products.filter((stock) => stock.action === "In");
+  console.log("filter-In", filterIn);
+
+  let filterOut = products.filter((stock) => stock.action === "Out");
+  console.log("filter-Out", filterOut);
+
+  const stockIn = filterIn.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
+  }, 0);
+
+  const stockOut = filterOut.reduce((total, currentElement) => {
+    return JSON.parse(total) + JSON.parse(currentElement.quantity);
+  }, 0);
+
+  const stockTotal = stockIn - stockOut;
+
+  function shelfSapce () {
+    let space = 0;
+    if (shelfStock < 100 && action === 'Out'){
+      space = shelfStock;
+    }
+    if (shelfStock < 100 && action === 'In'){
+      space = 100 - shelfStock;
+    }
+    
+    return space;
+  } 
+  console.log("space", shelfSapce());
+
   console.log("stock", shelfStock);
   const outPutData = products.map((item) => (
     <tr key={item.id}>
@@ -336,7 +365,7 @@ function EditItem() {
                   type="text"
                   style={{ backgroundColor: "#e9e9ed" }}
                   disabled
-                  value={shelfSapce}
+                  value={shelfSapce()}
                 />
               </Col>
             </Row>
