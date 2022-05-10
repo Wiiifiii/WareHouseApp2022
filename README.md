@@ -10,7 +10,7 @@
 * npx json-server --watch db.json --port 8000
 * npm install react-bootstrap bootstrap
 
-![Home](src\img\Hoem-Page-WareHouseApp.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
