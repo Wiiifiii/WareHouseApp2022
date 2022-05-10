@@ -142,12 +142,12 @@ function AddItem() {
   };
 
   return (
-    <div>
+    <div data-testid="addItem">
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header style={{ backgroundColor: "#ff600b" }}>
           <Modal.Title>
             {" "}
-            <b>Add New Product</b>
+            <b >Add New Product</b>
             <VscDiffAdded style={{ color: "#1b1b1b" , paddingLeft: 7}} size={45}/>
           </Modal.Title>
         </Modal.Header>
@@ -369,7 +369,6 @@ function AddItem() {
             disabled={isDisable}
             onClick={() => {
               inputValidation();
-
               changeBtnState();
             }}
           >

@@ -300,7 +300,7 @@ function Search() {
           </Col>
         </Row>
         <div>
-          <Button
+          <Button  data-testid='bsearch'
             variant="outline-secondary"
             disabled={isDisable}
             onClick={() => {

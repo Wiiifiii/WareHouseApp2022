@@ -42,7 +42,7 @@ class Inventory extends Component {
         <tr key={item.id}>
           <td>{item.id}</td>
           <td>
-            <img src={item.img}/>
+            <img src={item.img} alt="ProductImg"/>
           </td>
           <td>{item.name}</td>
           <td>{item.categorie}</td>
@@ -53,7 +53,7 @@ class Inventory extends Component {
           <td>{item.actionDate}</td>
           <td>
             <Link to={`/InfoItem/${item.productnumber}`}>
-              <VscInfo style={{ color: "#d6d6d6" }} />
+              <VscInfo style={{ color: "#d6d6d6" }} name= 'info'/>
             </Link>
           </td>
           <td>

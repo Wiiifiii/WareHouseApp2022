@@ -1,3 +1,16 @@
+#  Webohjelmointi II.ET21KM 
+ * Harjoitustyö
+ * Tekija : Wefky Hamed
+
+# Installation
+* npm install react-router-dom@6
+* npm install -g json-server
+* db.json Resources
+  http://localhost:8000/stock
+* npx json-server --watch db.json --port 8000
+* npm install react-bootstrap bootstrap
+
+![Home](C:\Users\wefky\warehouseapp2022\src\img\Hoem-Page-WareHouseApp.png);
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

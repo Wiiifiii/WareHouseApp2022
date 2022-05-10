@@ -417,6 +417,17 @@
       "actionDate": "2022-05-09T18:59:06.192Z",
       "quantity": "80",
       "id": 83
+    },
+    {
+      "img": "",
+      "name": "ghgfhgf",
+      "categorie": "ghghfg",
+      "productnumber": "gfgfhg",
+      "shelfid": "F-01",
+      "action": "In",
+      "actionDate": "2022-05-09T21:33:00.689Z",
+      "quantity": "8",
+      "id": 84
     }
   ]
 }
