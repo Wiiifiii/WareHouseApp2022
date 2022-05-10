@@ -19,7 +19,7 @@ export const NavBar = () => {
         <VscHome style={{ color: "#ff650b" }} size={30} />
         </Button>
       </NavLink>
-      <NavLink style={{ color: "#ff650b" }} to={"/SearchII"}>
+      <NavLink style={{ color: "#ff650b" }} to={"/Search"}>
         <Button variant="outline-secondary">
         <VscSearch style={{ color: "#ff650b" }}size={25} />
         </Button>

@@ -12,7 +12,7 @@ import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
-function Search() {
+function SearchII() {
   const [products, setproducts] = useState([]);
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
@@ -22,48 +22,9 @@ function Search() {
   const [quantity, setQuantity] = useState("");
   const [input, setInput] = useState("");
   const [Message, setMessage] = useState("");
-  const [stockStatus, setStockStatus] = useState(false)
+  const [stockStatus, setStockStatus] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
 
-  const handleInputClick = () => {
-    if (name !== "") {
-      setInput("?name=" + name.charAt(0).toUpperCase() + name.slice(1));
-    }
-    if (categorie !== "") {
-      setInput(
-        "?categorie=" + categorie.charAt(0).toUpperCase() + categorie.slice(1)
-      );
-    }
-    if (productnumber !== "") {
-      setInput(
-        "?productnumber=" +
-          productnumber.charAt(0).toUpperCase() +
-          productnumber.slice(1)
-      );
-    }
-    if (shelfid !== "") {
-      setInput(
-        "?shelfid=" + shelfid.charAt(0).toUpperCase() + shelfid.slice(1)
-      );
-    }
-    if (action !== "") {
-      setInput("?action=" + action.charAt(0).toUpperCase() + action.slice(1));
-    }
-    if (quantity !== "") {
-      setInput(
-        "?quantity=" + quantity.charAt(0).toUpperCase() + quantity.slice(1)
-      );
-    }
-    if (
-      name === "" &&
-      categorie === "" &&
-      productnumber === "" &&
-      shelfid === "" &&
-      action === "" &&
-      quantity === ""
-    ) {
-      setInput("/");
-    }
-  };
   const handleClearClick = () => {
     setname("");
     setcategorie("");
@@ -71,33 +32,146 @@ function Search() {
     setShelfId("");
     setAction("");
     setQuantity("");
+    setSuggestions([]);
   };
-  
-  useEffect(() => {
-    if (input !== "") {
-      fetch(url + `${input}`)
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log("data:", data);
-          if (data.length === 0) {
-            setMessage("No Data Found");
-            setproducts([]);
-          } else {
-            setproducts(data);
-            setMessage("");
-          }
-        });
+  const handleNameInput = (name) => {
+    let output = [];
+    if (name.length >= 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${name}`, "gi");
+        return pro.name.match(regex);
+      });
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(name);
+      console.log("suggestions", suggestions);
+      setname(name);
+      setproducts(output);
+      setStockStatus(false);
     }
-  }, [input]);
+  };
+  const handleCategoryInput = (categorie) => {
+    let output = [];
+    if (categorie.length >= 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${categorie}`, "gi");
+        return pro.categorie.match(regex);
+      });
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(categorie);
+      setcategorie(categorie);
+      setproducts(output);
+      setStockStatus(false);
+    }
+  };
+  const handleProductCodeInput = (productnumber) => {
+    let output = [];
+    if (productnumber.length >= 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${productnumber}`, "gi");
+        return pro.productnumber.match(regex);
+      });
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(productnumber);
+      setProductNumber(productnumber);
+      setproducts(output);
+      setStockStatus(false);
+    }
+  };
+  const handleShelfCodeInput = (shelfid) => {
+    let output = [];
+    if (shelfid.length > 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${shelfid}`, "gi");
+        return pro.shelfid.match(regex);
+      });
+
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(shelfid);
+      setShelfId(shelfid);
+      setproducts(output);
+      setStockStatus(false);
+    }
+  };
+  const handleActionInput = (action) => {
+    let output = [];
+    if (action.length >= 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${action}`, "gi");
+        return pro.action.match(regex);
+      });
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(action);
+      setAction(action);
+      setproducts(output);
+      setStockStatus(false);
+    }
+  };
+  const handleQuantityInput = (quantity) => {
+    let output = [];
+    if (quantity.length >= 0) {
+      output = products.filter((pro) => {
+        const regex = new RegExp(`${quantity}`, "gi");
+        return pro.quantity.match(regex);
+      });
+      if (output.length === 0) {
+        setMessage("No Data Found");
+        setproducts([]);
+      } else {
+        setproducts(output);
+        setMessage("");
+      }
+      console.log("output", output);
+      setSuggestions(quantity);
+      setQuantity(quantity);
+      setproducts(output);
+      setStockStatus(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllItems();
+  }, []);
 
   let filterIn = products.filter((stock) => stock.action === "In");
   console.log("filter-In", filterIn);
 
   let filterOut = products.filter((stock) => stock.action === "Out");
   console.log("filter-Out", filterOut);
-
 
   const stockIn = filterIn.reduce((total, currentElement) => {
     return JSON.parse(total) + JSON.parse(currentElement.quantity);
@@ -112,22 +186,20 @@ function Search() {
   const shelfSpace = () => {
     let Space = 0;
     if (products.length > 0 && products.shelfid !== shelfid) {
-     
       Space = products.length * 100 - stockTotal; //100 is the shelf capacity
-      
-    }  if (stockTotal < 100 && products.length !== 0 ) {
-
-      Space =   100  - stockTotal;
+    }
+    if (stockTotal < 100 && products.length !== 0) {
+      Space = 100 - stockTotal;
     }
     return Space;
   };
-  function getAllItems() {
+  const getAllItems = () => {
     fetch(url).then((result) => {
       result.json().then((res) => {
         setproducts(res);
       });
     });
-  }
+  };
   function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
@@ -140,7 +212,6 @@ function Search() {
 
     alert("The item has been successfully deleted");
   }
-
   const outPutData = products.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -154,7 +225,6 @@ function Search() {
       <td>{item.quantity}</td>
       <td>{item.action}</td>
       <td>{item.actionDate}</td>
-
       <td>
         <Link to={`/InfoItem/${item.productnumber}`}>
           <VscInfo style={{ color: "#d6d6d6" }} />
@@ -175,7 +245,6 @@ function Search() {
       </td>
     </tr>
   ));
-
   return (
     <div>
       <Form>
@@ -187,7 +256,7 @@ function Search() {
               action="text"
               placeholder="Product name"
               value={name}
-              onChange={(e) => setname(e.target.value)}
+              onChange={(e) => handleNameInput(e.target.value)}
             />
           </Col>
           <Col>
@@ -199,7 +268,7 @@ function Search() {
               action="text"
               placeholder="Product Category"
               value={categorie}
-              onChange={(e) => setcategorie(e.target.value)}
+              onChange={(e) => handleCategoryInput(e.target.value)}
             />
           </Col>
           <Col>
@@ -209,7 +278,7 @@ function Search() {
               action="text"
               placeholder="Product code"
               value={productnumber}
-              onChange={(e) => setProductNumber(e.target.value)}
+              onChange={(e) => handleProductCodeInput(e.target.value)}
             />
           </Col>
         </Row>
@@ -219,7 +288,7 @@ function Search() {
             <Form.Label style={{ color: "#ff600b" }}>Shelf Code</Form.Label>
             <Form.Select
               value={shelfid}
-              onChange={(e) => setShelfId(e.target.value)}
+              onChange={(e) => handleShelfCodeInput(e.target.value)}
             >
               <option>Shelf Code...</option>
               <option>A-01</option>
@@ -281,7 +350,7 @@ function Search() {
             <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
             <Form.Select
               value={action}
-              onChange={(e) => setAction(e.target.value)}
+              onChange={(e) => handleActionInput(e.target.value)}
             >
               <option>Action...</option>
               <option>In</option>
@@ -297,20 +366,11 @@ function Search() {
               type="number"
               placeholder="Product Quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => handleQuantityInput(e.target.value)}
             />
           </Col>
         </Row>
         <div>
-          <Button  data-testid='bsearch'
-            variant="outline-secondary"
-            onClick={() => {
-              handleInputClick();
-              setStockStatus(false);
-            }}
-          >
-            Search
-          </Button>
           <Button
             style={{ marginLeft: 10 }}
             variant="outline-secondary"
@@ -323,12 +383,11 @@ function Search() {
           >
             Clear
           </Button>
-
           <Button
             style={{ marginLeft: 10 }}
             variant="outline-secondary"
             onClick={() => {
-             setStockStatus(true);
+              setStockStatus(true);
             }}
           >
             Stock Status
@@ -336,39 +395,37 @@ function Search() {
         </div>
       </Form>
 
-      <div  className="row gx-5">
+      <div className="row gx-5">
         <div className="col">
-        {stockStatus && (
-          <div>
-          
-          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
-            <Card.Body>
-              <FaSitemap style={{ color: "#ff650b" }} size={100} />
+          {stockStatus && (
+            <div>
+              <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+                <Card.Body>
+                  <FaSitemap style={{ color: "#ff650b" }} size={100} />
 
-              <Card.Text>
-                <h3 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h3>
-                <h1 style={{ color: "#fbfbfb" }}>{stockTotal}</h1>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-         
-          </div>
-           )}
+                  <Card.Text>
+                    <h3 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h3>
+                    <h1 style={{ color: "#fbfbfb" }}>{stockTotal}</h1>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          )}
         </div>
-        
-        <div className="col">
-        {stockStatus && (
-          <Card style={{ width: "20rem", background: "#1b1b1b" }}>
-            <Card.Body>
-              <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
 
-              <Card.Text>
-                <h3 style={{ color: "#ff650b" }}>SHELF SPACE AVAILABLE</h3>
-                <h1 style={{ color: "#fbfbfb" }}>{shelfSpace()}</h1>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        )}
+        <div className="col">
+          {stockStatus && (
+            <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+              <Card.Body>
+                <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
+
+                <Card.Text>
+                  <h3 style={{ color: "#ff650b" }}>SHELF SPACE AVAILABLE</h3>
+                  <h1 style={{ color: "#fbfbfb" }}>{shelfSpace()}</h1>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          )}
         </div>
       </div>
       <div>
@@ -401,4 +458,4 @@ function Search() {
     </div>
   );
 }
-export default Search;
+export default SearchII;
