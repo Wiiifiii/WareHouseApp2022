@@ -9,7 +9,6 @@ function ItemInfo() {
   const url = "http://localhost:8000/stock/";
   const params = useParams();
   const [info, setInfo] = useState([]);
-  // const [currentElement, setCurrentElement] = useState();
 
   async function getProduct() {
     let response = await fetch(
@@ -39,6 +38,7 @@ function ItemInfo() {
   }, 0);
 
   const stockTotal = stockIn - stockOut;
+  
   const outPutData = info.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>

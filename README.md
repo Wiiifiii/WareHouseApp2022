@@ -10,6 +10,8 @@
 * npx json-server --watch db.json --port 8000
 * npm install react-bootstrap bootstrap
 
+# TODO
+* Delete Confirmation Modal.
 
 # Getting Started with Create React App
 

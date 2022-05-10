@@ -3,7 +3,13 @@ import React, { useState, useEffect } from "react";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 import { BiCommentError } from "react-icons/bi";
-import {VscHome,VscSearch,VscGraph,VscCheck,VscDiffAdded} from "react-icons/vsc";
+import {
+  VscHome,
+  VscSearch,
+  VscGraph,
+  VscCheck,
+  VscDiffAdded,
+} from "react-icons/vsc";
 import { useParams } from "react-router-dom";
 
 function AddItem() {
@@ -27,31 +33,30 @@ function AddItem() {
   const url = "http://localhost:8000/stock/";
   const params = useParams();
 
+  useEffect(() => {
+    getProduct();
+  }, [shelfid]);
+
   async function getProduct() {
     let response = await fetch(url + "?shelfid=" + shelfid);
     let data = await response.json();
     console.log(data);
     setproducts(data);
   }
-  useEffect(() => {
-    getProduct();
-  }, [shelfid]);
-
   const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  function shelfSapce () {
+  function shelfSapce() {
     let space = 0;
-    if (shelfStock < 100 && action === 'Out'){
+    if (shelfStock < 100 && action === "Out") {
       space = shelfStock;
     }
-    if (shelfStock < 100 && action === 'In'){
+    if (shelfStock < 100 && action === "In") {
       space = 100 - shelfStock;
     }
-    
     return space;
-  } 
+  }
   console.log("space", shelfSapce);
   console.log("stock", shelfStock);
 
@@ -61,12 +66,10 @@ function AddItem() {
       setMessage(false);
     }
     if (quantity > shelfSapce()) {
-      setValidation("Only this value " + shelfSapce() + " can lead to action" );
+      setValidation("Only this value " + shelfSapce() + " can lead to action");
       setMessage(false);
-       setIsValid(true);
-    } 
-  
-    else {
+      setIsValid(true);
+    } else {
       addProduct();
       setMessage(true);
       setIsValid(false);
@@ -94,9 +97,7 @@ function AddItem() {
       setMessage(false);
       setIsValid(true);
     } else if (quantity < -100 || quantity > 100 || quantity === "") {
-      setValidation(
-        "You can change the shelf capacity from -100 (Out) to +100 (In)."
-      );
+      setValidation("The shelf capacity is Max 100.");
       setMessage(false);
       setIsValid(true);
     } else if (img === "" || img == !"") {
@@ -105,10 +106,6 @@ function AddItem() {
       checkShelfStatus();
     }
   }
-  console.log(quantity);
-  console.log(shelfid);
-  console.log(products.shelfid);
-
   function addProduct() {
     fetch("http://localhost:8000/stock/", {
       method: "POST",
@@ -131,10 +128,9 @@ function AddItem() {
       .then((result) => {
         console.log(result);
       });
-
+      setDisable(false)
     getProduct();
   }
-
   function refreshPage() {
     window.location.reload(false);
   }
@@ -152,15 +148,17 @@ function AddItem() {
   const changeBtnState = () => {
     setBtnState(false);
   };
-
   return (
-    <div data-testid="addItem">
+    <div>
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header style={{ backgroundColor: "#ff600b" }}>
           <Modal.Title>
             {" "}
-            <b >Add New Product</b>
-            <VscDiffAdded style={{ color: "#1b1b1b" , paddingLeft: 7}} size={45}/>
+            <b>Add New Product</b>
+            <VscDiffAdded
+              style={{ color: "#1b1b1b", paddingLeft: 7 }}
+              size={45}
+            />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -168,7 +166,9 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Product Name</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>
+                  Product Name
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product name"
@@ -180,7 +180,9 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Product Category</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>
+                  Product Category
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product Category"
@@ -192,7 +194,9 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Product Code</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>
+                  Product Code
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Product code"
@@ -202,80 +206,84 @@ function AddItem() {
               </Col>
             </Row>
             <Row>
-              <Col style={{paddingRight:0}}>
+              <Col style={{ paddingRight: 0 }}>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Shelf Code</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>Shelf Code</Form.Label>
                 <Form.Select
                   value={shelfid}
                   onChange={(e) => setShelfId(e.target.value)}
                 >
                   <option>Shelf Code...</option>
                   <option>A-01</option>
-              <option>A-02</option>
-              <option>B-01</option>
-              <option>B-02</option>
-              <option>C-01</option>
-              <option>C-02</option>
-              <option>D-01</option>
-              <option>D-02</option>
-              <option>E-01</option>
-              <option>E-02</option>
-              <option>F-01</option>
-              <option>F-02</option>
-              <option>G-01</option>
-              <option>G-02</option>
-              <option>H-01</option>
-              <option>H-02</option>
-              <option>I-01</option>
-              <option>I-02</option>
-              <option>J-01</option>
-              <option>J-02</option>
-              <option>K-01</option>
-              <option>K-02</option>
-              <option>L-01</option>
-              <option>L-02</option>
-              <option>M-01</option>
-              <option>M-02</option>
-              <option>N-01</option>
-              <option>N-02</option>
-              <option>O-01</option>
-              <option>O-02</option>
-              <option>P-01</option>
-              <option>P-02</option>
-              <option>Q-01</option>
-              <option>Q-02</option>
-              <option>R-01</option>
-              <option>R-02</option>
-              <option>S-01</option>
-              <option>S-02</option>
-              <option>T-01</option>
-              <option>T-02</option>
-              <option>U-01</option>
-              <option>U-02</option>
-              <option>V-01</option>
-              <option>V-02</option>
-              <option>W-01</option>
-              <option>W-02</option>
-              <option>X-01</option>
-              <option>X-02</option>
-              <option>Y-01</option>
-              <option>Y-02</option>
-              <option>Z-01</option>
-              <option>Z-02</option>
+                  <option>A-02</option>
+                  <option>B-01</option>
+                  <option>B-02</option>
+                  <option>C-01</option>
+                  <option>C-02</option>
+                  <option>D-01</option>
+                  <option>D-02</option>
+                  <option>E-01</option>
+                  <option>E-02</option>
+                  <option>F-01</option>
+                  <option>F-02</option>
+                  <option>G-01</option>
+                  <option>G-02</option>
+                  <option>H-01</option>
+                  <option>H-02</option>
+                  <option>I-01</option>
+                  <option>I-02</option>
+                  <option>J-01</option>
+                  <option>J-02</option>
+                  <option>K-01</option>
+                  <option>K-02</option>
+                  <option>L-01</option>
+                  <option>L-02</option>
+                  <option>M-01</option>
+                  <option>M-02</option>
+                  <option>N-01</option>
+                  <option>N-02</option>
+                  <option>O-01</option>
+                  <option>O-02</option>
+                  <option>P-01</option>
+                  <option>P-02</option>
+                  <option>Q-01</option>
+                  <option>Q-02</option>
+                  <option>R-01</option>
+                  <option>R-02</option>
+                  <option>S-01</option>
+                  <option>S-02</option>
+                  <option>T-01</option>
+                  <option>T-02</option>
+                  <option>U-01</option>
+                  <option>U-02</option>
+                  <option>V-01</option>
+                  <option>V-02</option>
+                  <option>W-01</option>
+                  <option>W-02</option>
+                  <option>X-01</option>
+                  <option>X-02</option>
+                  <option>Y-01</option>
+                  <option>Y-02</option>
+                  <option>Z-01</option>
+                  <option>Z-02</option>
                 </Form.Select>
               </Col>
-              <Col style={{paddingLeft:0 }}>
-              <Form.Label style={{color: '#ff600b'}}>Shelf Space Available</Form.Label>
-              <Form.Control type="text"  
-              style={{backgroundColor: '#e9e9ed'}}
-              disabled
-              value=  {shelfSapce() }/>
+              <Col style={{ paddingLeft: 0 }}>
+                <Form.Label style={{ color: "#ff600b" }}>
+                  Shelf Space Available
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  style={{ backgroundColor: "#e9e9ed" }}
+                  disabled
+                  value={shelfSapce()}
+                />
               </Col>
             </Row>
             <Row>
               <Col>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Action</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
                 <Form.Select
                   value={action}
                   onChange={(e) => setAction(e.target.value)}
@@ -289,7 +297,9 @@ function AddItem() {
             <Row>
               <Col>
                 {" "}
-                <Form.Label style={{color: '#ff600b'}}>Product Quantity</Form.Label>
+                <Form.Label style={{ color: "#ff600b" }}>
+                  Product Quantity
+                </Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Product Quantity"
@@ -328,9 +338,9 @@ function AddItem() {
                   <Alert.Heading>
                     Your new product was successfully added!
                   </Alert.Heading>
-                  <p>
+                  
                     <VscCheck size={40} />
-                  </p>
+                  
                   <hr />
                 </Alert>
               )}
@@ -339,9 +349,9 @@ function AddItem() {
               {isValid && (
                 <Alert variant="danger ">
                   <Alert.Heading>{validation}</Alert.Heading>
-                  <p>
+                 
                     <BiCommentError size={40} />
-                  </p>
+                  
                   <hr />
                 </Alert>
               )}
@@ -368,13 +378,12 @@ function AddItem() {
             variant="outline-secondary"
             onClick={() => {
               setMessage(false);
-              
+
               handleClose();
             }}
           >
             Close
           </Button>
-
           <Button
             type="submit"
             variant="outline-secondary"
@@ -388,11 +397,10 @@ function AddItem() {
           </Button>
           <Button
             variant="outline-secondary"
-            // disabled={isDisable}
             onClick={() => {
               setMessage(false);
               handleClearClick();
-             setDisable(false);
+              setDisable(false);
             }}
           >
             Clear

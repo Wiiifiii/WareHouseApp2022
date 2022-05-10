@@ -12,7 +12,7 @@ import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
 
 const url = "http://localhost:8000/stock/";
 
-function SearchII() {
+function Search() {
   const [products, setproducts] = useState([]);
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
@@ -20,7 +20,6 @@ function SearchII() {
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [input, setInput] = useState("");
   const [Message, setMessage] = useState("");
   const [stockStatus, setStockStatus] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
@@ -250,7 +249,7 @@ function SearchII() {
       <Form>
         <Row className="mb-3">
           <Col xs={7}>
-            {" "}
+           
             <Form.Label style={{ color: "#ff600b" }}>Product Name</Form.Label>
             <Form.Control
               action="text"
@@ -260,7 +259,6 @@ function SearchII() {
             />
           </Col>
           <Col>
-            {" "}
             <Form.Label style={{ color: "#ff600b" }}>
               Product Category
             </Form.Label>
@@ -272,7 +270,6 @@ function SearchII() {
             />
           </Col>
           <Col>
-            {" "}
             <Form.Label style={{ color: "#ff600b" }}>Product Code</Form.Label>
             <Form.Control
               action="text"
@@ -284,7 +281,6 @@ function SearchII() {
         </Row>
         <Row className="mb-3">
           <Col>
-            {" "}
             <Form.Label style={{ color: "#ff600b" }}>Shelf Code</Form.Label>
             <Form.Select
               value={shelfid}
@@ -346,7 +342,7 @@ function SearchII() {
             </Form.Select>
           </Col>
           <Col>
-            {" "}
+            
             <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
             <Form.Select
               value={action}
@@ -358,7 +354,7 @@ function SearchII() {
             </Form.Select>
           </Col>
           <Col xs={3}>
-            {" "}
+            
             <Form.Label style={{ color: "#ff600b" }}>
               Product Quantity
             </Form.Label>
@@ -384,6 +380,7 @@ function SearchII() {
             Clear
           </Button>
           <Button
+          data-testid='StockStatus'
             style={{ marginLeft: 10 }}
             variant="outline-secondary"
             onClick={() => {
@@ -394,7 +391,6 @@ function SearchII() {
           </Button>
         </div>
       </Form>
-
       <div className="row gx-5">
         <div className="col">
           {stockStatus && (
@@ -412,7 +408,6 @@ function SearchII() {
             </div>
           )}
         </div>
-
         <div className="col">
           {stockStatus && (
             <Card style={{ width: "20rem", background: "#1b1b1b" }}>
@@ -458,4 +453,4 @@ function SearchII() {
     </div>
   );
 }
-export default SearchII;
+export default Search;

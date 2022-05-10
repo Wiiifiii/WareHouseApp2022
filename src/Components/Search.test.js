@@ -11,8 +11,8 @@ describe("Search Component test", () => {
     const { getByTestId } = render(<Search />);
     //Assertion
     act(async () => {
-      const button = getByTestId("bsearch");
-      const table = getByTestId("bsearch");
+      const button = getByTestId("StockStatus");
+      const table = getByTestId("StockStatus");
       await fireEvent.click(button);
       expect(button).toBeTruthy();
       expect(table).toBeInTheDocument();

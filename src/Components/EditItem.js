@@ -10,7 +10,7 @@ import {
   VscSearch,
   VscGraph,
   VscEdit,
-  VscExclude
+  VscExclude,
 } from "react-icons/vsc";
 import { BiCommentError } from "react-icons/bi";
 
@@ -34,6 +34,7 @@ function EditItem() {
   const [isValid, setIsValid] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [isDisable, setDisable] = useState(false);
 
   function getItem() {
     fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
@@ -96,6 +97,7 @@ function EditItem() {
     }).then((response) => {
       console.log("res :", response);
     });
+    setDisable(true);
   }
 
   function checkShelfStatus() {
@@ -103,19 +105,16 @@ function EditItem() {
       setValidation("Shelf is full");
       setMessage(false);
     }
-    if (quantity + shelfSapce > shelfSapce()  ) {
-      setValidation("Only this value " + shelfSapce() + " can lead to action" );
+    if (quantity > shelfSapce()) {
+      setValidation("Only this value " + shelfSapce() + " can lead to action");
       setMessage(false);
       setIsValid(true);
-    }
-    
-    else {
+    } else {
       updateProduct();
       setMessage(true);
       setIsValid(false);
     }
   }
-
   function inputValidation() {
     if (name === "") {
       setValidation("Product name should be required, please");
@@ -136,9 +135,7 @@ function EditItem() {
       setMessage(false);
       setIsValid(true);
     } else if (quantity < -100 || quantity > 100 || quantity === "") {
-      setValidation(
-        "The shelf capacity is 100."
-      );
+      setValidation("The shelf capacity is Max 100.");
       setMessage(false);
       setIsValid(true);
     } else if (img === "" || img == !"") {
@@ -148,50 +145,22 @@ function EditItem() {
     }
   }
 
-  // async function getProduct() {
-  //   let response = await fetch(url + "?shelfid=" + shelfid);
-  //   let data = await response.json();
-  //   console.log(data);
-  //   setproducts(data);
-  // }
-  // useEffect(() => {
-  //   getProduct();
-  // }, [shelfid]);
-
   const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
 
-  let filterIn = products.filter((stock) => stock.action === "In");
-  console.log("filter-In", filterIn);
-
-  let filterOut = products.filter((stock) => stock.action === "Out");
-  console.log("filter-Out", filterOut);
-
-  const stockIn = filterIn.reduce((total, currentElement) => {
-    return JSON.parse(total) + JSON.parse(currentElement.quantity);
-  }, 0);
-
-  const stockOut = filterOut.reduce((total, currentElement) => {
-    return JSON.parse(total) + JSON.parse(currentElement.quantity);
-  }, 0);
-
-  const stockTotal = stockIn - stockOut;
-
-  function shelfSapce () {
+  function shelfSapce() {
     let space = 0;
-    if (shelfStock < 100 && action === 'Out'){
+    if (shelfStock < 100 && action === "Out") {
       space = shelfStock;
     }
-    if (shelfStock < 100 && action === 'In'){
+    if (shelfStock < 100 && action === "In") {
       space = 100 - shelfStock;
     }
-    
-    return space;
-  } 
-  console.log("space", shelfSapce());
 
-  console.log("stock", shelfStock);
+    return space;
+  }
+
   const outPutData = products.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -234,7 +203,10 @@ function EditItem() {
           <Modal.Title>
             {" "}
             <b>Edit Product</b>
-            <VscExclude style={{ color: "#1b1b1b" , paddingLeft: 7}} size={45}/>
+            <VscExclude
+              style={{ color: "#1b1b1b", paddingLeft: 7 }}
+              size={45}
+            />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -304,57 +276,57 @@ function EditItem() {
                 >
                   <option>Shelf Code...</option>
                   <option>A-01</option>
-              <option>A-02</option>
-              <option>B-01</option>
-              <option>B-02</option>
-              <option>C-01</option>
-              <option>C-02</option>
-              <option>D-01</option>
-              <option>D-02</option>
-              <option>E-01</option>
-              <option>E-02</option>
-              <option>F-01</option>
-              <option>F-02</option>
-              <option>G-01</option>
-              <option>G-02</option>
-              <option>H-01</option>
-              <option>H-02</option>
-              <option>I-01</option>
-              <option>I-02</option>
-              <option>J-01</option>
-              <option>J-02</option>
-              <option>K-01</option>
-              <option>K-02</option>
-              <option>L-01</option>
-              <option>L-02</option>
-              <option>M-01</option>
-              <option>M-02</option>
-              <option>N-01</option>
-              <option>N-02</option>
-              <option>O-01</option>
-              <option>O-02</option>
-              <option>P-01</option>
-              <option>P-02</option>
-              <option>Q-01</option>
-              <option>Q-02</option>
-              <option>R-01</option>
-              <option>R-02</option>
-              <option>S-01</option>
-              <option>S-02</option>
-              <option>T-01</option>
-              <option>T-02</option>
-              <option>U-01</option>
-              <option>U-02</option>
-              <option>V-01</option>
-              <option>V-02</option>
-              <option>W-01</option>
-              <option>W-02</option>
-              <option>X-01</option>
-              <option>X-02</option>
-              <option>Y-01</option>
-              <option>Y-02</option>
-              <option>Z-01</option>
-              <option>Z-02</option>
+                  <option>A-02</option>
+                  <option>B-01</option>
+                  <option>B-02</option>
+                  <option>C-01</option>
+                  <option>C-02</option>
+                  <option>D-01</option>
+                  <option>D-02</option>
+                  <option>E-01</option>
+                  <option>E-02</option>
+                  <option>F-01</option>
+                  <option>F-02</option>
+                  <option>G-01</option>
+                  <option>G-02</option>
+                  <option>H-01</option>
+                  <option>H-02</option>
+                  <option>I-01</option>
+                  <option>I-02</option>
+                  <option>J-01</option>
+                  <option>J-02</option>
+                  <option>K-01</option>
+                  <option>K-02</option>
+                  <option>L-01</option>
+                  <option>L-02</option>
+                  <option>M-01</option>
+                  <option>M-02</option>
+                  <option>N-01</option>
+                  <option>N-02</option>
+                  <option>O-01</option>
+                  <option>O-02</option>
+                  <option>P-01</option>
+                  <option>P-02</option>
+                  <option>Q-01</option>
+                  <option>Q-02</option>
+                  <option>R-01</option>
+                  <option>R-02</option>
+                  <option>S-01</option>
+                  <option>S-02</option>
+                  <option>T-01</option>
+                  <option>T-02</option>
+                  <option>U-01</option>
+                  <option>U-02</option>
+                  <option>V-01</option>
+                  <option>V-02</option>
+                  <option>W-01</option>
+                  <option>W-02</option>
+                  <option>X-01</option>
+                  <option>X-02</option>
+                  <option>Y-01</option>
+                  <option>Y-02</option>
+                  <option>Z-01</option>
+                  <option>Z-02</option>
                 </Form.Select>
               </Col>
               <Col style={{ paddingLeft: 0 }}>
@@ -426,9 +398,9 @@ function EditItem() {
                   <Alert.Heading>
                     Your new product was successfully Updated!
                   </Alert.Heading>
-                  <p>
+               
                     <VscCheck size={40} />
-                  </p>
+                 
                   <hr />
                 </Alert>
               )}
@@ -437,9 +409,7 @@ function EditItem() {
               {isValid && (
                 <Alert variant="danger ">
                   <Alert.Heading>{validation}</Alert.Heading>
-                  <p>
                     <BiCommentError size={40} />
-                  </p>
                   <hr />
                 </Alert>
               )}
@@ -468,11 +438,13 @@ function EditItem() {
               setMessage(false);
               handleClose();
               getProduct();
+              setDisable(true);
             }}
           >
             Close
           </Button>
           <Button
+            disabled={isDisable}
             type="submit"
             variant="outline-secondary"
             onClick={() => {
