@@ -42,7 +42,7 @@ class Inventory extends Component {
         <tr key={item.id}>
           <td>{item.id}</td>
           <td>
-            <img src={item.img} alt="ProductImg"/>
+            <img src={item.img} />
           </td>
           <td>{item.name}</td>
           <td>{item.categorie}</td>
