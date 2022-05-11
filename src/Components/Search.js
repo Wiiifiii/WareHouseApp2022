@@ -9,7 +9,7 @@ import { FaSitemap } from "react-icons/fa";
 import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
-
+import ReactLoading from "react-loading";
 const url = "http://localhost:8000/stock/";
 
 function Search() {
@@ -23,6 +23,7 @@ function Search() {
   const [Message, setMessage] = useState("");
   const [stockStatus, setStockStatus] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [isLoading, setisLoading] = useState(true)
 
   const handleClearClick = () => {
     setname("");
@@ -195,7 +196,12 @@ function Search() {
   const getAllItems = () => {
     fetch(url).then((result) => {
       result.json().then((res) => {
+        if(res == 0 ){
+          setisLoading(true)
+          setproducts([]);
+        }else
         setproducts(res);
+        setisLoading(false)
       });
     });
   };
@@ -245,7 +251,9 @@ function Search() {
     </tr>
   ));
   return (
+
     <div>
+      
       <Form>
         <Row className="mb-3">
           <Col xs={7}>
@@ -424,6 +432,19 @@ function Search() {
         </div>
       </div>
       <div>
+      {isLoading && (
+      
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+         
+          height: "100vh",
+        }}
+      >
+        <ReactLoading type="spin" color="#ff650bF" />
+      </div>
+    )}
         <Table className="table table-hover table-dark">
           <thead>
             <tr>
@@ -449,6 +470,11 @@ function Search() {
             </Card.Body>
           </Card>
         )}
+      </div>
+
+      
+      
+    <div>
       </div>
     </div>
   );

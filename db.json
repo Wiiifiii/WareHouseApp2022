@@ -8,7 +8,7 @@
       "action": "In",
       "actionDate": "2022-05-05T18:17:09.568Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/376153/01/sv01/fnd/EEA/fmt/png/PUMA-x-HELLY-HANSEN-Voyage-Nitro-Running-Shoes",
-      "quantity": "100",
+      "quantity": "99",
       "id": 43
     },
     {
@@ -360,7 +360,7 @@
       "action": "In",
       "actionDate": "2022-05-07T22:05:41.618Z",
       "img": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/530079/24/fnd/EEA/fmt/png/Iconic-T7-Women's-Track-Jacket",
-      "quantity": "77",
+      "quantity": "25",
       "id": 76
     },
     {
@@ -420,69 +420,14 @@
     },
     {
       "img": "",
-      "name": "ghgfhgf",
-      "categorie": "ghghfg",
-      "productnumber": "gfgfhg",
-      "shelfid": "F-01",
+      "name": "1",
+      "categorie": "2",
+      "productnumber": "3",
+      "shelfid": "T-01",
       "action": "In",
-      "actionDate": "2022-05-09T21:33:00.689Z",
-      "quantity": "8",
+      "actionDate": "2022-05-11T02:22:42.080Z",
+      "quantity": "57",
       "id": 84
-    },
-    {
-      "img": "",
-      "name": "Pro FG",
-      "categorie": "Football Shoes",
-      "productnumber": "NicciNSco",
-      "shelfid": "O-01",
-      "action": "In",
-      "actionDate": "2022-05-10T13:42:26.381Z",
-      "quantity": "60",
-      "id": 85
-    },
-    {
-      "img": "",
-      "name": "dfdsfd",
-      "categorie": "dfdfds",
-      "productnumber": "dfdfd",
-      "shelfid": "E-01",
-      "action": "In",
-      "actionDate": "2022-05-10T14:05:40.039Z",
-      "quantity": "25",
-      "id": 86
-    },
-    {
-      "img": "",
-      "name": "dfdfds",
-      "categorie": "dsfdsf",
-      "productnumber": "dsfdsfd",
-      "shelfid": "D-02",
-      "action": "In",
-      "actionDate": "2022-05-10T14:08:01.277Z",
-      "quantity": "20",
-      "id": 87
-    },
-    {
-      "img": "",
-      "name": "dfdfs",
-      "categorie": "dfsdfd",
-      "productnumber": "dfdsf",
-      "shelfid": "N-02",
-      "action": "In",
-      "actionDate": "2022-05-10T17:07:47.011Z",
-      "quantity": "50",
-      "id": 88
-    },
-    {
-      "img": "",
-      "name": "asas",
-      "categorie": "FGFGFG",
-      "productnumber": "GGG",
-      "shelfid": "Y-02",
-      "action": "In",
-      "actionDate": "2022-05-10T17:29:50.489Z",
-      "quantity": "30",
-      "id": 89
     }
   ]
 }

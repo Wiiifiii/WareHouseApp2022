@@ -4,12 +4,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { VscTrash, VscEdit, VscInfo, VscGraphLine } from "react-icons/vsc";
 import { Card, Button } from "react-bootstrap";
-
+import ReactLoading from "react-loading";
 function ItemInfo() {
   const url = "http://localhost:8000/stock/";
   const params = useParams();
   const [info, setInfo] = useState([]);
-
+  const [isLoading, setisLoading] = useState(true)
   async function getProduct() {
     let response = await fetch(
       "http://localhost:8000/stock?productnumber=" + params.productnumber
@@ -17,6 +17,13 @@ function ItemInfo() {
     let data = await response.json();
     console.log(data);
     setInfo(data);
+
+    if(data == 0 ){
+      setisLoading(true)
+      setInfo([]);
+    }else
+    setInfo(data);
+    setisLoading(false)
     
   }
   useEffect(() => {
@@ -87,6 +94,19 @@ function ItemInfo() {
 
   return (
     <div>
+      {isLoading && (
+      
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+         
+          height: "100vh",
+        }}
+      >
+        <ReactLoading type="spin" color="#ff650bF" />
+      </div>
+    )}
       <table className="table table-striped table-dark">
         <thead>
           <tr>

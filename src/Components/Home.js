@@ -18,10 +18,10 @@ function Home() {
         Inventory tracking can help you avoid selling products that have run out
         of stock, or let you know when you need to order or make more of your
         product. You can set up inventory tracking, view your inventory, and
-        adjust your inventory levels in the Inventory area of
-       WareHouse. You can also view the history of inventory adjustments
+        adjust your inventory levels in the Inventory area of 
+        <b> WareHouse</b>. You can also view the history of inventory adjustments
         for products and variants whose inventory is being tracked by
-        WareHouse.
+        <b> WareHouse</b>.
       </span>
       <hr></hr>
 
@@ -33,8 +33,7 @@ function Home() {
           <Card.Title style={{ color: "#ff650b" }}>ADD NEW PRODUCT</Card.Title>
           <Card.Text>
             <span style={{ color: "#fbfbfb" }}>
-              The <b>WareHouse</b> Add section allows you to add a new product
-              to the <b>WareHouse</b>.
+              The <b>WareHouse</b> Add section allows you to Add new products or stock actions either to inbound or outbound operations using <b>WareHouse</b> Add.
             </span>
           </Card.Text>
         </Card.Body>
@@ -52,7 +51,7 @@ function Home() {
             <Card.Title style={{ color: "#ff650b" }}>SEARCH</Card.Title>
             <span style={{ color: "#fbfbfb" }}>
               The <b>WareHouse</b> Search section allows you to look up any
-              product in the <b>WareHouse</b>.{" "}
+              product in the <b>WareHouse</b>. In addition, you can check the status of your stocks and shelves.
             </span>
           </Card.Text>
         </Card.Body>
@@ -66,9 +65,8 @@ function Home() {
           <Card.Text>
             <Card.Title style={{ color: "#ff650b" }}>INVENTORY</Card.Title>
             <span style={{ color: "#fbfbfb" }}>
-              You can add or update information about a product such as
-              variants, and availability from the Inventory page in your
-              <b> WareHouse</b> app.{" "}
+            You can edit or update information about a product , Check the <b>WareHouse</b> situation, such as the number of stocks and the number of available spaces on shelves,
+            from the Inventory page in your <b>WareHouse</b> app.
             </span>
           </Card.Text>
         </Card.Body>
