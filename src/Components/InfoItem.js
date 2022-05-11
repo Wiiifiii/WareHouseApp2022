@@ -94,6 +94,9 @@ function ItemInfo() {
 
   return (
     <div>
+      <div>
+
+    
       {isLoading && (
       
       <div
@@ -145,6 +148,7 @@ function ItemInfo() {
           </div>
         </Card.Body>
       </Card>
+      </div>
     </div>
   );
 }
