@@ -10,7 +10,7 @@ import { ImSad } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { Form, Col, Row, Button, Table, Card } from "react-bootstrap";
 import ReactLoading from "react-loading";
-const url = "http://localhost:8000/stock/";
+const url = "http://localhost:8000/stock/"; //db.resourc
 
 function Search() {
   const [products, setproducts] = useState([]);
@@ -20,11 +20,17 @@ function Search() {
   const [shelfid, setShelfId] = useState("");
   const [action, setAction] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [Message, setMessage] = useState("");
+  const [Message, setMessage] = useState(""); //If data is empty, set Message.
   const [stockStatus, setStockStatus] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
-  const [isLoading, setisLoading] = useState(true)
+  const [suggestions, setSuggestions] = useState([]); //array to set the search suggestions.
+  const [isLoading, setisLoading] = useState(true); //search loading message/rectloading.
 
+  useEffect(() => {
+    getAllItems();
+  }, []);
+  /**
+   * handleClearClick()=> reset fields for a new entry
+   */
   const handleClearClick = () => {
     setname("");
     setcategorie("");
@@ -34,6 +40,10 @@ function Search() {
     setQuantity("");
     setSuggestions([]);
   };
+
+  /**
+   * handleNameInput = (name) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleNameInput = (name) => {
     let output = [];
     if (name.length >= 0) {
@@ -56,6 +66,9 @@ function Search() {
       setStockStatus(false);
     }
   };
+  /**
+   * handleCategoryInput = (categorie) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleCategoryInput = (categorie) => {
     let output = [];
     if (categorie.length >= 0) {
@@ -77,6 +90,9 @@ function Search() {
       setStockStatus(false);
     }
   };
+  /**
+   * handleProductCodeInput = (productnumber) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleProductCodeInput = (productnumber) => {
     let output = [];
     if (productnumber.length >= 0) {
@@ -98,6 +114,9 @@ function Search() {
       setStockStatus(false);
     }
   };
+  /**
+   * handleShelfCodeInput = (shelfid) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleShelfCodeInput = (shelfid) => {
     let output = [];
     if (shelfid.length > 0) {
@@ -120,6 +139,9 @@ function Search() {
       setStockStatus(false);
     }
   };
+  /**
+   * handleActionInput = (action) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleActionInput = (action) => {
     let output = [];
     if (action.length >= 0) {
@@ -141,6 +163,9 @@ function Search() {
       setStockStatus(false);
     }
   };
+  /**
+   * handleQuantityInput = (quantity) => using RegEx() and match () for Searching with Regular Expressions
+   */
   const handleQuantityInput = (quantity) => {
     let output = [];
     if (quantity.length >= 0) {
@@ -163,9 +188,9 @@ function Search() {
     }
   };
 
-  useEffect(() => {
-    getAllItems();
-  }, []);
+  /**
+   * filter()=> and reduce()=> Calculate the product stock based on the in/out actions, then we get the stock amount.
+   */
 
   let filterIn = products.filter((stock) => stock.action === "In");
   console.log("filter-In", filterIn);
@@ -182,7 +207,9 @@ function Search() {
   }, 0);
 
   const stockTotal = stockIn - stockOut;
-
+  /**
+   * shelfSapce()=> Calculate shelf space based on action in/out
+   */
   const shelfSpace = () => {
     let Space = 0;
     if (products.length > 0 && products.shelfid !== shelfid) {
@@ -193,18 +220,23 @@ function Search() {
     }
     return Space;
   };
+  /**
+   * getAllItems()=> GET all data from to the server.
+   */
   const getAllItems = () => {
     fetch(url).then((result) => {
       result.json().then((res) => {
-        if(res == 0 ){
-          setisLoading(true)
+        if (res == 0) {
+          setisLoading(true);
           setproducts([]);
-        }else
-        setproducts(res);
-        setisLoading(false)
+        } else setproducts(res);
+        setisLoading(false);
       });
     });
   };
+  /**
+   * deleteProduct(id)=> Get the product given the unique id and delete with icon click.
+   */
   function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
@@ -217,6 +249,9 @@ function Search() {
 
     alert("The item has been successfully deleted");
   }
+  /**
+   * map()=> map all products to html table element
+   */
   const outPutData = products.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -251,13 +286,10 @@ function Search() {
     </tr>
   ));
   return (
-
     <div>
-      
       <Form>
         <Row className="mb-3">
           <Col xs={7}>
-           
             <Form.Label style={{ color: "#ff600b" }}>Product Name</Form.Label>
             <Form.Control
               action="text"
@@ -350,7 +382,6 @@ function Search() {
             </Form.Select>
           </Col>
           <Col>
-            
             <Form.Label style={{ color: "#ff600b" }}>Action</Form.Label>
             <Form.Select
               value={action}
@@ -362,7 +393,6 @@ function Search() {
             </Form.Select>
           </Col>
           <Col xs={3}>
-            
             <Form.Label style={{ color: "#ff600b" }}>
               Product Quantity
             </Form.Label>
@@ -388,7 +418,7 @@ function Search() {
             Clear
           </Button>
           <Button
-          data-testid='StockStatus'
+            data-testid="StockStatus"
             style={{ marginLeft: 10 }}
             variant="outline-secondary"
             onClick={() => {
@@ -432,19 +462,18 @@ function Search() {
         </div>
       </div>
       <div>
-      {isLoading && (
-      
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-         
-          height: "100vh",
-        }}
-      >
-        <ReactLoading type="spin" color="#ff650bF" />
-      </div>
-    )}
+        {isLoading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+
+              height: "100vh",
+            }}
+          >
+            <ReactLoading type="spin" color="#ff650bF" />
+          </div>
+        )}
         <Table className="table table-hover table-dark">
           <thead>
             <tr>
@@ -472,10 +501,7 @@ function Search() {
         )}
       </div>
 
-      
-      
-    <div>
-      </div>
+      <div></div>
     </div>
   );
 }

@@ -3,20 +3,16 @@ import React, { useState, useEffect } from "react";
 import Inventory from "./Inventory";
 import { Link } from "react-router-dom";
 import { BiCommentError } from "react-icons/bi";
-import {
-  VscHome,
-  VscSearch,
-  VscGraph,
-  VscCheck,
-  VscDiffAdded,
-} from "react-icons/vsc";
-import { useParams } from "react-router-dom";
+import { VscHome, VscSearch, VscGraph, VscCheck, VscDiffAdded, } from "react-icons/vsc";
 
+/**
+ * this componenet to add an new products or stock actions either to in or out operations.
+ */
 function AddItem() {
-  const [show, setShow] = useState(true);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [products, setproducts] = useState([]);
+  const [show, setShow] = useState(true); // Additem Mdoal show state.
+  const handleClose = () => setShow(false); // Additem Mdoal show close handler.
+  const handleShow = () => setShow(true); // Additem Mdoal show show handler.
+  const [products, setproducts] = useState([]); 
   const [name, setname] = useState("");
   const [categorie, setcategorie] = useState("");
   const [productnumber, setProductNumber] = useState("");
@@ -25,28 +21,34 @@ function AddItem() {
   const [quantity, setQuantity] = useState("");
   const [img, setImg] = useState("");
   const [actionDate, setActionDate] = useState(new Date());
-  const [Message, setMessage] = useState(false);
+  const [Message, setMessage] = useState(false); //If data is empty, set Message.
   const [showBtn, setBtnState] = useState(true);
-  const [validation, setValidation] = useState("");
-  const [isValid, setIsValid] = useState(false);
-  const [isDisable, setDisable] = useState(false);
-  const url = "http://localhost:8000/stock/";
-  const params = useParams();
+  const [validation, setValidation] = useState(""); //Based on the input, set a validation message
+  const [isValid, setIsValid] = useState(false); //Set the Alert message based on the validation output
+  const [isDisable, setDisable] = useState(false); //Based on the status of the POST method, the save product button is disabled (true/false). 
+  const url = "http://localhost:8000/stock/"; //db.resourc
 
   useEffect(() => {
     getProduct();
   }, [shelfid]);
-
+  /**
+   * getProduct()=> Get the product given the unique shelf id and add it to the product list. 
+   */
   async function getProduct() {
     let response = await fetch(url + "?shelfid=" + shelfid);
     let data = await response.json();
     console.log(data);
     setproducts(data);
   }
+  /**
+   * reduce()=> Calculate the shelf stock from the product list using the reduce function () 
+   */
   const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
-
+  /**
+   * shelfSapce()=> Calculate shelf space based on action in/out
+   */
   function shelfSapce() {
     let space = 0;
     if (shelfStock < 100 && action === "Out") {
@@ -59,7 +61,9 @@ function AddItem() {
   }
   console.log("space", shelfSapce);
   console.log("stock", shelfStock);
-
+  /**
+   * checkShelfStatus()=> Check the shelf space based on the current shelf stock. 
+   */
   function checkShelfStatus() {
     if (shelfStock >= 100) {
       setValidation("Shelf is full");
@@ -76,7 +80,10 @@ function AddItem() {
       setDisable(true);
     }
   }
-
+  /**
+   * inputValidation()=> Checker function for input validation.
+   * Todo: add yup validation schema...
+   */
   function inputValidation() {
     if (name === "") {
       setValidation("Product name should be required, please");
@@ -106,6 +113,9 @@ function AddItem() {
       checkShelfStatus();
     }
   }
+  /**
+   * addProduct()=> Post JSON new product date to the server.
+   */
   function addProduct() {
     fetch("http://localhost:8000/stock/", {
       method: "POST",
@@ -128,12 +138,15 @@ function AddItem() {
       .then((result) => {
         console.log(result);
       });
-      setDisable(false)
+    setDisable(false)
     getProduct();
   }
   function refreshPage() {
     window.location.reload(false);
   }
+  /**
+   * handleClearClick()=> reset fields for a new entry
+   */
   const handleClearClick = () => {
     setname("");
     setcategorie("");
@@ -309,17 +322,20 @@ function AddItem() {
                 />
               </Col>
             </Row>
-            {/* <Row>
+            <Row>
               <Col>
+              //!Hide the image input field, no needs right now.
                 {" "}
                 <Form.Control
+                  disabled
+                  hidden
                   type="text"
                   placeholder="Product Image URL"
                   value={img}
                   onChange={(e) => setImg(e.target.value)}
                 />
               </Col>
-            </Row> */}
+            </Row>
             <Row>
               <Col>
                 {" "}
@@ -338,9 +354,9 @@ function AddItem() {
                   <Alert.Heading>
                     Your new product was successfully added!
                   </Alert.Heading>
-                  
-                    <VscCheck size={40} />
-                  
+
+                  <VscCheck size={40} />
+
                   <hr />
                 </Alert>
               )}
@@ -349,9 +365,9 @@ function AddItem() {
               {isValid && (
                 <Alert variant="danger ">
                   <Alert.Heading>{validation}</Alert.Heading>
-                 
-                    <BiCommentError size={40} />
-                  
+
+                  <BiCommentError size={40} />
+
                   <hr />
                 </Alert>
               )}

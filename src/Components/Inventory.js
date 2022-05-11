@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { VscTrash, VscEdit, VscInfo,VscError } from "react-icons/vsc";
+import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-const url = "http://localhost:8000/stock/";
-
+const url = "http://localhost:8000/stock/"; //db.resourc
+/**
+ * this component you can edit or update information about a product, Check the WareHouse situation, 
+ */
 class Inventory extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +19,9 @@ class Inventory extends Component {
   componentDidMount() {
     this.getAllItems();
   }
+  /**
+   * getAllItems()=> GET all data from to the server.
+   */
   async getAllItems() {
     this.setState({ isLoading: true });
     const result = await fetch(url);
@@ -27,6 +32,9 @@ class Inventory extends Component {
       this.setState({ IsError: true, isLoading: false });
     }
   }
+  /**
+   * deleteProduct(id)=> Get the product given the unique id and delete with icon click.
+   */
   async deleteItem(id) {
     await fetch(url + `${id}`, {
       method: "DELETE",
@@ -35,7 +43,9 @@ class Inventory extends Component {
     this.getAllItems();
     alert("The item has been successfully deleted");
   }
-  
+  /**
+  * map()=> map all products to html table element
+  */
   itemsTable = () => {
     return this.state.products.map((item) => {
       return (

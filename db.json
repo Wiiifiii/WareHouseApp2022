@@ -417,6 +417,17 @@
       "actionDate": "2022-05-09T18:59:06.192Z",
       "quantity": "80",
       "id": 83
+    },
+    {
+      "img": "",
+      "name": "vv",
+      "categorie": "vvvv",
+      "productnumber": "2222",
+      "shelfid": "F-02",
+      "action": "In",
+      "actionDate": "2022-05-11T19:37:11.814Z",
+      "quantity": "77",
+      "id": 84
     }
   ]
 }

@@ -14,11 +14,13 @@ import {
 } from "react-icons/vsc";
 import { BiCommentError } from "react-icons/bi";
 
-const url = "http://localhost:8000/stock/";
-
+const url = "http://localhost:8000/stock/"; //db.resourc
+/**
+ * this componenet to edit product information and stock actions either to in or out operations.
+ */
 function EditItem() {
-  const [show, setShow] = useState(true);
-  const params = useParams();
+  const [show, setShow] = useState(true); // Additem Mdoal show state.
+  const params = useParams(); // get params from the react router dom.
   const [products, setproducts] = useState([]);
   const [id, setId] = useState("");
   const [name, setname] = useState("");
@@ -29,13 +31,19 @@ function EditItem() {
   const [quantity, setQuantity] = useState();
   const [img, setImg] = useState("");
   const [actionDate, setActionDate] = useState(new Date());
-  const [Message, setMessage] = useState(false);
-  const [validation, setValidation] = useState("");
-  const [isValid, setIsValid] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [isDisable, setDisable] = useState(false);
+  const [Message, setMessage] = useState(false); //If data is empty, set Message.
+  const [validation, setValidation] = useState(""); //Based on the input, set a validation message
+  const [isValid, setIsValid] = useState(false); //Set the Alert message based on the validation output
+  const handleClose = () => setShow(false); // Edititem Mdoal show close handler.
+  const handleShow = () => setShow(true); // Edititem Mdoal show show handler.
+  const [isDisable, setDisable] = useState(false); //Based on the status of the POST method, the save changes button is disabled (true/false).
 
+  useEffect(() => {
+    getItem();
+  }, []);
+  /**
+   * getItem()=> Get the product given the unique id and add it to fields.
+   */
   function getItem() {
     fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
       result.json().then((resp) => {
@@ -53,28 +61,9 @@ function EditItem() {
       });
     });
   }
-  useEffect(() => {
-    getItem();
-  }, []);
-
-  function deleteProduct(id) {
-    fetch(url + `${id}`, {
-      method: "DELETE",
-    }).then((result) => {
-      result.json().then((res) => {
-        console.log(res);
-        getProduct();
-      });
-    });
-    alert("The item has been successfully deleted");
-  }
-  function getProduct() {
-    fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
-      result.json().then((res) => {
-        setproducts(res);
-      });
-    });
-  }
+ /**
+   * updateProduct()=> PUT JSON edit product date to the server.
+   */
   function updateProduct() {
     let products = {
       name,
@@ -99,7 +88,34 @@ function EditItem() {
     });
     setDisable(true);
   }
-
+ 
+  /**
+   * getProduct()=> After finish editing we get the product back
+   */
+  function getProduct() {
+    fetch("http://localhost:8000/stock?id=" + params.id).then((result) => {
+      result.json().then((res) => {
+        setproducts(res);
+      });
+    });
+  }
+   /**
+   * deleteProduct(id)=> Get the product given the unique id and delete with icon click.
+   */
+    function deleteProduct(id) {
+      fetch(url + `${id}`, {
+        method: "DELETE",
+      }).then((result) => {
+        result.json().then((res) => {
+          console.log(res);
+          getProduct();
+        });
+      });
+      alert("The item has been successfully deleted");
+    }
+     /**
+   * checkShelfStatus()=> Check the shelf space based on the current shelf stock. 
+   */
   function checkShelfStatus() {
     if (shelfStock >= 100) {
       setValidation("Shelf is full");
@@ -115,6 +131,10 @@ function EditItem() {
       setIsValid(false);
     }
   }
+   /**
+   * inputValidation()=> Checker function for input validation.
+   * Todo: add yup validation schema...
+   */
   function inputValidation() {
     if (name === "") {
       setValidation("Product name should be required, please");
@@ -144,11 +164,15 @@ function EditItem() {
       checkShelfStatus();
     }
   }
-
+  /**
+   * reduce()=> Calculate the shelf stock from the product list using the reduce function () 
+   */
   const shelfStock = products.reduce((accumulater, currentElement) => {
     return JSON.parse(accumulater) + JSON.parse(currentElement.quantity);
   }, 0);
-
+  /**
+   * shelfSapce()=> Calculate shelf space based on action in/out
+   */
   function shelfSapce() {
     let space = 0;
     if (shelfStock < 100 && action === "Out") {
@@ -160,7 +184,9 @@ function EditItem() {
 
     return space;
   }
-
+ /**
+  * map()=> map all products to html table element
+  */
   const outPutData = products.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -398,9 +424,9 @@ function EditItem() {
                   <Alert.Heading>
                     Your new product was successfully Updated!
                   </Alert.Heading>
-               
-                    <VscCheck size={40} />
-                 
+
+                  <VscCheck size={40} />
+
                   <hr />
                 </Alert>
               )}
@@ -409,7 +435,7 @@ function EditItem() {
               {isValid && (
                 <Alert variant="danger ">
                   <Alert.Heading>{validation}</Alert.Heading>
-                    <BiCommentError size={40} />
+                  <BiCommentError size={40} />
                   <hr />
                 </Alert>
               )}

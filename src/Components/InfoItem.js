@@ -5,11 +5,22 @@ import { Link } from "react-router-dom";
 import { VscTrash, VscEdit, VscInfo, VscGraphLine } from "react-icons/vsc";
 import { Card, Button } from "react-bootstrap";
 import ReactLoading from "react-loading";
+
+/**
+ * this component to get the product infomormach such as. Stock ,actions, dates...
+ */
 function ItemInfo() {
-  const url = "http://localhost:8000/stock/";
-  const params = useParams();
+  const url = "http://localhost:8000/stock/"; //db.resourc
+  const params = useParams(); // get params from the react router dom.
   const [info, setInfo] = useState([]);
-  const [isLoading, setisLoading] = useState(true)
+  const [isLoading, setisLoading] = useState(true) //info sap loading
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+  /**
+   * getProduct()=> Get the product given the unique product id and add it to the info list. 
+   */
   async function getProduct() {
     let response = await fetch(
       "http://localhost:8000/stock?productnumber=" + params.productnumber
@@ -26,9 +37,9 @@ function ItemInfo() {
     setisLoading(false)
     
   }
-  useEffect(() => {
-    getProduct();
-  }, []);
+  /**
+   * filter()=> and reduce()=> Calculate the product stock based on the in/out actions, then we get the stock amount.
+   */
 
   let filterIn = info.filter(stock => stock.action === "In" )
   console.log('filter-In' , filterIn);
@@ -45,7 +56,9 @@ function ItemInfo() {
   }, 0);
 
   const stockTotal = stockIn - stockOut;
-  
+  /**
+  * map()=> map all info to html table element
+  */
   const outPutData = info.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
@@ -80,6 +93,9 @@ function ItemInfo() {
       </td>
     </tr>
   ));
+   /**
+   * deleteProduct(id)=> Get the product given the unique id and delete with icon click.
+   */
   function deleteProduct(id) {
     fetch(url + `${id}`, {
       method: "DELETE",
@@ -91,7 +107,6 @@ function ItemInfo() {
     });
     alert("The item has been successfully deleted");
   }
-
   return (
     <div>
       <div>
