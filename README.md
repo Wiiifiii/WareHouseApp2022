@@ -12,7 +12,7 @@
 
 # TODO
 * Delete Confirmation Modal.
-
+![Home Page](https://user-images.githubusercontent.com/97392010/167566580-2e49be5e-263c-4153-b880-48dcfbee4d57.png)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
