@@ -223,18 +223,21 @@ function Search() {
  console.log('stockIn',stockIn);
  console.log('stocOut',stockOut);
  console.log("filterShelves", filterShelves);
+ console.log("action", action);
 
   const stockTotal =  () => {
     let stock = 0;
-    if( products.action === 'Out'){
-      stock = stockOut;
-    }
-    if( products.action === 'In'){
-      stock = stockIn;
-    }
-    else{
+    if (filterOut.length > 0 && filterIn.length > 0)
+    {
   stock =  stockIn - stockOut;
     }
+    else if(filterOut.length > 0){
+      stock = stockOut ;
+    }
+    else  if(filterIn.length > 0 ){
+      stock = stockIn;
+    }
+   
    return stock;
   }
   /**
@@ -243,7 +246,7 @@ function Search() {
   const shelfSpace = () => {
     let Space = 0;
     if (products.length > 0) {
-      Space = (filterShelves.length * 100 ) - stockTotal(); //100 is the shelf capacity
+      Space = (filterShelves.length * 100 ) - (stockTotal()); //100 is the shelf capacity
     }
    
     return Space;
@@ -461,7 +464,7 @@ function Search() {
         <div className="col">
           {stockStatus && (
             <div>
-              <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+              <Card style={{ width: "27rem", background: "#1b1b1b" }}>
                 <Card.Body>
                   <FaSitemap style={{ color: "#ff650b" }} size={100} />
 
@@ -476,7 +479,7 @@ function Search() {
         </div>
         <div className="col">
           {stockStatus && (
-            <Card style={{ width: "20rem", background: "#1b1b1b" }}>
+            <Card style={{ width: "27rem", background: "#1b1b1b" }}>
               <Card.Body>
                 <VscSymbolNamespace style={{ color: "#ff650b" }} size={100} />
 
