@@ -109,22 +109,7 @@ function ItemInfo() {
   }
   return (
     <div>
-      <div>
-
-    
-      {isLoading && (
       
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-         
-          height: "100vh",
-        }}
-      >
-        <ReactLoading type="spin" color="#ff650bF" />
-      </div>
-    )}
       <table className="table table-striped table-dark">
         <thead>
           <tr>
@@ -142,7 +127,21 @@ function ItemInfo() {
         </thead>
         <tbody>{outPutData}</tbody>
       </table>
+      <div>
     
+{isLoading && (
+
+<div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+   
+    height: "100vh",
+  }}
+>
+  <ReactLoading type="spin" color="#ff650bF" />
+</div>
+)}
       <Card style={{ width: "20rem", background: "#1b1b1b" }}>
         <Card.Body>
           <div>
