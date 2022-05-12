@@ -187,10 +187,25 @@ function Search() {
       setStockStatus(false);
     }
   };
-
+  
   /**
-   * filter()=> and reduce()=> Calculate the product stock based on the in/out actions, then we get the stock amount.
+   * filter()=> and reduce()=> and includes()=> To Calculate the product 
+   * stock based on the in/out actions and shelves uniqe Ids, 
+   * then we get the stock amount and the shelves space.
    */
+  const uniqueShelfIds = [];
+
+  const filterShelves = products.filter(element => {
+    const isDuplicate = uniqueShelfIds.includes(element.shelfid);
+
+    if (!isDuplicate) {
+      uniqueShelfIds.push(element.shelfid);
+
+      return true;
+    }
+
+    return false;
+  });
 
   let filterIn = products.filter((stock) => stock.action === "In");
   console.log("filter-In", filterIn);
@@ -205,19 +220,32 @@ function Search() {
   const stockOut = filterOut.reduce((total, currentElement) => {
     return JSON.parse(total) + JSON.parse(currentElement.quantity);
   }, 0);
+ console.log('stockIn',stockIn);
+ console.log('stocOut',stockOut);
+ console.log("filterShelves", filterShelves);
 
-  const stockTotal = stockIn - stockOut;
+  const stockTotal =  () => {
+    let stock = 0;
+    if( products.action === 'Out'){
+      stock = stockOut;
+    }
+    if( products.action === 'In'){
+      stock = stockIn;
+    }
+    else{
+  stock =  stockIn - stockOut;
+    }
+   return stock;
+  }
   /**
    * shelfSapce()=> Calculate shelf space based on action in/out
    */
   const shelfSpace = () => {
     let Space = 0;
-    if (products.length > 0 && products.shelfid !== shelfid) {
-      Space = products.length * 100 - stockTotal; //100 is the shelf capacity
+    if (products.length > 0) {
+      Space = (filterShelves.length * 100 ) - stockTotal(); //100 is the shelf capacity
     }
-    if (stockTotal < 100 && products.length !== 0) {
-      Space = 100 - stockTotal;
-    }
+   
     return Space;
   };
   /**
@@ -439,7 +467,7 @@ function Search() {
 
                   <Card.Text>
                     <h3 style={{ color: "#ff650b" }}>STOCK ON THE SHELVES</h3>
-                    <h1 style={{ color: "#fbfbfb" }}>{stockTotal}</h1>
+                    <h1 style={{ color: "#fbfbfb" }}>{stockTotal()}</h1>
                   </Card.Text>
                 </Card.Body>
               </Card>
