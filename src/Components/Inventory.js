@@ -50,9 +50,9 @@ class Inventory extends Component {
     return this.state.products.map((item) => {
       return (
         <tr key={item.id}>
-          <td>{item.id}</td>
+          <td>{item.id} </td>
           <td>
-            <img src={item.img} />
+            <img src={item.img} alt=" "/>
           </td>
           <td>{item.name}</td>
           <td>{item.categorie}</td>

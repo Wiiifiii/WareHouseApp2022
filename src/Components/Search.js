@@ -226,7 +226,7 @@ function Search() {
   const getAllItems = () => {
     fetch(url).then((result) => {
       result.json().then((res) => {
-        if (res == 0) {
+        if (res === 0) {
           setisLoading(true);
           setproducts([]);
         } else setproducts(res);
@@ -461,19 +461,7 @@ function Search() {
           )}
         </div>
       </div>
-      <div>
-        {isLoading && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-
-              height: "100vh",
-            }}
-          >
-            <ReactLoading type="spin" color="#ff650bF" />
-          </div>
-        )}
+      
         <Table className="table table-hover table-dark">
           <thead>
             <tr>
@@ -491,6 +479,19 @@ function Search() {
           </thead>
           <tbody>{outPutData}</tbody>
         </Table>
+        <div>
+        {isLoading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+
+              height: "100vh",
+            }}
+          >
+            <ReactLoading type="spin" color="#ff650bF" />
+          </div>
+        )}
         {Message && (
           <Card style={{ width: "20rem", background: "#1b1b1b" }}>
             <Card.Body>

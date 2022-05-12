@@ -107,7 +107,7 @@ function AddItem() {
       setValidation("The shelf capacity is Max 100.");
       setMessage(false);
       setIsValid(true);
-    } else if (img === "" || img == !"") {
+    } else if (img === "" || img === !"") {
       checkShelfStatus();
     } else {
       checkShelfStatus();
@@ -324,7 +324,7 @@ function AddItem() {
             </Row>
             <Row>
               <Col>
-              //!Hide the image input field, no needs right now.
+              {/* //!Hide the image input field, no needs right now. */}
                 {" "}
                 <Form.Control
                   disabled
