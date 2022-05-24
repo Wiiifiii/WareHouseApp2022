@@ -10,7 +10,7 @@ import ReactLoading from "react-loading";
  * this component to get the product infomormach such as. Stock ,actions, dates...
  */
 function ItemInfo() {
-  const url = "http://localhost:8000/stock/"; //db.resourc
+  const url = "http://localhost:8000/stock/"; //db.resource
   const params = useParams(); // get params from the react router dom.
   const [info, setInfo] = useState([]);
   const [isLoading, setisLoading] = useState(true) //info sap loading

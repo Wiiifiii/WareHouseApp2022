@@ -3,7 +3,7 @@ import { VscTrash, VscEdit, VscInfo } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-const url = "http://localhost:8000/stock/"; //db.resourc
+const url = "http://localhost:8000/stock/"; //db.resource
 /**
  * this component you can edit or update information about a product, Check the WareHouse situation, 
  */

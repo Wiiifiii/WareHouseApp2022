@@ -14,7 +14,7 @@ import {
 } from "react-icons/vsc";
 import { BiCommentError } from "react-icons/bi";
 
-const url = "http://localhost:8000/stock/"; //db.resours
+const url = "http://localhost:8000/stock/"; //db.resource
 /**
  * this componenet to edit product information and stock actions either to in or out operations.
  */
