@@ -3,8 +3,6 @@
  * Tekija : Wefky Hamed
 
 # WareHouse Image Library
-* Package json
-![Package json](https://user-images.githubusercontent.com/97392010/167570513-2d2df47a-e1ca-4f03-b915-cd9c2d2dae6b.png)
 * Home Page
 ![Home Page](https://user-images.githubusercontent.com/97392010/167566580-2e49be5e-263c-4153-b880-48dcfbee4d57.png)
 * Search Page
